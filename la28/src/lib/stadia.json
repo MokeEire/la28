@@ -1,0 +1,72 @@
+[
+    {
+        "lngLat": [-118.2654, 34.0448],
+        "label": "LACC",
+        "name": "Los Angeles Convention Center/Crypto.com Arena"
+    },
+    {
+        "lngLat": [-118.2879, 34.0141],
+        "label": "DSP",
+        "name": "Downtown Sports Park"
+    },
+    {
+        "lngLat": [-118.4729, 34.1672],
+        "label": "VSP",
+        "name": "Valley Sports Park"
+    },
+    {
+        "lngLat": [-118.2553, 33.8634],
+        "label": "SBP",
+        "name": "South Bay Sports Park"
+    },
+    {
+        "lngLat": [-118.1913, 33.7705],
+        "label": "LB",
+        "name": "Long Beach Sports Park"
+    },
+    {
+        "lngLat": [-118.4999, 34.0125],
+        "label": "SMB",
+        "name": "Santa Monica Beach"
+    },
+    {
+        "lngLat": [-118.4695, 33.9850],
+        "label": "VB",
+        "name": "Venice Beach"
+    },
+    {
+        "lngLat": [-118.5013, 34.0498],
+        "label": "RCC",
+        "name": "Riviera Country Club"
+    },
+    {
+        "lngLat": [-118.4452, 34.0689],
+        "label": "UCLA",
+        "name": "UCLA"
+    },
+    {
+        "lngLat": [-118.3431, 33.9451],
+        "label": "ID",
+        "name": "Intuit Dome"
+    },
+    {
+        "lngLat": [-118.3392, 33.95345],
+        "label": "SOFI",
+        "name": "SoFi Stadium"
+    },
+    {
+        "lngLat": [-117.8363, 34.0885],
+        "label": "BP",
+        "name": "Bonelli Park"
+    },
+    {
+        "lngLat": [-117.8827, 33.8003],
+        "label": "ANA",
+        "name": "Anaheim Sports Area"
+    },
+    {
+        "lngLat": [-118.3534, 34.1381],
+        "label": "UC",
+        "name": "Universal City"
+    }
+]

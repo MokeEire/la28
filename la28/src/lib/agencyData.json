@@ -1,0 +1,9 @@
+{
+    "agencies": [
+        {
+            "agency_key": "metro-rail",
+            "url": "https://gitlab.com/LACMTA/gtfs_rail/raw/master/gtfs_rail.zip?1729758603.3193846",
+            "outputFormat": "lines"
+        }
+    ]
+}
