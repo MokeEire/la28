@@ -1,21 +1,20 @@
 <script>
 	import { PUBLIC_MAPTILER_KEY } from '$env/static/public';
-	import { MapLibre, Marker, Popup, DefaultMarker } from 'svelte-maplibre';
+	import { MapLibre, Marker, Popup, DefaultMarker, GeoJSON, LineLayer } from 'svelte-maplibre';
 	import { mapClasses } from '$lib/styles';
 
-	export let data;
+	export let venues;
+	export let routes;
 </script>
 
 <MapLibre
 	center={[-118.25, 34.01]}
 	zoom={8.94}
-	maxZoom={8.94}
 	minZoom={8.94}
 	class={mapClasses}
-	dragPan={false}
 	style="https://api.maptiler.com/maps/basic-v2/style.json?key={PUBLIC_MAPTILER_KEY}"
 >
-	{#each data as { lngLat, label, name }  (label)}
+	{#each venues as { lngLat, label, name }  (label)}
 		<!-- Unlike the custom marker example, default markers do not have mouse events,
     and popups only support the default openOn="click" behavior 
 		<DefaultMarker {lngLat}>
@@ -36,6 +35,17 @@
         </Popup>
         </Marker>
 	{/each}
+	<GeoJSON id="metro-rail" data={routes}>
+		<LineLayer
+			layout={{ 'line-cap': 'round', 'line-join': 'round'}}
+			paint={{
+				'line-width': 3,
+				//'line-dasharray': [5, 2],
+				'line-color': ['get', 'route_color'],//'#008800',
+				'line-opacity': 0.8,
+			  }}
+			/>
+	</GeoJSON>
 </MapLibre>
 
 <style lang="postcss">
