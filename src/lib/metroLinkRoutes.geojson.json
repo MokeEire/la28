@@ -1,0 +1,275 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"route": {
+					"route_id": "91 Line",
+					"agency_id": "Metrolink",
+					"route_short_name": null,
+					"route_long_name": "Metrolink 91-Perris Valley Line",
+					"route_desc": null,
+					"route_type": 2,
+					"route_url": "https://metrolinktrains.com/schedules/?type=line&lineName=91+Line",
+					"route_color": "#0071CE",
+					"route_text_color": "FFFFFF",
+					"route_sort_order": null,
+					"continuous_pickup": null,
+					"continuous_drop_off": null,
+					"network_id": null
+				},
+				"routeAttributes": []
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[-118.233513, 34.055729],
+					[-118.060165, 33.916203],
+					[-117.986855, 33.875969],
+					[-117.922295, 33.868698],
+					[-117.613586, 33.885761],
+					[-117.563454, 33.882195],
+					[-117.4702, 33.899925],
+					[-117.369888, 33.975552],
+					[-117.335518, 33.997517],
+					[-117.289215, 33.911469],
+					[-117.229836, 33.785282],
+					[-117.205711, 33.763752]
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"route": {
+					"route_id": "Antelope Valley Line",
+					"agency_id": "Metrolink",
+					"route_short_name": null,
+					"route_long_name": "Metrolink Antelope Valley Line",
+					"route_desc": null,
+					"route_type": 2,
+					"route_url": "https://metrolinktrains.com/schedules/?type=line&lineName=Antelope+Valley+Line",
+					"route_color": "#00AF43",
+					"route_text_color": "FFFFFF",
+					"route_sort_order": null,
+					"continuous_pickup": null,
+					"continuous_drop_off": null,
+					"network_id": null
+				},
+				"routeAttributes": []
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[-118.233513, 34.055729],
+					[-118.258926, 34.123341],
+					[-118.312866, 34.178944],
+					[-118.35, 34.206389],
+					[-118.373398, 34.222401],
+					[-118.450172, 34.292591],
+					[-118.527306, 34.379913],
+					[-118.524818, 34.413437],
+					[-118.469406, 34.408817],
+					[-118.4339, 34.4131],
+					[-118.118301, 34.49786],
+					[-118.119293, 34.590771],
+					[-118.136131, 34.696579]
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"route": {
+					"route_id": "Inland Emp.-Orange Co. Line",
+					"agency_id": "Metrolink",
+					"route_short_name": null,
+					"route_long_name": "Metrolink Inland Empire-Orange County Line",
+					"route_desc": null,
+					"route_type": 2,
+					"route_url": "https://metrolinktrains.com/schedules/?type=line&lineName=IEOC+Line",
+					"route_color": "#E92076",
+					"route_text_color": "FFFFFF",
+					"route_sort_order": null,
+					"continuous_pickup": null,
+					"continuous_drop_off": null,
+					"network_id": null
+				},
+				"routeAttributes": []
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[-117.2960167, 34.0995034],
+					[-117.310089, 34.10453],
+					[-117.369888, 33.975552],
+					[-117.4702, 33.899925],
+					[-117.563454, 33.882195],
+					[-117.613586, 33.885761],
+					[-117.840523, 33.854176],
+					[-117.8573, 33.78878],
+					[-117.85598, 33.751522],
+					[-117.806015, 33.707966],
+					[-117.732933, 33.657055],
+					[-117.675003, 33.553902],
+					[-117.663696, 33.5014],
+					[-117.632736, 33.432076],
+					[-117.619598, 33.419476],
+					[-117.379875, 33.192554]
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"route": {
+					"route_id": "Orange County Line",
+					"agency_id": "Metrolink",
+					"route_short_name": null,
+					"route_long_name": "Metrolink Orange County Line",
+					"route_desc": null,
+					"route_type": 2,
+					"route_url": "https://metrolinktrains.com/schedules/?type=line&lineName=Orange+County+Line",
+					"route_color": "#FF8400",
+					"route_text_color": "FFFFFF",
+					"route_sort_order": null,
+					"continuous_pickup": null,
+					"continuous_drop_off": null,
+					"network_id": null
+				},
+				"routeAttributes": []
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[-117.379875, 33.192554],
+					[-117.632736, 33.432076],
+					[-117.663696, 33.5014],
+					[-117.675003, 33.553902],
+					[-117.732933, 33.657055],
+					[-117.806015, 33.707966],
+					[-117.85598, 33.751522],
+					[-117.8573, 33.78878],
+					[-117.877998, 33.802582],
+					[-117.922295, 33.868698],
+					[-117.986855, 33.875969],
+					[-118.060165, 33.916203],
+					[-118.143776, 33.990734],
+					[-118.233513, 34.055729]
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"route": {
+					"route_id": "Riverside Line",
+					"agency_id": "Metrolink",
+					"route_short_name": null,
+					"route_long_name": "Metrolink Riverside Line",
+					"route_desc": null,
+					"route_type": 2,
+					"route_url": "https://metrolinktrains.com/schedules/?type=line&lineName=Riverside+Line",
+					"route_color": "#682E86",
+					"route_text_color": "FFFFFF",
+					"route_sort_order": null,
+					"continuous_pickup": null,
+					"continuous_drop_off": null,
+					"network_id": null
+				},
+				"routeAttributes": []
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[-118.233513, 34.055729],
+					[-118.12561, 34.006962],
+					[-117.845581, 34.007927],
+					[-117.750549, 34.058765],
+					[-117.579521, 34.039909],
+					[-117.476273, 33.978119],
+					[-117.369888, 33.975552]
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"route": {
+					"route_id": "San Bernardino Line",
+					"agency_id": "Metrolink",
+					"route_short_name": null,
+					"route_long_name": "Metrolink San Bernardino Line",
+					"route_desc": null,
+					"route_type": 2,
+					"route_url": "https://metrolinktrains.com/schedules/?type=line&lineName=San+Bernardino+Line",
+					"route_color": "#A32136",
+					"route_text_color": "FFFFFF",
+					"route_sort_order": null,
+					"continuous_pickup": null,
+					"continuous_drop_off": null,
+					"network_id": null
+				},
+				"routeAttributes": []
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[-118.233513, 34.055729],
+					[-118.171646, 34.062119],
+					[-118.0355, 34.076805],
+					[-117.957397, 34.086426],
+					[-117.888893, 34.09214],
+					[-117.753052, 34.093639],
+					[-117.716354, 34.093884],
+					[-117.69558, 34.094086],
+					[-117.647507, 34.094501],
+					[-117.559937, 34.091854],
+					[-117.438095, 34.095165],
+					[-117.371887, 34.096786],
+					[-117.310089, 34.10453],
+					[-117.2960167, 34.0995034]
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"route": {
+					"route_id": "Ventura County Line",
+					"agency_id": "Metrolink",
+					"route_short_name": null,
+					"route_long_name": "Metrolink Ventura County Line",
+					"route_desc": null,
+					"route_type": 2,
+					"route_url": "https://metrolinktrains.com/schedules/?type=line&lineName=Ventura+County+Line",
+					"route_color": "#FFB81D",
+					"route_text_color": "000000",
+					"route_sort_order": null,
+					"continuous_pickup": null,
+					"continuous_drop_off": null,
+					"network_id": null
+				},
+				"routeAttributes": []
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[-119.205025, 34.250793],
+					[-119.176308, 34.199276],
+					[-119.033829, 34.216656],
+					[-118.877876, 34.285324],
+					[-118.695549, 34.270412],
+					[-118.599411, 34.253197],
+					[-118.545097, 34.230614],
+					[-118.448219, 34.211559],
+					[-118.3526, 34.192795],
+					[-118.312866, 34.178944],
+					[-118.258926, 34.123341],
+					[-118.233513, 34.055729]
+				]
+			}
+		}
+	]
+}
