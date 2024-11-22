@@ -26,9 +26,13 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
+		"@maptiler/sdk": "^2.4.1",
+		"@turf/turf": "^7.1.0",
+		"d3": "^7.9.0",
+		"d3-scale": "^4.0.2",
 		"gtfs-to-geojson": "^3.7.7",
 		"mapbox-gl": "^3.7.0",
-		"maplibre-gl": "^4.7.1",
+		"maplibre-gl": "^4.6.0",
 		"svelte-maplibre": "^0.9.14"
 	}
 }
