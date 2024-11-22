@@ -1,0 +1,1 @@
+gtfs-to-geojson --configPath src/lib/agencyData.json
