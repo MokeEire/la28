@@ -38,7 +38,6 @@
 </div>
 
 <style>
-	@import 'maplibre-gl/dist/maplibre-gl.css';
 	.map-wrap {
 		position: relative;
 		width: 70%;
