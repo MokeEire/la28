@@ -14,6 +14,12 @@
 <div class="app">
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
+		<blockquote>
+			“Being car-free, you will not be able to drive as a spectator to any of the [Olympic] venues. You have to take transit, walk, bicycle or get dropped off.”
+		</blockquote>
+		<p>
+			- Stephanie Wiggans, Metro CEO (<a href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/">Source</a>)
+		</p>
 		<p>
 			Imagine you’re in downtown Los Angeles and you want to go to SoFi stadium - one of the city’s big new venues which will host the swimming events in the 2028 Olympics. 
 			The good news is that you’re in one of the best places to get the metro in the city, the bad news is that it is still going to take 2-3 times longer than driving would. 
@@ -28,6 +34,11 @@
 			Without owning the current situation and admitting that LA's public transportation does not serve the majority of people, the implication is that the problem is not the infrastructure but the willingness to use it. 
 			While the city has made some progress in expanding its public transit network, allowing spectators to only use transit to get to the games makes them inaccessible to a significant portion of the city.
 			I wanted to illustrate some of the reasons why Angelenos don't use public transit. 
+		</p>
+		<p>
+			Transit in LA is inconvenient. That is the overwhelming response from LA residents in a <a href="https://dornsife.usc.edu/cesr/wp-content/uploads/sites/54/2024/06/UAS595_Topline.pdf">survey about mobility conducted by USC Dornsife</a>.
+			Roughly 60% of respondents said that public buses are inconvenient for going to work or for personal trips.
+			Meanwhile, around 50% of respondents said the same about the metro. 
 		</p>
 				
 		<h1>Transit is too far</h1>
