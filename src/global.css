@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&ffamily=Alegreya:ital,wght@0,400..900;1,400..900&family=Sono:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&ffamily=Alegreya:ital,wght@0,400..900;1,400..900&family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&family=Sono:wght@200..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +7,7 @@
 :root {
 	--font-body: 'Alegreya', georgia, "times new roman", times, serif;
 	--font-mono: 'Sono', monospace;
+	--font-title: 'Noticia Text', georgia, "times new roman", times, serif;
 	--color-bg-0: rgb(202, 216, 228);
 	--color-bg-1: hsl(209, 36%, 86%);
 	--color-bg-2: hsl(224, 44%, 95%);
@@ -58,18 +59,17 @@ a:hover {
 
 h1 {
 	font-size: 2rem;
-	text-align: center;
-    font-family: var(--font-mono);
+    font-family: var(--font-title);
 }
 
 h2 {
 	font-size: 1rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-title);
 }
 
 pre {
 	font-size: 16px;
-	font-family: var(--font-mono);
+	font-family: var(--font-title);
 	background-color: rgba(255, 255, 255, 0.45);
 	border-radius: 3px;
 	box-shadow: 2px 2px 6px rgb(255 255 255 / 25%);
