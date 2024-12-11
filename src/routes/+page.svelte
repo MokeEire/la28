@@ -3,6 +3,7 @@
 	import UsingSvelteLibre from '$lib/UsingSvelteLibre.svelte';
 	import UsingMapLibreGL from '$lib/UsingMapLibreGL.svelte';
 	import BarChartTest from '$lib/BarChartTest.svelte';
+	import Isochrones from '$lib/Isochrones.svelte';
 	//import GetGTFSData from '$lib/GetGTFSData.svelte';
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
@@ -24,7 +25,19 @@
 			“Being car-free, you will not be able to drive as a spectator to any of the [Olympic] venues. You have to take transit, walk, bicycle or get dropped off.”
 		</blockquote>
 		<p>
-			- Stephanie Wiggans, Metro CEO (<a href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/">Source</a>)
+			- Stephanie Wiggans, Metro CEO (<a
+				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
+				>Source</a
+			>)
+		</p>
+		<Isochrones />
+		<p>
+			To most Angelenos, this sounds like a nightmare because public transit in Los Angeles is
+			viewed as slow, inaccessible, and inconvenient. So how do people in Los Angeles get around?
+			The answer, unsurprisingly, is by car. In 2024, 92% of LA County residents surveyed said they
+			used a car to get around LA in the past year. Only 24% used public transportation at some
+			point in the past year, while 31% used a ride-hailing service. Of the public transit users,
+			75% had used the bus, 60% used Metro rail, and just 11% said they had used Metrolink.
 		</p>
 		<p>
 			There was a steep decline in transit usage during pandemic.
