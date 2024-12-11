@@ -21,8 +21,17 @@
 <div class="app">
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
+		<p>
+			For residents of Los Angeles, public transit to Olympic venues like the Sepulveda Basin Recreation Area can take longer than than it takes Londoners to travel to Paris.
+			People in LA find public transit slow, inconvenient, and inaccessible. 
+			In 2024, 92% of LA County residents surveyed said they used a car to get around LA in the past year while only 25% said they had used any form of public transit.
+		</p>
+		<p>
+			For these reasons, the promise of a car-free Olympics in 2028 is a daunting prospect for many Angelenos.
+		</p>
 		<blockquote>
-			“Being car-free, you will not be able to drive as a spectator to any of the [Olympic] venues. You have to take transit, walk, bicycle or get dropped off.”
+			“Being car-free, you will not be able to drive as a spectator to any of the [Olympic] venues.
+			You have to take transit, walk, bicycle or get dropped off.”
 		</blockquote>
 		<p>
 			- Stephanie Wiggans, Metro CEO (<a
@@ -69,53 +78,72 @@
 			to the venues by transit? How does that compare to driving?
 		</p>
 		<BarChartTest />
+
+		<h1>What's LA's plan?</h1>
+
+		<hr />
+
+		<h1>Rough Work</h1>
+
 		<p>
-			Los Angeles’ leadership has vowed a “car-free” Olympics in 2028. 
-			This is an admirable goal that will help drive much needed transportation improvements, but it feels inconsiderate/disconnected/dishonest to say that people will not be able to attend the Olympics unless they travel by transit, bike, or walk.
-			Without owning the current situation and admitting that LA's public transportation does not serve the majority of people, the implication is that the problem is not the infrastructure but the willingness to use it. 
-			While the city has made some progress in expanding its public transit network, allowing spectators to only use transit to get to the games makes them inaccessible to a significant portion of the city.
-			I wanted to illustrate some of the reasons why Angelenos don't use public transit. 
+			Imagine you’re in downtown Los Angeles and you want to go to SoFi stadium - one of the city’s
+			big new venues which will host the swimming events in the 2028 Olympics. The good news is that
+			you’re in one of the best places to get the metro in the city, the bad news is that it is
+			still going to take 2-3 times longer than driving would. You could take the J line for 24
+			minutes from 1st St station to Manchester/Harbor Freeway, then get 115 bus for 19 minutes down
+			Manchester, and then you’re a 13 minute walk away from the stadium (this is at 11:45AM on a
+			Monday). Alternatively, you could hop in your car and you would be there in 25 minutes.
+			Unfortunately this is often the trade-off for those of us that even consider using public
+			transit in Los Angeles.
 		</p>
+
 		<p>
-			Transit in LA is inconvenient. That is the overwhelming response from LA residents in a <a href="https://dornsife.usc.edu/cesr/wp-content/uploads/sites/54/2024/06/UAS595_Topline.pdf">survey about mobility conducted by USC Dornsife</a>.
-			Roughly 60% of respondents said that public buses are inconvenient for going to work or for personal trips.
-			Meanwhile, around 50% of respondents said the same about the metro. 
+			Los Angeles’ leadership has vowed a “car-free” Olympics in 2028. This is an admirable goal
+			that will help drive much needed transportation improvements, but it feels
+			inconsiderate/disconnected/dishonest to say that people will not be able to attend the
+			Olympics unless they travel by transit, bike, or walk. Without owning the current situation
+			and admitting that LA's public transportation does not serve the majority of people, the
+			implication is that the problem is not the infrastructure but the willingness to use it. While
+			the city has made some progress in expanding its public transit network, allowing spectators
+			to only use transit to get to the games makes them inaccessible to a significant portion of
+			the city. I wanted to illustrate some of the reasons why Angelenos don't use public transit.
 		</p>
-				
+		<p></p>
+
 		<h1>Transit is too far</h1>
 		<p>
-			What % of population lives within 1km of rail?
-			Create a 1km buffer around rail lines and identify how much of the population are served by rail lines using census tract/block population data
-			How far are venues from the nearest metro station?
+			What % of population lives within 1km of rail? Create a 1km buffer around rail lines and
+			identify how much of the population are served by rail lines using census tract/block
+			population data How far are venues from the nearest metro station?
 		</p>
 		<h1>Transit is much slower than driving</h1>
 		<p>
-			What are the travel times between venues?
-			What are travel times between most populous neighbourhoods and venues?
-			What are Angelenos' commute times in car vs. transit?
+			What are the travel times between venues? What are travel times between most populous
+			neighbourhoods and venues? What are Angelenos' commute times in car vs. transit?
 		</p>
 		<h1>So how are they going to do it?</h1>
 		<h2>Car-free zones</h2>
 		<h2>Lots of buses</h2>
 		<h1>Will we see a car-free olympics?</h1>
 		<p>
-			Why is it that public transport doesn't work for more people in LA? It's slow, poorly maintained, and doesn't go where people need it to go. 
-			Even in the places where it does go, it's often not safe or convenient to walk to the station. 
-			The stations and walkways feel like intrusions into the car's habitat, situating passengers 6 feet from 6 lanes of freeway traffic on either side.
-			I say all this as an avid user of public transit. 
+			Why is it that public transport doesn't work for more people in LA? It's slow, poorly
+			maintained, and doesn't go where people need it to go. Even in the places where it does go,
+			it's often not safe or convenient to walk to the station. The stations and walkways feel like
+			intrusions into the car's habitat, situating passengers 6 feet from 6 lanes of freeway traffic
+			on either side. I say all this as an avid user of public transit.
 		</p>
-		<h1>Rough Work</h1>
+
 		<p>
-			Living without a car is often a point of pride among the climate conscious, but in Los Angeles it is a flex of tremendous proportions.
-			While I managed to be car-free for a number of years in LA, it was not easy. 
-			It was only possible because I lived and worked along the E (then Expo) Line and I had a generous group of friends who helped me when I needed it.
+			Living without a car is often a point of pride among the climate conscious, but in Los Angeles
+			it is a flex of tremendous proportions. While I managed to be car-free for a number of years
+			in LA, it was not easy. It was only possible because I lived and worked along the E (then
+			Expo) Line and I had a generous group of friends who helped me when I needed it.
 		</p>
 	</div>
 
-	<UsingSvelteLibre venues={stadia} {metroRoutes} {metroLinkRoutes} />
-		<!--<GetGTFSData />-->
+	<!--<GetGTFSData />-->
 
-		<!--<UsingMapLibreGL />-->
+	<!--<UsingMapLibreGL />-->
 </div>
 
 <style>
