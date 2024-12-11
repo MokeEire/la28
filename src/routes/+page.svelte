@@ -9,6 +9,12 @@
 	import stadia from '$lib/venues_complete.json';
 	import metroRoutes from '$lib/metroRoutes.geojson.json';
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
+
+	let showMetrolink = true;
+
+	function handleMetrolinkClick() {
+		showMetrolink = !showMetrolink;
+	}
 </script>
 
 <div class="app">
@@ -21,11 +27,33 @@
 			- Stephanie Wiggans, Metro CEO (<a href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/">Source</a>)
 		</p>
 		<p>
-			Imagine you’re in downtown Los Angeles and you want to go to SoFi stadium - one of the city’s big new venues which will host the swimming events in the 2028 Olympics. 
-			The good news is that you’re in one of the best places to get the metro in the city, the bad news is that it is still going to take 2-3 times longer than driving would. 
-			You could take the J line for 24 minutes from 1st St station to Manchester/Harbor Freeway, then get 115 bus for 19 minutes down Manchester, and then you’re a 13 minute walk away from the stadium (this is at 11:45AM on a Monday). 
-			Alternatively, you could hop in your car and you would be there in 25 minutes.
-			Unfortunately this is often the trade-off for those of us that even consider using public transit in Los Angeles. 
+			There was a steep decline in transit usage during pandemic.
+			In 2019, 35% of LA County residents said they used public transportation in the same survey.
+		</p>
+		<h1>Public Transit in Los Angeles</h1>
+		<p>What does LA's transit system look like? How many rail lines? How many bus routes?</p>
+		<UsingSvelteLibre venues={stadia} {metroRoutes} {metroLinkRoutes} {showMetrolink} />
+		<button on:click={handleMetrolinkClick}>{#if showMetrolink}Hide{:else}Show{/if} Metrolink</button>
+
+		<p>
+			How do people feel about the transit system? The overwhelming response from LA residents in a <a
+				href="https://dornsife.usc.edu/cesr/wp-content/uploads/sites/54/2024/06/UAS595_Topline.pdf"
+				>survey about mobility conducted by USC Dornsife</a
+			> is that transit is inconvenient. Roughly 60% of respondents said that public buses are inconvenient
+			for going to work or for personal trips. Meanwhile, around 50% of respondents said the same about
+			the metro.
+		</p>
+
+		<p>
+			Where is transit accessible in LA? How many people live within a 15 minute walk of a metro
+			station?
+		</p>
+
+		<h1>Getting to the Olympics</h1>
+
+		<p>
+			So not everywhere in LA is accessible, but what about the venues? How long does it take to get
+			to the venues by transit? How does that compare to driving?
 		</p>
 		<BarChartTest />
 		<p>
@@ -78,4 +106,14 @@
 </div>
 
 <style>
+	button {
+		border: 2px solid #9418dc;
+		background-color: #9418dc;
+		border-radius: 8px;
+		padding: 8px 16px;
+		color: white;
+		margin: 16px 0;
+		font-size: 1rem;
+		opacity: .9;
+	}
 </style>
