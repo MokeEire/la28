@@ -8,6 +8,7 @@
       padding: 0px;
       background-color: black;
       color: white;
+      text-align: center;
     }
   
     .heading > h1 {
