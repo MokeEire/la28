@@ -3,13 +3,17 @@
 	import UsingSvelteLibre from '$lib/UsingSvelteLibre.svelte';
 	import UsingMapLibreGL from '$lib/UsingMapLibreGL.svelte';
 	import BarChartTest from '$lib/BarChartTest.svelte';
-	import Isochrones from '$lib/Isochrones.svelte';
+	import IsochroneMap from '$lib/IsochroneMap.svelte';
+	import { union } from 'd3-array';
 	//import GetGTFSData from '$lib/GetGTFSData.svelte';
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
 	import stadia from '$lib/venues_complete.json';
 	import metroRoutes from '$lib/metroRoutes.geojson.json';
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
+	import isochrones from '$lib/isochrones.geojson.json';
+
+	let venues = union(isochrones.features.map(d => d.properties.venue))
 
 	let showMetrolink = true;
 

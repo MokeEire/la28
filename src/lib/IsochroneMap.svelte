@@ -1,0 +1,157 @@
+<script>
+	// Components
+	import Isochrone from '$lib/Isochrone.svelte';
+
+	// Functions
+	import { draw } from 'svelte/transition';
+	import { geoAlbersUsa, geoPath } from 'd3-geo';
+	import { union, sort, descending } from 'd3-array';
+	import { scaleOrdinal } from 'd3-scale';
+	import * as turf from '@turf/turf';
+
+	// Data
+	import tracts from '$lib/nhgis_la_subset.geojson.json';
+	import isochrones from '$lib/isochrones.geojson.json';
+	import metroRoutes from '$lib/metroRoutes.geojson.json';
+	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
+
+	// Props
+	export let venue;
+
+	// Filter isochrones by venue and travel time + rewind to fix polygons
+	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
+	let isochronesFiltered = isochronesRewind.features.filter(
+		(d) => d.properties.venue == venue && d.properties.travel_time <= 60 * 120
+	);
+	let isochronesSorted = sort(isochronesFiltered, (a, b) =>
+		descending(a.properties.travel_time, b.properties.travel_time)
+	);
+
+	let width = 400;
+	let height = width * 0.75;
+
+	// Margins around the chart to position it properly inside the SVG container
+	const margin = { top: 25, right: 30, bottom: 100, left: 32 };
+
+	// Mapping projection
+	let projection = geoAlbersUsa()
+		.rotate([118, 0])
+		.center([-0.31, 34.05])
+		.fitSize([width, height], tracts)
+		//.scale(width * 53)
+		.translate([width / 2, height / 2]);
+
+	let path = geoPath().projection(projection);
+
+	// Get unique travel times
+	const travelTimes = union(isochronesFiltered.map((d) => d.properties.travel_time));
+
+	let travelTimeCategories = {
+		1800: '< 30',
+		3600: '30-60',
+		5400: '60-90',
+		7200: '90-120',
+		9000: '> 120'
+	};
+
+	// Colour scale
+	const colour = scaleOrdinal()
+		.domain(travelTimes)
+		.range(['green', 'yellow', 'orange', 'red', 'black']);
+
+	// Show transit lines value and function
+	let showTransit = false;
+
+	function handleTransitClick() {
+		showTransit = !showTransit;
+	}
+
+	//let twoHrTravelTime = isochronesSorted.filter((d) => d.properties.travel_time === 60 * 120);
+</script>
+
+<div class="chart-container" bind:clientWidth={width}>
+	<h1>{venue}</h1>
+	<h2>44% of LA residents live within 2hrs of the venue by public transit</h2>
+	<svg width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+		<!-- svelte-ignore a11y-click-events-have-key-events --->
+		<!-- Census Tracts -->
+		<path d={path(tracts)} fill="white" stroke="#333" />
+		<!-- Isochrones -->
+		<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} {venue} />
+
+		<!-- Transit lines -->
+		{#if showTransit}
+			<g>
+				{#each metroRoutes.features as route}
+					<path
+						transition:draw={{ duration: 2000 }}
+						d={path(route.geometry)}
+						stroke={route.properties.route_color}
+						fill="none"
+						stroke-width="3"
+					/>
+				{/each}
+				{#each metroLinkRoutes.features as route}
+					<path
+						d={path(route.geometry)}
+						stroke={route.properties.route.route_color}
+						fill="none"
+						stroke-width="2"
+					/>
+				{/each}
+			</g>
+		{/if}
+
+		<!-- Legend -->
+		<g transform={`translate(14, ${height - 20})`}>
+			{#each travelTimes as time, i}
+				<g transform={`translate(${margin.left + (i * width) / 7}, -4)`}>
+					<!-- Color box -->
+					<rect
+						style="border-radius:10px;"
+						width="16"
+						height="16"
+						rx="4"
+						ry="4"
+						fill={colour(time)}
+					/>
+					<!-- Category text -->
+					<text class="fill-gray-800" x="20" y="10" font-size="14px" alignment-baseline="middle"
+						>{travelTimeCategories[time]} mins</text
+					>
+				</g>
+			{/each}
+		</g>
+	</svg>
+
+	<button on:click={handleTransitClick}
+		>{#if showTransit}Hide{:else}Show{/if} Transit</button
+	>
+</div>
+
+<style>
+	.chart-container {
+		position: relative;
+		width: 100%;
+		margin-top: 2rem;
+	}
+
+	.chart-container h1 {
+		font-size: 1.5rem;
+	}
+
+	.chart-container h2 {
+		font-size: 1rem;
+	}
+
+	button {
+		border: 2px solid #9418dc;
+		background-color: #9418dc;
+		border-radius: 8px;
+		padding: 4px 8px;
+		color: white;
+		margin: 16px 0;
+		font-size: 0.9rem;
+		opacity: 0.9;
+	}
+</style>
