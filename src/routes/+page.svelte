@@ -20,55 +20,59 @@
 	function handleMetrolinkClick() {
 		showMetrolink = !showMetrolink;
 	}
+
 </script>
 
 <div class="app">
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
 		<p>
-			For residents of Los Angeles, public transit to Olympic venues like the Sepulveda Basin Recreation Area can take longer than than it takes Londoners to travel to Paris.
-			People in LA find public transit slow, inconvenient, and inaccessible. 
-			In 2024, 92% of LA County residents surveyed said they used a car to get around LA in the past year while only 25% said they had used any form of public transit.
+			For residents of Whittier, the 40 mile public transit journey to the Sepulveda Basin Recreation Area, an upcoming Olympic venue, takes longer than than it takes Londoners to travel 285 miles to Paris.
+			According to the latest transportation & mobility survey from USC's Dornsife, 92% of Angelenos use cars to get around the city. 
+			Astronomical journey times like this are part of the reason that just 25% of residents said they public transit in the past year. 
+			One of the four objectives of the LA 2028 Transport Strategy is to change residents' transit behaviours and encourage broader use of LA's transit system "before, during, and after the Games".
+			Why do Angelenos not use public transit?
 		</p>
 		<p>
-			For these reasons, the promise of a car-free Olympics in 2028 is a daunting prospect for many Angelenos.
-		</p>
-		<blockquote>
-			“Being car-free, you will not be able to drive as a spectator to any of the [Olympic] venues.
-			You have to take transit, walk, bicycle or get dropped off.”
-		</blockquote>
-		<p>
-			- Stephanie Wiggans, Metro CEO (<a
-				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
-				>Source</a
-			>)
-		</p>
-		<Isochrones />
-		<p>
-			To most Angelenos, this sounds like a nightmare because public transit in Los Angeles is
-			viewed as slow, inaccessible, and inconvenient. So how do people in Los Angeles get around?
-			The answer, unsurprisingly, is by car. In 2024, 92% of LA County residents surveyed said they
-			used a car to get around LA in the past year. Only 24% used public transportation at some
-			point in the past year, while 31% used a ride-hailing service. Of the public transit users,
-			75% had used the bus, 60% used Metro rail, and just 11% said they had used Metrolink.
+			The overwhelming response from LA residents in a <a
+				href="https://dornsife.usc.edu/cesr/wp-content/uploads/sites/54/2024/06/UAS595_Topline.pdf"
+				>survey about mobility conducted by USC Dornsife</a
+			> is that transit is inconvenient. 
+			Roughly 60% of respondents said that public buses are inconvenient
+			for going to work or for personal trips. 
+			Meanwhile, around 50% of respondents said the same about the metro.
+			The primary concern with buses is that they are slow, while the primary concern with the metro is that it is not close to where people live.
 		</p>
 		<p>
-			There was a steep decline in transit usage during pandemic.
-			In 2019, 35% of LA County residents said they used public transportation in the same survey.
+			To illustrate the inconvenience of public transit in Los Angeles, here is an isochrone map for each of the 2028 Olympic venues. 
+			These maps show how long it takes to get to each venue by public transit. 
+			For example, the map for the Sepulveda Basin Recreation Area shows that it takes more than 2 hours to get there by public transit from Whittier, a city 40 miles away.
 		</p>
+		{#each venues as venue}
+			{#if venue == 'Sepulveda Basin Recreation Area'}
+			<IsochroneMap {venue} />
+			{/if}
+		{/each}
+		
+		
+		<h1>LA's Transportation Plan</h1>
+		<p>
+			Of course, the Olympic Games are not being held today.
+			Los Angeles has time to prepare, so what are they doing?
+			
+			Outside of existing transportation projects, nothing.
+			The two major infrastructure projects that the city is promising to deliver by 2028 are the extension of the Purple Line to Westwood and the completion of the transit connection to LAX.
+			Connecting LAX to the transit system is a big deal, but it's not going to make everyday transit better for Angelenos (except those working at the airport).
+			The Purple Line is more important for making the city accessible and will likely speed up transit times for a lot of the Westside.
+		</p>
+		
+		
 		<h1>Public Transit in Los Angeles</h1>
 		<p>What does LA's transit system look like? How many rail lines? How many bus routes?</p>
 		<UsingSvelteLibre venues={stadia} {metroRoutes} {metroLinkRoutes} {showMetrolink} />
 		<button on:click={handleMetrolinkClick}>{#if showMetrolink}Hide{:else}Show{/if} Metrolink</button>
 
-		<p>
-			How do people feel about the transit system? The overwhelming response from LA residents in a <a
-				href="https://dornsife.usc.edu/cesr/wp-content/uploads/sites/54/2024/06/UAS595_Topline.pdf"
-				>survey about mobility conducted by USC Dornsife</a
-			> is that transit is inconvenient. Roughly 60% of respondents said that public buses are inconvenient
-			for going to work or for personal trips. Meanwhile, around 50% of respondents said the same about
-			the metro.
-		</p>
+		
 
 		<p>
 			Where is transit accessible in LA? How many people live within a 15 minute walk of a metro
