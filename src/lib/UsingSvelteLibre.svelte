@@ -5,7 +5,6 @@
 	//import {lineString} from '@turf/turf';
 	import LineToNearestStop from '$lib/LineToNearestStop.svelte';
 	import VenueMarkers from '$lib/VenueMarkers.svelte';
-	export let venues;
 	export let metroRoutes;
 	export let metroLinkRoutes;
 	export let showMetrolink;
@@ -53,7 +52,4 @@
 		height: 400px;
 	}
 
-	.showMetrolink {
-		display: none;
-	}
 </style>
