@@ -4,7 +4,7 @@
 
 	// Functions
 	import { draw } from 'svelte/transition';
-	import { geoAlbersUsa, geoPath } from 'd3-geo';
+	import { geoAlbers, geoPath } from 'd3-geo';
 	import { union, sort, descending } from 'd3-array';
 	import { scaleOrdinal } from 'd3-scale';
 	import * as turf from '@turf/turf';
@@ -34,11 +34,11 @@
 	const margin = { top: 25, right: 30, bottom: 100, left: 32 };
 
 	// Mapping projection
-	let projection = geoAlbersUsa()
+	let projection = geoAlbers()
 		.rotate([118, 0])
 		.center([-0.31, 34.05])
-		.fitSize([width, height], tracts)
-		//.scale(width * 53)
+		//.fitExtent([width, height], tracts)
+		.scale(width * 53)
 		.translate([width / 2, height / 2]);
 
 	let path = geoPath().projection(projection);
