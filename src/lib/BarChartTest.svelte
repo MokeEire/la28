@@ -3,7 +3,7 @@
   import { scaleBand, scaleLinear } from 'd3-scale';
   import { stack, stackOrderNone } from 'd3-shape';
   import { max } from 'd3-array';
-  import AxisLeft from '$lib/AxisLeftV5.svelte';
+  //import AxisLeft from '$lib/AxisLeftV5.svelte';
 
   let {
     title = 'Car or Transit? How much time do you have?',
