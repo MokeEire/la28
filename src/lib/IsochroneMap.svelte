@@ -27,18 +27,18 @@
 		descending(a.properties.travel_time, b.properties.travel_time)
 	);
 
-	let width = 400;
+	let width = 600;
 	let height = width * 0.75;
 
 	// Margins around the chart to position it properly inside the SVG container
-	const margin = { top: 25, right: 30, bottom: 100, left: 32 };
+	const margin = { top: 25, right: 25, bottom: 25, left: 25 };
 
 	// Mapping projection
 	let projection = geoAlbers()
 		.rotate([118, 0])
-		.center([-0.31, 34.05])
+		.center([-0.35, 34.0])
 		//.fitExtent([width, height], tracts)
-		.scale(width * 53)
+		.scale(width * 55)
 		.translate([width / 2, height / 2]);
 
 	let path = geoPath().projection(projection);
