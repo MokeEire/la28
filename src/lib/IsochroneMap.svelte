@@ -72,7 +72,11 @@
 <div class="chart-container" bind:clientWidth={width}>
 	<h1>{venue}</h1>
 	<h2>44% of LA residents live within 2hrs of the venue by public transit</h2>
-	<svg width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+	
+	<button on:click={handleTransitClick}
+		>{#if showTransit}Hide{:else}Show{/if} Transit</button
+	>
+	<svg width={width} height={height}>
 		<!-- svelte-ignore a11y-click-events-have-key-events --->
 		<!-- Census Tracts -->
 		<path d={path(tracts)} fill="white" stroke="#333" />
@@ -124,10 +128,9 @@
 		</g>
 	</svg>
 
-	<button on:click={handleTransitClick}
-		>{#if showTransit}Hide{:else}Show{/if} Transit</button
-	>
+	
 </div>
+<hr>
 
 <style>
 	.chart-container {
@@ -145,13 +148,10 @@
 	}
 
 	button {
-		border: 2px solid #9418dc;
-		background-color: #9418dc;
-		border-radius: 8px;
 		padding: 4px 8px;
-		color: white;
-		margin: 16px 0;
+		color: rgb(80, 80, 80);
 		font-size: 0.9rem;
 		opacity: 0.9;
+		text-decoration: underline;
 	}
 </style>
