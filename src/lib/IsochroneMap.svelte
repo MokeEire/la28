@@ -11,7 +11,7 @@
 
 	// Data
 	import tracts from '$lib/nhgis_la_subset.geojson.json';
-	import isochrones from '$lib/isochrones.geojson.json';
+	import isochrones from '$lib/isochronesPop.geojson.json';
 	import metroRoutes from '$lib/metroRoutes.geojson.json';
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
 
