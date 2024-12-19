@@ -16,7 +16,7 @@
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
 
 	// Props
-	export let venue;
+	let venue = $props();
 
 	// Filter isochrones by venue and travel time + rewind to fix polygons
 	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
@@ -27,21 +27,25 @@
 		descending(a.properties.travel_time, b.properties.travel_time)
 	);
 
-	let width = 600;
-	let height = width * 0.75;
+	let width = $state(600);
+	let height = $derived(width * 0.75);
 
 	// Margins around the chart to position it properly inside the SVG container
 	const margin = { top: 25, right: 25, bottom: 25, left: 25 };
 
 	// Mapping projection
-	let projection = geoAlbers()
+	let projection = $derived(
+		geoAlbers()
 		.rotate([118, 0])
 		.center([-0.35, 34.0])
 		//.fitExtent([width, height], tracts)
 		.scale(width * 55)
-		.translate([width / 2, height / 2]);
+		.translate([width / 2, height / 2])
+	);
 
-	let path = geoPath().projection(projection);
+	let path = $derived(
+		geoPath().projection(projection)
+	);
 
 	// Get unique travel times
 	const travelTimes = union(isochronesFiltered.map((d) => d.properties.travel_time));
@@ -60,7 +64,7 @@
 		.range(['green', 'yellow', 'orange', 'red', 'black']);
 
 	// Show transit lines value and function
-	let showTransit = false;
+	let showTransit = $state(false);
 
 	function handleTransitClick() {
 		showTransit = !showTransit;
@@ -73,7 +77,7 @@
 	<h1>{venue}</h1>
 	<h2>44% of LA residents live within 2hrs of the venue by public transit</h2>
 	
-	<button on:click={handleTransitClick}
+	<button onclick={handleTransitClick}
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
 	>
 	<svg width={width} height={height}>
