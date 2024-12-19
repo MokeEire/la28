@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Navbar from '$lib/Navbar.svelte';
-	import UsingSvelteLibre from '$lib/UsingSvelteLibre.svelte';
-	import UsingMapLibreGL from '$lib/UsingMapLibreGL.svelte';
+	//import UsingSvelteLibre from '$lib/UsingSvelteLibre.svelte';
+	//import UsingMapLibreGL from '$lib/UsingMapLibreGL.svelte';
 	import BarChartTest from '$lib/BarChartTest.svelte';
 	import IsochroneMap from '$lib/IsochroneMap.svelte';
 	import { union } from 'd3-array';
@@ -9,17 +9,11 @@
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
 	import stadia from '$lib/venues_complete.json';
-	import metroRoutes from '$lib/metroRoutes.geojson.json';
-	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
-	import isochrones from '$lib/isochrones.geojson.json';
+	//import metroRoutes from '$lib/metroRoutes.geojson.json';
+	//import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
+	import isochrones from '$lib/isochronesPop.geojson.json';
 
 	let venues = union(isochrones.features.map(d => d.properties.venue))
-
-	let showMetrolink = true;
-
-	function handleMetrolinkClick() {
-		showMetrolink = !showMetrolink;
-	}
 
 </script>
 
@@ -69,8 +63,7 @@
 		
 		<h1>Public Transit in Los Angeles</h1>
 		<p>What does LA's transit system look like? How many rail lines? How many bus routes?</p>
-		<UsingSvelteLibre venues={stadia} {metroRoutes} {metroLinkRoutes} {showMetrolink} />
-		<button on:click={handleMetrolinkClick}>{#if showMetrolink}Hide{:else}Show{/if} Metrolink</button>
+		
 
 		
 
@@ -155,14 +148,5 @@
 </div>
 
 <style>
-	button {
-		border: 2px solid #9418dc;
-		background-color: #9418dc;
-		border-radius: 8px;
-		padding: 8px 16px;
-		color: white;
-		margin: 16px 0;
-		font-size: 1rem;
-		opacity: .9;
-	}
+	
 </style>
