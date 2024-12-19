@@ -18,9 +18,9 @@
 	// Props
 	let { venue } = $props();
 
+	//$inspect(venue.venue)
 	//let tractPop = isochrones.features.map((d) => d.properties.pop).reduce((a, b) => a + b, 0);
 	//let venueIsos = isochrones.features.map((d) => d.properties.includes(venue))
-
 	// Filter isochrones by venue and travel time + rewind to fix polygons
 	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
 	let isochronesFiltered = $derived(isochronesRewind.features.filter(
@@ -101,7 +101,7 @@
 	<svg {width} {height} class="svg-container">
 		<!-- svelte-ignore a11y_click_events_have_key_events --->
 		<!-- Census Tracts -->
-		<path d={path(tracts)} fill="white" stroke="#333" />
+			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=.4 />
 		<!-- Isochrones -->
 			 {#key isochronesSorted}
 			<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} venue={venue.venue} />
@@ -152,23 +152,30 @@
 			{/each}
 		</g>
 	</svg>
-
-	
 </div>
-<hr>
+<hr />
 
 <style>
 	.chart-container {
 		position: relative;
 		width: 100%;
-		margin-top: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.svg-container {
+
 	}
 
 	.chart-container h1 {
 		font-size: 1.5rem;
+		font-weight: 600;
 	}
 
 	.chart-container h2 {
+		font-size: 1.1rem;
+	}
+
+	.chart-container h3 {
 		font-size: 1rem;
 	}
 
