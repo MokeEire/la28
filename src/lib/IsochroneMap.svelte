@@ -16,16 +16,23 @@
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
 
 	// Props
-	let venue = $props();
+	let { venue } = $props();
+
+	//let tractPop = isochrones.features.map((d) => d.properties.pop).reduce((a, b) => a + b, 0);
+	//let venueIsos = isochrones.features.map((d) => d.properties.includes(venue))
 
 	// Filter isochrones by venue and travel time + rewind to fix polygons
 	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
 	let isochronesFiltered = isochronesRewind.features.filter(
-		(d) => d.properties.venue == venue && d.properties.travel_time <= 60 * 120
+		(d) => d.properties.venue == venue.venue && d.properties.travel_time <= 60 * 120
 	);
 	let isochronesSorted = sort(isochronesFiltered, (a, b) =>
 		descending(a.properties.travel_time, b.properties.travel_time)
 	);
+	let venuePop = isochronesFiltered.filter(
+		(d) => d.properties.venue == venue.venue && d.properties.travel_time === 7200
+	);
+	let venuePopPercent = (venuePop[0].properties.pop / 9301156).toLocaleString('en-US', {style: 'percent', minimumFractionDigits:1});
 
 	let width = $state(600);
 	let height = $derived(width * 0.75);
@@ -74,8 +81,9 @@
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
-	<h1>{venue}</h1>
-	<h2>44% of LA residents live within 2hrs of the venue by public transit</h2>
+	<h1>{venue.venue}</h1>
+	<h2>{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h2>
+	<h3>Events: {venue.events}</h3>
 	
 	<button onclick={handleTransitClick}
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
@@ -85,7 +93,7 @@
 		<!-- Census Tracts -->
 		<path d={path(tracts)} fill="white" stroke="#333" />
 		<!-- Isochrones -->
-		<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} {venue} />
+		<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} venue = {venue.venue} />
 
 		<!-- Transit lines -->
 		{#if showTransit}

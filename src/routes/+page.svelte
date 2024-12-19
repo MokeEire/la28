@@ -4,16 +4,16 @@
 	//import UsingMapLibreGL from '$lib/UsingMapLibreGL.svelte';
 	import BarChartTest from '$lib/BarChartTest.svelte';
 	import IsochroneMap from '$lib/IsochroneMap.svelte';
-	import { union } from 'd3-array';
+	//import { union } from 'd3-array';
 	//import GetGTFSData from '$lib/GetGTFSData.svelte';
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
 	import stadia from '$lib/venues_complete.json';
 	//import metroRoutes from '$lib/metroRoutes.geojson.json';
 	//import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
-	import isochrones from '$lib/isochronesPop.geojson.json';
+	//import isochrones from '$lib/isochronesPop.geojson.json';
 
-	let venues = union(isochrones.features.map(d => d.properties.venue))
+	let venueNames = stadia.map(d => d.venue)
 
 </script>
 
@@ -42,8 +42,8 @@
 			These maps show how long it takes to get to each venue by public transit. 
 			For example, the map for the Sepulveda Basin Recreation Area shows that it takes more than 2 hours to get there by public transit from Whittier, a city 40 miles away.
 		</p>
-		{#each venues as venue}
-			{#if venue == 'Sepulveda Basin Recreation Area'}
+		{#each stadia as venue}
+			{#if venue.venue == 'Sepulveda Basin Recreation Area'}
 			<IsochroneMap {venue} />
 			{/if}
 		{/each}
