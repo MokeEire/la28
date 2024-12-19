@@ -157,5 +157,15 @@
 </div>
 
 <style>
-	
+	select {
+		font-size: 1.5rem;
+		text-decoration: underline;
+		padding: 4px 8px;
+		background-color: transparent;
+		border-bottom: 2px solid var(--color-theme-2)
+	}
+
+	select option {
+		font-size: 1rem;
+	}
 </style>
