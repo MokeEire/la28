@@ -23,16 +23,23 @@
 
 	// Filter isochrones by venue and travel time + rewind to fix polygons
 	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
-	let isochronesFiltered = isochronesRewind.features.filter(
+	let isochronesFiltered = $derived(isochronesRewind.features.filter(
 		(d) => d.properties.venue == venue.venue && d.properties.travel_time <= 60 * 120
-	);
-	let isochronesSorted = sort(isochronesFiltered, (a, b) =>
+	));
+	let isochronesSorted = $derived(
+		sort(isochronesFiltered, (a, b) =>
 		descending(a.properties.travel_time, b.properties.travel_time)
+	)
 	);
-	let venuePop = isochronesFiltered.filter(
+	let venuePop = $derived(isochronesFiltered.filter(
 		(d) => d.properties.venue == venue.venue && d.properties.travel_time === 7200
+	));
+	let venuePopPercent = $derived(
+		(venuePop[0].properties.pop / 9301156).toLocaleString('en-US', {
+		style: 'percent',
+		minimumFractionDigits: 1
+	})
 	);
-	let venuePopPercent = (venuePop[0].properties.pop / 9301156).toLocaleString('en-US', {style: 'percent', minimumFractionDigits:1});
 
 	let width = $state(600);
 	let height = $derived(width * 0.75);
@@ -50,12 +57,12 @@
 		.translate([width / 2, height / 2])
 	);
 
-	let path = $derived(
-		geoPath().projection(projection)
-	);
+	let path = $derived(geoPath().projection(projection));
 
 	// Get unique travel times
-	const travelTimes = union(isochronesFiltered.map((d) => d.properties.travel_time));
+	const travelTimes = $derived(
+		union(isochronesFiltered.map((d) => d.properties.travel_time))
+	);
 
 	let travelTimeCategories = {
 		1800: '< 30',
@@ -66,9 +73,11 @@
 	};
 
 	// Colour scale
-	const colour = scaleOrdinal()
+	const colour = $derived(
+		scaleOrdinal()
 		.domain(travelTimes)
-		.range(['green', 'yellow', 'orange', 'red', 'black']);
+		.range(['green', 'yellow', 'orange', 'red', 'black'])
+	);
 
 	// Show transit lines value and function
 	let showTransit = $state(false);
@@ -76,24 +85,27 @@
 	function handleTransitClick() {
 		showTransit = !showTransit;
 	}
-
-	//let twoHrTravelTime = isochronesSorted.filter((d) => d.properties.travel_time === 60 * 120);
+	let [x, y] = $derived(
+		projection([venue.venue_geometry.coordinates[0], venue.venue_geometry.coordinates[1]])
+	);
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
-	<h1>{venue.venue}</h1>
 	<h2>{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h2>
 	<h3>Events: {venue.events}</h3>
 	
 	<button onclick={handleTransitClick}
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
 	>
-	<svg width={width} height={height}>
-		<!-- svelte-ignore a11y-click-events-have-key-events --->
+	<svg {width} {height} class="svg-container">
+		<!-- svelte-ignore a11y_click_events_have_key_events --->
 		<!-- Census Tracts -->
 		<path d={path(tracts)} fill="white" stroke="#333" />
 		<!-- Isochrones -->
-		<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} venue = {venue.venue} />
+			 {#key isochronesSorted}
+			<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} venue={venue.venue} />
+			{/key}
+			<circle cx={x} cy={y} r="6" stroke="white" stroke-width="2" />
 
 		<!-- Transit lines -->
 		{#if showTransit}

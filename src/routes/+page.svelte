@@ -15,6 +15,10 @@
 
 	let venueNames = stadia.map(d => d.venue)
 
+	let venueSelected = $state(stadia[0]);
+
+	//$inspect(venueSelected)
+
 </script>
 
 <div class="app">
@@ -42,11 +46,16 @@
 			These maps show how long it takes to get to each venue by public transit. 
 			For example, the map for the Sepulveda Basin Recreation Area shows that it takes more than 2 hours to get there by public transit from Whittier, a city 40 miles away.
 		</p>
+
+		<h4>Select a venue</h4>
+		<select bind:value={venueSelected}>
 		{#each stadia as venue}
-			{#if venue.venue == 'Sepulveda Basin Recreation Area'}
-			<IsochroneMap {venue} />
-			{/if}
+			<option value={venue}>
+				{venue.venue}
+			</option>
 		{/each}
+		</select>
+		<IsochroneMap venue={venueSelected} />
 		
 		
 		<h1>LA's Transportation Plan</h1>
