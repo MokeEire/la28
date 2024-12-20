@@ -1,6 +1,7 @@
 <script>
 	// Components
 	import Isochrone from '$lib/Isochrone.svelte';
+	import PercentBar from '$lib/PercentBar.svelte';
 
 	// Functions
 	import { draw } from 'svelte/transition';
@@ -93,6 +94,9 @@
 
 <div class="chart-container" bind:clientWidth={width}>
 	<h2>{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h2>
+	{#key isochronesFiltered}
+		<PercentBar data={isochronesFiltered} />
+			{/key}
 	<h3>Events: {venue.events}</h3>
 	
 	<button onclick={handleTransitClick}
