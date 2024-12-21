@@ -112,7 +112,7 @@
 		<g>
 			{#each metroRoutes.features as route}
 				<path
-					transition:draw={{ duration: 2000 }}
+					transition:draw|global={{ duration: 800 }}
 					d={path(route.geometry)}
 					stroke={route.properties.route_color}
 					fill="none"
@@ -121,6 +121,7 @@
 			{/each}
 			{#each metroLinkRoutes.features as route}
 				<path
+				transition:draw|global={{ delay: 400, duration: 800 }}
 					d={path(route.geometry)}
 					stroke={route.properties.route.route_color}
 					fill="none"
@@ -169,7 +170,7 @@
 	.chart-container {
 		position: relative;
 		width: 100%;
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 	}
 
 	.svg-container {
