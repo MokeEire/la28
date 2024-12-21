@@ -93,52 +93,52 @@
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
-	<h2>{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h2>
-	{#key isochronesFiltered}
-		<PercentBar data={isochronesFiltered} />
-			{/key}
 	<h3>Events: {venue.events}</h3>
+	<h2>{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h2>
 	
-	<button onclick={handleTransitClick}
-		>{#if showTransit}Hide{:else}Show{/if} Transit</button
-	>
 	<svg {width} {height} class="svg-container">
 		<!-- svelte-ignore a11y_click_events_have_key_events --->
-		<!-- Census Tracts -->
+		
+		 <g>
+			<!-- Census Tracts -->
 			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=.4 />
 		<!-- Isochrones -->
 			 {#key isochronesSorted}
 			<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} venue={venue.venue} />
 			{/key}
-			<circle cx={x} cy={y} r="6" stroke="white" stroke-width="2" />
-
-		<!-- Transit lines -->
+			
+			<!-- Transit lines -->
 		{#if showTransit}
-			<g>
-				{#each metroRoutes.features as route}
-					<path
-						transition:draw={{ duration: 2000 }}
-						d={path(route.geometry)}
-						stroke={route.properties.route_color}
-						fill="none"
-						stroke-width="3"
-					/>
-				{/each}
-				{#each metroLinkRoutes.features as route}
-					<path
-						d={path(route.geometry)}
-						stroke={route.properties.route.route_color}
-						fill="none"
-						stroke-width="2"
-					/>
-				{/each}
-			</g>
-		{/if}
+		<g>
+			{#each metroRoutes.features as route}
+				<path
+					transition:draw={{ duration: 2000 }}
+					d={path(route.geometry)}
+					stroke={route.properties.route_color}
+					fill="none"
+					stroke-width="3"
+				/>
+			{/each}
+			{#each metroLinkRoutes.features as route}
+				<path
+					d={path(route.geometry)}
+					stroke={route.properties.route.route_color}
+					fill="none"
+					stroke-width="2"
+				/>
+			{/each}
+		</g>
+	{/if}
+	<circle cx={x} cy={y} r="6" stroke="white" stroke-width="2" />
+		</g>
+			
+
+		
 
 		<!-- Legend -->
-		<g transform={`translate(14, ${height - 20})`}>
+		<g transform={`translate(${margin.left}, ${height-margin.top})`}>
 			{#each travelTimes as time, i}
-				<g transform={`translate(${margin.left + (i * width) / 7}, -4)`}>
+				<g transform={`translate(${margin.left + (i * width) / 4}, -4)`}>
 					<!-- Color box -->
 					<rect
 						style="border-radius:10px;"
@@ -156,6 +156,12 @@
 			{/each}
 		</g>
 	</svg>
+	<button onclick={handleTransitClick}
+		>{#if showTransit}Hide{:else}Show{/if} Transit</button
+	>
+	{#key isochronesFiltered}
+		<PercentBar data={isochronesFiltered} />
+			{/key}
 </div>
 <hr />
 
