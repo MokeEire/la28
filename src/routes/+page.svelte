@@ -1,11 +1,25 @@
 <script lang="ts">
 	import Navbar from '$lib/Navbar.svelte';
 	import IsochroneMap from '$lib/IsochroneMap.svelte';
+	import BarChartTest from '$lib/BarChartTest.svelte';
+	import TravelTimeBar from '$lib/TravelTimeBar.svelte';
+	import * as turf from '@turf/turf';
+	import { union, sort, descending } from 'd3-array';
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
 	import stadia from '$lib/venues_complete.json';
+	import isochrones from '$lib/isochronesTransit.geojson.json';
 
 	let venueSelected = $state(stadia[0]);
+
+	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
+
+	let isochronesFiltered = $derived(
+		isochronesRewind.features.filter(
+			(d) => d.properties.venue == venueSelected.venue && d.properties.travel_time <= 60 * 120
+		)
+	);
+	
 
 </script>
 
