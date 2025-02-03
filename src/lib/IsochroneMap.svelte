@@ -28,20 +28,20 @@
 	// Filter isochrones by venue and travel time + rewind to fix polygons
 	let isochronesSorted = $derived(
 		sort(isochronesFiltered, (a, b) =>
-		descending(a.properties.travel_time, b.properties.travel_time)
-	)
+			descending(a.properties.travel_time, b.properties.travel_time)
+		)
 	);
 	
 	let venuePop = $derived(
 		isochronesFiltered.filter(
-		(d) => d.properties.venue == venue.venue && d.properties.travel_time === 7200
+			(d) => d.properties.venue == venue.venue && d.properties.travel_time === 7200
 		)
 	);
 	let venuePopPercent = $derived(
 		(venuePop[0].properties.pop / 9301156).toLocaleString('en-US', {
-		style: 'percent',
-		minimumFractionDigits: 1
-	})
+			style: 'percent',
+			minimumFractionDigits: 1
+		})
 	);
 
 	let width = $state(600);
@@ -54,19 +54,18 @@
 	let projection = $derived(
 		geoAlbers()
 			.rotate([118, 0])
+			.rotate([118, 0])
 			//.center([-0.35, 34.2])
 			.fitSize([width - margin.left - margin.right, height - margin.top - margin.bottom], tracts)
-			//.scale(width * 55)
-			//.translate([width / 2, height / 2])
-			//.fitWidth(width - margin.left - margin.right, tracts)
+		//.scale(width * 55)
+		//.translate([width / 2, height / 2])
+		//.fitWidth(width - margin.left - margin.right, tracts)
 	);
 
 	let path = $derived(geoPath().projection(projection));
 
 	// Get unique travel times
-	const travelTimes = $derived(
-		union(isochronesFiltered.map((d) => d.properties.travel_time))
-	);
+	const travelTimes = $derived(union(isochronesFiltered.map((d) => d.properties.travel_time)));
 
 	let travelTimeCategories = {
 		1800: '< 30',
@@ -78,9 +77,7 @@
 
 	// Colour scale
 	const colour = $derived(
-		scaleOrdinal()
-		.domain(travelTimes)
-		.range(['green', 'yellow', 'orange', 'red', 'black'])
+		scaleOrdinal().domain(travelTimes).range(['green', 'yellow', 'orange', 'red', 'black'])
 	);
 
 	// Show transit lines value and function
@@ -97,49 +94,51 @@
 <div class="chart-container" bind:clientWidth={width}>
 	<h3>Events: {venue.events}</h3>
 	<h2>{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h2>
-	
+
 	<svg {width} {height} class="svg-container">
 		<!-- svelte-ignore a11y_click_events_have_key_events --->
-		
-		 <g>
-			<!-- Census Tracts -->
-			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=.4 />
-			<!-- Isochrones -->
-			 {#key isochronesSorted}
-			<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} venue={venue.venue} />
-			{/key}
-			
-			<!-- Transit lines -->
-		{#if showTransit}
-		<g>
-			{#each metroRoutes.features as route}
-				<path
-					transition:draw|global={{ duration: 800 }}
-					d={path(route.geometry)}
-					stroke={route.properties.route_color}
-					fill="none"
-					stroke-width="3"
-				/>
-			{/each}
-			{#each metroLinkRoutes.features as route}
-				<path
-				transition:draw|global={{ delay: 400, duration: 800 }}
-					d={path(route.geometry)}
-					stroke={route.properties.route.route_color}
-					fill="none"
-					stroke-width="2"
-				/>
-			{/each}
-		</g>
-	{/if}
-	<circle cx={x} cy={y} r="6" stroke="white" stroke-width="2" />
-		</g>
-			
 
-		
+		<g>
+			<!-- Census Tracts -->
+			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=".4" />
+			<!-- Isochrones -->
+			{#key isochronesSorted}
+				<Isochrone
+					isochroneData={isochronesSorted}
+					{path}
+					colourScale={colour}
+					venue={venue.venue}
+				/>
+			{/key}
+
+			<!-- Transit lines -->
+			{#if showTransit}
+				<g>
+					{#each metroRoutes.features as route}
+						<path
+							transition:draw|global={{ duration: 800 }}
+							d={path(route.geometry)}
+							stroke={route.properties.route_color}
+							fill="none"
+							stroke-width="3"
+						/>
+					{/each}
+					{#each metroLinkRoutes.features as route}
+						<path
+							transition:draw|global={{ delay: 400, duration: 800 }}
+							d={path(route.geometry)}
+							stroke={route.properties.route.route_color}
+							fill="none"
+							stroke-width="2"
+						/>
+					{/each}
+				</g>
+			{/if}
+			<circle cx={x} cy={y} r="6" stroke="white" stroke-width="2" />
+		</g>
 
 		<!-- Legend -->
-		<g transform={`translate(${margin.left}, ${height-margin.top})`}>
+		<g transform={`translate(${margin.left}, ${height - margin.top})`}>
 			{#each travelTimes as time, i}
 				<g transform={`translate(${margin.left + (i * width) / 4}, -4)`}>
 					<!-- Color box -->
@@ -162,9 +161,7 @@
 	<button onclick={handleTransitClick}
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
 	>
-	{#key isochronesFiltered}
-		<PercentBar data={isochronesFiltered} />
-			{/key}
+	<PercentBar data={isochronesFiltered} />
 </div>
 <hr />
 
@@ -176,7 +173,6 @@
 	}
 
 	.svg-container {
-
 	}
 
 	.chart-container h1 {
