@@ -49,7 +49,11 @@
 			Transport Strategy is to change residents' transit behaviors and encourage broader use of LA's
 			transit system "before, during, and after the Games."
 		</p>
+
 		<h1 style="font-family:var(--font-mono);">BAR CHART</h1>
+		<BarChartTest />
+		<TravelTimeBar data={isochronesRewind.features}/>
+
 		<p>
 			This analysis used travel time data to identify the areas in Los Angeles which can access each
 			venue by public transit within 30, 60, 90, and 120 minutes and the population which lives
@@ -86,7 +90,7 @@
 		
 		
 		
-		<IsochroneMap venue={venueSelected} />
+		<IsochroneMap venue={venueSelected} {isochronesFiltered}/>
 		<h1>LA's Transit Plan</h1>
 		<p>
 			While cities like Paris used the Olympic Games as a political catalyst for new transportation
