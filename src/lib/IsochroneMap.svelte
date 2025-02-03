@@ -8,7 +8,6 @@
 	import { geoAlbers, geoPath } from 'd3-geo';
 	import { union, sort, descending } from 'd3-array';
 	import { scaleOrdinal } from 'd3-scale';
-	import * as turf from '@turf/turf';
 
 	// Data
 	import tracts from '$lib/nhgis_la_subset.geojson.json';
@@ -18,24 +17,26 @@
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
 
 	// Props
-	let { venue } = $props();
+	let { 
+		venue,
+		isochronesFiltered
+	 } = $props();
 
 	//$inspect(venue.venue)
 	//let tractPop = isochrones.features.map((d) => d.properties.pop).reduce((a, b) => a + b, 0);
 	//let venueIsos = isochrones.features.map((d) => d.properties.includes(venue))
 	// Filter isochrones by venue and travel time + rewind to fix polygons
-	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
-	let isochronesFiltered = $derived(isochronesRewind.features.filter(
-		(d) => d.properties.venue == venue.venue && d.properties.travel_time <= 60 * 120
-	));
 	let isochronesSorted = $derived(
 		sort(isochronesFiltered, (a, b) =>
 		descending(a.properties.travel_time, b.properties.travel_time)
 	)
 	);
-	let venuePop = $derived(isochronesFiltered.filter(
+	
+	let venuePop = $derived(
+		isochronesFiltered.filter(
 		(d) => d.properties.venue == venue.venue && d.properties.travel_time === 7200
-	));
+		)
+	);
 	let venuePopPercent = $derived(
 		(venuePop[0].properties.pop / 9301156).toLocaleString('en-US', {
 		style: 'percent',
