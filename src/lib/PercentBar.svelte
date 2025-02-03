@@ -16,8 +16,8 @@
   console.log(data[0].properties.venue)
   
   let width = $state(480);
-  const height = 64;
-  const margin = { top: 10, right: 20, bottom: 20, left: 10 };
+  const height = 48;
+  const margin = { top: 8, right: 20, bottom: 24, left: 10 };
 
   let travelTimeCategories = {
 		1800: '< 30',
@@ -137,7 +137,7 @@
           fill="black"
           x={xScale(percent)}
           y={margin.bottom}
-          font-size="12px"
+          font-size="14px"
           text-anchor={percent < 1 ? "middle" : "end"}>
           {percent.toLocaleString('en-US', {
             style: 'percent',
@@ -146,8 +146,8 @@
         </text>
         <line
           stroke="black"
-          y1={0}
-          y2={margin.top}
+          y1={4}
+          y2={12}
           x1={xScale(percent)}
           x2={xScale(percent)} />
       {/each}
