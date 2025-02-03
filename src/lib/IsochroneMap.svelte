@@ -12,7 +12,8 @@
 
 	// Data
 	import tracts from '$lib/nhgis_la_subset.geojson.json';
-	import isochrones from '$lib/isochronesTransit.geojson.json';
+	import laOutline from '$lib/nhgis_la_outline.geojson.json';
+	import isochrones from '$lib/isochronesTransit2025.geojson.json';
 	import metroRoutes from '$lib/metroRoutes.geojson.json';
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
 
@@ -51,7 +52,7 @@
 	// Mapping projection
 	let projection = $derived(
 		geoAlbers()
-		.rotate([118, 0])
+			.rotate([118, 0])
 			//.center([-0.35, 34.2])
 			.fitSize([width - margin.left - margin.right, height - margin.top - margin.bottom], tracts)
 			//.scale(width * 55)
@@ -98,42 +99,42 @@
 		<PercentBar data={isochronesFiltered} />
 			{/key}
 	<h3>Events: {venue.events}</h3>
-	
+
 	<button onclick={handleTransitClick}
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
 	>
 	<svg {width} {height} class="svg-container">
 		<!-- svelte-ignore a11y_click_events_have_key_events --->
-		<!-- Census Tracts -->
+			<!-- Census Tracts -->
 			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=.4 />
-		<!-- Isochrones -->
+			<!-- Isochrones -->
 			 {#key isochronesSorted}
 			<Isochrone isochroneData={isochronesSorted} {path} colourScale={colour} venue={venue.venue} />
 			{/key}
 			<circle cx={x} cy={y} r="6" stroke="white" stroke-width="2" />
 
-		<!-- Transit lines -->
-		{#if showTransit}
-			<g>
-				{#each metroRoutes.features as route}
-					<path
-						transition:draw={{ duration: 2000 }}
-						d={path(route.geometry)}
-						stroke={route.properties.route_color}
-						fill="none"
-						stroke-width="3"
-					/>
-				{/each}
-				{#each metroLinkRoutes.features as route}
-					<path
-						d={path(route.geometry)}
-						stroke={route.properties.route.route_color}
-						fill="none"
-						stroke-width="2"
-					/>
-				{/each}
-			</g>
-		{/if}
+			<!-- Transit lines -->
+			{#if showTransit}
+				<g>
+					{#each metroRoutes.features as route}
+						<path
+							transition:draw={{ duration: 2000 }}
+							d={path(route.geometry)}
+							stroke={route.properties.route_color}
+							fill="none"
+							stroke-width="3"
+						/>
+					{/each}
+					{#each metroLinkRoutes.features as route}
+						<path
+							d={path(route.geometry)}
+							stroke={route.properties.route.route_color}
+							fill="none"
+							stroke-width="2"
+						/>
+					{/each}
+				</g>
+			{/if}
 
 		<!-- Legend -->
 		<g transform={`translate(14, ${height - 20})`}>
