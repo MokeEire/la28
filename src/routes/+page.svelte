@@ -64,8 +64,6 @@
 			transit system "before, during, and after the Games."
 		</p>
 
-		<h1 style="font-family:var(--font-mono);">BAR CHART</h1>
-		<BarChartTest />
 		<TravelTimeBar data={isochronesRewind.features}/>
 
 		<p>
