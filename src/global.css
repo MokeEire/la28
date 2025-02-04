@@ -6,6 +6,7 @@
 
 :root {
 	--font-body: 'Alegreya', georgia, "times new roman", times, serif;
+	--font-sans: 'Lato', sans-serif;
 	--font-mono: 'Sono', monospace;
 	--font-title: 'Noticia Text', georgia, "times new roman", times, serif;
 	--color-bg-0: rgb(202, 216, 228);
