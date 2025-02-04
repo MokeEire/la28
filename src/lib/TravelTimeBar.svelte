@@ -62,7 +62,8 @@
 
 	const yScale = $derived(
     scaleBand()
-		.domain(data.map((d) => d.properties['venue']))
+			//.domain(data.map((d) => d.properties['venue']))
+			.domain(groupSort(data, (D) => max(D, (d) => d.properties.pop_pct), (d) => d.properties.venue))
 		.range([height - margin.bottom, margin.top])
 		.padding(0.25)
   );
