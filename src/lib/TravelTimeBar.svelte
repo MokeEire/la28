@@ -106,7 +106,7 @@
 	<div class="flex w-full items-center justify-between pt-1 font-semibold text-gray-600">
 		<h3 class="">{title}</h3>
 	</div>
-	<div class="flex w-full items-center justify-between pt-0 pb-2 text-gray-400 text-base">
+	<div class="flex w-full items-center justify-between pt-0 pb-2 text-gray-500 text-base">
 		<h4 class="">{subtitle}</h4>
 	</div>
 	<svg {width} {height} class="border-t-[1px] border-gray-200 fill-emerald-300">
@@ -114,7 +114,7 @@
 		<g transform={`translate(0,${margin.top/2})`}>
 			{#each Object.keys(travelTimeCategories) as time, i}
 				{console.log(time, i)}
-				<g transform={`translate(${margin.left+(i * (width-margin.left-margin.right)) / 4}, -4)`}>
+				<g transform={`translate(${margin.left+(i * (width-margin.left)) / 4}, -4)`}>
 					<!-- Color box -->
 					<rect
 						style="border-radius:10px;"
@@ -123,9 +123,10 @@
 						rx="4"
 						ry="4"
 						fill={colour(travelTimeCategories[time])}
+						opacity=.85
 					/>
 					<!-- Category text -->
-					<text class="fill-gray-800" x="20" y="10" font-size="14px" alignment-baseline="middle"
+					<text class="fill-gray-800 font-sans" x="20" y="10" font-size="12px" dominant-baseline="middle"
 						>{travelTimeCategories[time]} mins</text
 					>
 				</g>
@@ -139,16 +140,14 @@
 			<line stroke="currentColor" x1={xScale(0)} x2={xScale(1)} />
 			<!-- Specify the number of ticks here -->
 			{#each xScale.ticks(5) as tick}
-				{#if tick !== 0}
 					<line stroke="currentColor" y1={0} y2={6} x1={xScale(tick)} x2={xScale(tick)} />
-				{/if}
 
-				<text
+				<text  class="font-sans"
 					fill="currentColor"
-					text-anchor="start"
+					text-anchor={tick < 1 ? (tick === 0 ? "start" : "middle") : "end"}
 					font-size="12"
 					dominant-baseline="middle"
-					y={12}
+					y={16}
 					x={xScale(tick)}
 				>
 					{tick.toLocaleString('en-US', {
@@ -163,7 +162,7 @@
 		<!-- Y-axis labels -->
 		<g transform="translate({margin.left},0)">
 			{#each yScale.domain() as venue}
-				<text
+				<text  class="font-sans"
 					fill="currentColor"
 					y={yScale(venue) + yScale.bandwidth() / 2}
 					x={-10}
@@ -186,6 +185,7 @@
 					fill="lightgrey"
 					rx="3"
 					ry="3"
+					opacity=.7
 				/>
 				{#each categories.reverse() as time}
 					<rect
@@ -194,23 +194,25 @@
 						height={yScale.bandwidth()}
 						width={xScale(getVenueData(dataSorted, venue, time))}
 						fill={colour(travelTimeCategories[time])}
+						opacity=.9
 					/>
-					{#if getVenueData(dataSorted, venue, time) > 1}
-						{console.log(getVenueData(dataSorted, venue, time))}
-					{/if}
-					<!--
-					<text
+					{#if getVenueData(data, venue, time) > .02}
+					<text class="font-sans"
 						x={xScale(getVenueData(data, venue, time))}
 						y={yScale(venue) + yScale.bandwidth() / 2}
-						fill="white"
-						font-size="10px"
-						alignment-baseline="middle"
+						fill={time === 1800 && getVenueData(data, venue, time) > 0.04 ? "white" : "currentColor"}
+						font-size="11px"
+						dominant-baseline="middle"
+						text-anchor={getVenueData(data, venue, time) < 0.04 && time === 1800 ? "start" : "end"}
+						dx={getVenueData(data, venue, time) < 0.04 ? "2" : "-2"}
+						dy="1"
 					>
 						{getVenueData(data, venue, time).toLocaleString('en-US', {
 							style: 'percent',
-							minimumFractionDigits: 1
+							minimumFractionDigits: 0
 						})}
-					</text>-->
+					</text>
+					{/if}
 				{/each}
 			{/each}
 		</g>
