@@ -1,12 +1,12 @@
 <script>
 	// This awesome component is from: https://datavisualizationwithsvelte.com/basics/stacked-bar-chart
 	import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale';
-	import { stack, stackOrderNone } from 'd3-shape';
-	import { max } from 'd3-array';
+	import { sort, descending, max, min, groupSort } from 'd3-array';
 	//import AxisLeft from '$lib/AxisLeftV5.svelte';
 
 	let {
-		title = 'Car or Transit? How much time do you have?',
+		title = 'How much of LA can get to the venues by Public Transit?',
+		subtitle = '% of Los Angeles population who can reach a venue within the travel time',
 		labelCategories = ['< 30', '30-60', '60-90', '90-120'],
 		categories = [1800, 3600, 5400, 7200],
 		data = [
@@ -57,8 +57,9 @@
 				//max(data, (d) => categories.reduce((sum, key) => sum + d[key], 0))
 			])
 			.nice()
-			.range([margin.left, width - margin.right - margin.left])
+			.range([0, innerWidth])
 	);
+	//$inspect(data);
 
 	const yScale = $derived(
     scaleBand()
@@ -100,86 +101,40 @@
 	class=" p relative box-border min-w-full rounded-xl border-gray-100 p-4 pt-0"
 	bind:clientWidth={width}
 >
-	<div class="flex w-full items-center justify-between pb-4 pt-1 font-semibold text-gray-600">
+	<div class="flex w-full items-center justify-between pt-1 font-semibold text-gray-600">
 		<h3 class="">{title}</h3>
 	</div>
-	<svg
-		width={width - margin.left - margin.right}
-		{height}
-		class="border-t-[1px] border-gray-200 fill-emerald-300"
-	>
-		
-
+	<div class="flex w-full items-center justify-between pt-0 pb-2 text-gray-400 text-base">
+		<h4 class="">{subtitle}</h4>
+	</div>
+	<svg {width} {height} class="border-t-[1px] border-gray-200 fill-emerald-300">
+		<!-- Legend -->
+		<g transform={`translate(0,${margin.top/2})`}>
+			{#each Object.keys(travelTimeCategories) as time, i}
+				{console.log(time, i)}
+				<g transform={`translate(${margin.left+(i * (width-margin.left-margin.right)) / 4}, -4)`}>
+					<!-- Color box -->
+					<rect
+						style="border-radius:10px;"
+						width="16"
+						height="16"
+						rx="4"
+						ry="4"
+						fill={colour(travelTimeCategories[time])}
+					/>
+					<!-- Category text -->
+					<text class="fill-gray-800" x="20" y="10" font-size="14px" alignment-baseline="middle"
+						>{travelTimeCategories[time]} mins</text
+					>
+				</g>
+			{/each}
+		</g>
 		<!-- X-axis -->
-		<g>
-			{#each xScale.ticks(5) as tick}
-				<text
-					y={margin.left - 10}
-					x={xScale(tick)}
-					font-size="10px"
-					text-anchor="end"
-					alignment-baseline="middle"
-				>
-					<!-- {tick} -->
-				</text>
-				<line
-					class="stroke-gray-300"
-					stroke-dasharray="6,6"
-					y1={margin.left + 10}
-					y2={height - margin.bottom - margin.top}
-					x1={xScale(tick)}
-					x2={xScale(tick)}
-				/>
-			{/each}
-		</g>
-
-		<!-- <AxisLeft {width} {height} {margin} {yScale} ticksNumber={5} /> -->
-		<!-- Bars and Total Values 
-    {#each stackedData as series, i}
-      {#each series as [x0, x1], j}
-        {console.log(data[j])}
-        <rect
-          rx="3"
-          ry="3"
-          y={yScale(data[j]['Venue'])}
-          x={xScale(x0)}
-          height={yScale.bandwidth()}
-          width={xScale(x1) - xScale(x0)}
-          fill={colour(labelCategories[i])} />
-          {#if (x1-x0) > 0}
-          <text
-          fill="white"
-          text-anchor="end"
-          font-size="12"
-          dominant-baseline="middle"
-          y={yScale(data[j]['Venue'])+yScale.bandwidth()/2}
-          x={xScale((x0+x1)/2)}>
-          {labelCategories[i]}
-        </text>
-          {/if}
-      {/each}
-    {/each}-->
-
-		<!-- Y-axis labels -->
-		<g transform="translate({margin.left},0)">
-			{#each yScale.domain() as period}
-				<text
-					fill="currentColor"
-					y={yScale(period) + yScale.bandwidth() / 2}
-					x="-{margin.left}"
-					font-size="14px"
-					dominant-baseline="middle"
-					text-anchor="start"
-				>
-					{period}
-				</text>
-			{/each}
-		</g>
-		<g transform={`translate(0, ${height - 20})`}>
+		<g transform={`translate(${margin.left}, ${height - margin.bottom})`}>
 			<!-- yScale.domain() is an array with two elements min and max values 
       from the data, so we can use it to create the start and end point
       of our axis line -->
-			<line stroke="currentColor" x1={xScale(0)} x2={xScale(xScale.domain()[1])} />
+			<line stroke="currentColor" x1={xScale(0)} x2={xScale(1)} />
 			<!-- Specify the number of ticks here -->
 			{#each xScale.ticks(5) as tick}
 				{#if tick !== 0}
@@ -194,21 +149,32 @@
 					y={12}
 					x={xScale(tick)}
 				>
-					{tick}
+					{tick.toLocaleString('en-US', {
+						style: 'percent',
+						minimumFractionDigits: 0
+					})}
 				</text>
 			{/each}
-			<text
-				fill="currentColor"
-				text-anchor="start"
-				font-size="12"
-				dominant-baseline="middle"
-				y={12}
-				x={xScale(width)}
-			>
-				Mins
-			</text>
+			
 		</g>
 
+		<!-- Y-axis labels -->
+		<g transform="translate({margin.left},0)">
+			{#each yScale.domain() as venue}
+			<text
+				fill="currentColor"
+					y={yScale(venue) + yScale.bandwidth() / 2}
+					x={-10}
+					font-size="14px"
+				dominant-baseline="middle"
+					text-anchor="end"
+			>
+					{venue.match(regexToMatch) === null ? venue : venue.match(regexToMatch)}
+			</text>
+			{/each}
+		</g>
+		<!-- Bars -->
+		<g transform="translate({margin.left},0)">
     {#each yScale.domain() as venue}
 			<rect
 				x={xScale(0)}
