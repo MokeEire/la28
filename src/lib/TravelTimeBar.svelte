@@ -27,6 +27,12 @@
 		]
 	} = $props();
 
+	let dataSorted = $derived(
+		sort(data, (a, b) =>
+			descending(a.properties.travel_time, b.properties.travel_time)
+		)
+	);
+
 	const colors = ['#0072BC', '#F56901', '#ADA8BE', '#0C1B33'];
 
 	let width = $state(480);
@@ -75,7 +81,7 @@
   );*/
 
 	function getVenueData(data, venue, travelTime = 1800) {
-		let dataFiltered = data.filter(
+		let dataFiltered = dataSorted.filter(
 			(d) => d.properties.venue == venue && d.properties.travel_time === travelTime
 		);
 		// Problem: dataFiltered is an array of Objects
@@ -217,9 +223,13 @@
 					x={xScale(0)}
 					y={yScale(venue)}
 					height={yScale.bandwidth()}
-					width={xScale(getVenueData(data, venue, time))}
+						width={xScale(getVenueData(dataSorted, venue, time))}
 					fill={colour(travelTimeCategories[time])}
 				/>
+					{#if getVenueData(dataSorted, venue, time) > 1}
+						{console.log(getVenueData(dataSorted, venue, time))}
+					{/if}
+					<!--
         <text
 					x={xScale(getVenueData(data, venue, time))}
 					y={yScale(venue)+yScale.bandwidth()/2}
