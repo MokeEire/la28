@@ -42,7 +42,7 @@
 	//const categories = ['Rail', 'Bus', 'Walk', 'Car'];
 	// Scales
 
-  let travelTimeCategories = {
+	let travelTimeCategories = {
 		1800: '< 30',
 		3600: '30-60',
 		5400: '60-90',
@@ -63,12 +63,12 @@
 	//$inspect(data);
 
 	const yScale = $derived(
-    scaleBand()
+		scaleBand()
 			//.domain(data.map((d) => d.properties['venue']))
 			.domain(groupSort(data, (D) => max(D, (d) => d.properties.pop_pct), (d) => d.properties.venue))
-		.range([height - margin.bottom, margin.top])
-		.padding(0.25)
-  );
+			.range([height - margin.bottom, margin.top])
+			.padding(0.25)
+	);
 
 	const colour = scaleOrdinal()
 		.domain(labelCategories)
@@ -92,6 +92,7 @@
 		return dataFiltered[0].properties.pop_pct;
 	}
 	//console.log(getVenueData(data, 'Arena Downtown'))
+	let regexToMatch = /(?<=\()([A-z\s]+)/g;
 
 	// 1. Venue, then  time category
 
@@ -162,54 +163,56 @@
 		<!-- Y-axis labels -->
 		<g transform="translate({margin.left},0)">
 			{#each yScale.domain() as venue}
-			<text
-				fill="currentColor"
+				<text
+					fill="currentColor"
 					y={yScale(venue) + yScale.bandwidth() / 2}
 					x={-10}
 					font-size="14px"
-				dominant-baseline="middle"
+					dominant-baseline="middle"
 					text-anchor="end"
-			>
+				>
 					{venue.match(regexToMatch) === null ? venue : venue.match(regexToMatch)}
-			</text>
+				</text>
 			{/each}
 		</g>
 		<!-- Bars -->
 		<g transform="translate({margin.left},0)">
-    {#each yScale.domain() as venue}
-			<rect
-				x={xScale(0)}
-				y={yScale(venue)}
-				height={yScale.bandwidth()}
-				width={xScale(1)}
-				fill="lightgrey"
-				rx="3"
-				ry="3"
-			/>
-			{#each categories.reverse() as time}
+			{#each yScale.domain() as venue}
 				<rect
 					x={xScale(0)}
 					y={yScale(venue)}
 					height={yScale.bandwidth()}
-						width={xScale(getVenueData(dataSorted, venue, time))}
-					fill={colour(travelTimeCategories[time])}
+					width={xScale(1)}
+					fill="lightgrey"
+					rx="3"
+					ry="3"
 				/>
+				{#each categories.reverse() as time}
+					<rect
+						x={xScale(0)}
+						y={yScale(venue)}
+						height={yScale.bandwidth()}
+						width={xScale(getVenueData(dataSorted, venue, time))}
+						fill={colour(travelTimeCategories[time])}
+					/>
 					{#if getVenueData(dataSorted, venue, time) > 1}
 						{console.log(getVenueData(dataSorted, venue, time))}
 					{/if}
 					<!--
-        <text
-					x={xScale(getVenueData(data, venue, time))}
-					y={yScale(venue)+yScale.bandwidth()/2}
-          fill="white"
-          font-size='10px'
-					alignment-baseline="middle">
-          {getVenueData(data, venue, time).toLocaleString('en-US', {
-            style: 'percent',
-            minimumFractionDigits: 1
-          })}
-				</text>
+					<text
+						x={xScale(getVenueData(data, venue, time))}
+						y={yScale(venue) + yScale.bandwidth() / 2}
+						fill="white"
+						font-size="10px"
+						alignment-baseline="middle"
+					>
+						{getVenueData(data, venue, time).toLocaleString('en-US', {
+							style: 'percent',
+							minimumFractionDigits: 1
+						})}
+					</text>-->
+				{/each}
 			{/each}
-		{/each}
+		</g>
 	</svg>
 </div>
