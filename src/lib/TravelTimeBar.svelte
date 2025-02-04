@@ -37,7 +37,7 @@
 
 	let width = $state(480);
 	const height = 480;
-	const margin = { top: 30, right: 30, bottom: 30, left: 64 };
+	const margin = { top: 40, right: 30, bottom: 30, left: 276 };
 
 	//const categories = ['Rail', 'Bus', 'Walk', 'Car'];
 	// Scales
@@ -47,8 +47,9 @@
 		3600: '30-60',
 		5400: '60-90',
 		7200: '90-120',
-		9000: '> 120'
 	};
+
+	let innerWidth = $derived(width - margin.left - margin.right);
 
 	let xScale = $derived(
 		scaleLinear()
@@ -74,7 +75,7 @@
 		.range(['green', 'yellow', 'orange', 'red', 'black']);
 
 	// Stack data
-	const stackGenerator = stack().keys(categories).order(stackOrderNone);
+	//const stackGenerator = stack().keys(categories).order(stackOrderNone);
 	//const stackedData = stackGenerator(data);
 
 	// Compute total values for each bar
