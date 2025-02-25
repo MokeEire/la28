@@ -7,7 +7,7 @@
 	let {
 		title = 'How much of LA can get to the venues by Public Transit?',
 		subtitle = '% of Los Angeles population who can reach a venue within the travel time',
-		labelCategories = ['< 30', '30-60', '60-90', '90-120'],
+		labelCategories = ['< 30', '< 60', '< 90', '< 120'],
 		categories = [1800, 3600, 5400, 7200],
 		data = [
 			{
@@ -44,9 +44,9 @@
 
 	let travelTimeCategories = {
 		1800: '< 30',
-		3600: '30-60',
-		5400: '60-90',
-		7200: '90-120',
+		3600: '< 60',
+		5400: '< 90',
+		7200: '< 120',
 	};
 
 	let innerWidth = $derived(width - margin.left - margin.right);
