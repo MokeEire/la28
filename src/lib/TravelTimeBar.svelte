@@ -65,7 +65,7 @@
 	const yScale = $derived(
 		scaleBand()
 			//.domain(data.map((d) => d.properties['venue']))
-			.domain(groupSort(data, (D) => max(D, (d) => d.properties.pop_pct), (d) => d.properties.venue))
+			.domain(groupSort(data, (D) => max(D, (d) => d.properties.pop_pct), (d) => d.properties.venue_simplified))
 			.range([height - margin.bottom, margin.top])
 			.padding(0.25)
 	);
@@ -85,7 +85,7 @@
 
 	function getVenueData(data, venue, travelTime = 1800) {
 		let dataFiltered = dataSorted.filter(
-			(d) => d.properties.venue == venue && d.properties.travel_time === travelTime
+			(d) => d.properties.venue_simplified == venue && d.properties.travel_time === travelTime
 		);
 		// Problem: dataFiltered is an array of Objects
 		//console.log(dataFiltered[0].properties.pop_pct)

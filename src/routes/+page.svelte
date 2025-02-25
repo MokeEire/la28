@@ -7,15 +7,15 @@
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
 	import stadia from '$lib/venues_complete.json';
-	import isochrones from '$lib/isochronesTransit2025.geojson.json';
+	import isochrones from '$lib/isochronesTransit.geojson.json';
 
-	let venueSelected = $state(stadia[11]);
+	let venueSelected = $state(stadia[9]);
 
 	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
 
 	let isochronesFiltered = $derived(
 		isochronesRewind.features.filter(
-			(d) => d.properties.venue == venueSelected.venue && d.properties.travel_time <= 60 * 120
+			(d) => d.properties.venue_simplified == venueSelected.venue_simplified && d.properties.travel_time <= 60 * 120
 		)
 	);
 	
@@ -85,7 +85,7 @@
 		<select bind:value={venueSelected}>
 			{#each stadia as venue}
 				<option value={venue}>
-					{venue.venue}
+					{venue.venue_simplified}
 				</option>
 			{/each}
 		</select>

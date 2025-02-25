@@ -34,7 +34,7 @@
 	
 	let venuePop = $derived(
 		isochronesFiltered.filter(
-			(d) => d.properties.venue == venue.venue && d.properties.travel_time === 7200
+			(d) => d.properties.venue_simplified == venue.venue_simplified && d.properties.travel_time === 7200
 		)
 	);
 	let venuePopPercent = $derived(
@@ -107,7 +107,7 @@
 					isochroneData={isochronesSorted}
 					{path}
 					colourScale={colour}
-					venue={venue.venue}
+					venue={venue.venue_simplified}
 				/>
 			{/key}
 
