@@ -2,6 +2,8 @@
 	// Components
 	import Isochrone from '$lib/Isochrone.svelte';
 	import PercentBar from '$lib/PercentBar.svelte';
+	import Legend from '$lib/Legend.svelte';
+	import LegendHTML from '$lib/LegendHTML.svelte';
 
 	// Functions
 	import { draw } from 'svelte/transition';
