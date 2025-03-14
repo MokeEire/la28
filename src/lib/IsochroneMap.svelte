@@ -93,8 +93,8 @@
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
-	<h3>Events: {venue.events}</h3>
-	<h2>{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h2>
+	<h3 class="opacity-75">Events: {venue.events}</h3>
+	<LegendHTML legend_data={travelTimes} legend_color_function={colour} legend_label_array={travelTimeCategories} {width}/>
 
 	<svg {width} {height} class="svg-container">
 		<!-- svelte-ignore a11y_click_events_have_key_events --->
@@ -159,10 +159,13 @@
 			{/each}
 		</g>
 	</svg>
+	<h3 class="flex justify-end mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
+	<PercentBar data={isochronesFiltered} />
+	
+	
 	<button onclick={handleTransitClick}
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
 	>
-	<PercentBar data={isochronesFiltered} />
 </div>
 <hr />
 
