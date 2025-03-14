@@ -169,7 +169,6 @@
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
 	>
 </div>
-<hr />
 
 <style>
 	.chart-container {
