@@ -47,10 +47,10 @@
 	);
 
 	let width = $state(600);
-	let height = $derived(width * 0.75);
+	let height = $derived(width * 0.5);
 
 	// Margins around the chart to position it properly inside the SVG container
-	const margin = { top: 25, right: 25, bottom: 25, left: 25 };
+	const margin = { top: 16, right: 16, bottom: 16, left: 16 };
 
 	// Mapping projection
 	let projection = $derived(
