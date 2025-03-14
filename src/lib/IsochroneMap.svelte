@@ -98,7 +98,30 @@
 
 	<svg {width} {height} class="svg-container">
 		<!-- svelte-ignore a11y_click_events_have_key_events --->
-
+		<!-- Legend 
+		<g transform={`translate(${margin.left}, ${margin.top})`}>
+			<Legend legend_data={travelTimes} legend_color_function={colour} legend_label_array={travelTimeCategories} {width}/>
+		</g> --->
+		<!-- 
+		<g transform={`translate(${margin.left}, ${margin.top})`}>
+			{#each travelTimes as time, i}
+				<g transform={`translate(${width/2 + (i * width/2) / 4}, -4)`}>
+					<!-- Color box
+					<rect
+						style="border-radius:10px;"
+						width="16"
+						height="16"
+						rx="4"
+						ry="4"
+						fill={colour(time)}
+					/>
+					<!-- Category text 
+					<text class="fill-gray-800" x="20" y="10" font-size="14px" alignment-baseline="middle"
+						>{travelTimeCategories[time]} mins</text
+					>
+				</g>
+			{/each}
+		</g>-->
 		<g>
 			<!-- Census Tracts -->
 			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=".4" />
@@ -136,27 +159,6 @@
 				</g>
 			{/if}
 			<circle cx={x} cy={y} r="6" stroke="white" stroke-width="2" />
-		</g>
-
-		<!-- Legend -->
-		<g transform={`translate(${margin.left}, ${height - margin.top})`}>
-			{#each travelTimes as time, i}
-				<g transform={`translate(${margin.left + (i * width) / 4}, -4)`}>
-					<!-- Color box -->
-					<rect
-						style="border-radius:10px;"
-						width="16"
-						height="16"
-						rx="4"
-						ry="4"
-						fill={colour(time)}
-					/>
-					<!-- Category text -->
-					<text class="fill-gray-800" x="20" y="10" font-size="14px" alignment-baseline="middle"
-						>{travelTimeCategories[time]} mins</text
-					>
-				</g>
-			{/each}
 		</g>
 	</svg>
 	<h3 class="flex justify-end mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
