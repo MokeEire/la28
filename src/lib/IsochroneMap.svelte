@@ -56,7 +56,6 @@
 	let projection = $derived(
 		geoAlbers()
 			.rotate([118, 0])
-			.rotate([118, 0])
 			//.center([-0.35, 34.2])
 			.fitSize([width - margin.left - margin.right, height - margin.top - margin.bottom], tracts)
 		//.scale(width * 55)
