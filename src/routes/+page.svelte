@@ -26,6 +26,38 @@
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
 		<p>
+			Los Angeles is home to one of the longest light rail systems in the US, the city is finally connecting its airport to the rail system, and the rail line connecting UCLA, Beverly Hills, and Century City to Downtown Los Angeles is seemingly on track to be completed by 2028.
+			Against this backdrop of transit expansion, L.A. announced that the 2028 Olympics will be "car-free", meaning fans <a
+			href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
+			>"will have to take transit, walk, bicycle, or get dropped off"</a> according to LA Metro CEO Stephanie Wiggans.
+			Angelenos are still skeptical.
+			Every person I've told about L.A.'s car-free ambitions for the Olympics has responded with disbelief, concern, or a chuckle. 
+			"Yeah, we'll see," they say.
+		</p>
+		<p>
+			While this must be frustrating for Metro, and the city's transportation planners, it's not surprising.
+			Angelenos are reacting to their experiences getting around the city.
+			In USC Dornsife's LA Barometer surveys, nine out of ten people say they used cars to get around Los Angeles in the past year, while more than half used cars every day or most days.
+			Just one in four Angelenos said they used public transit in the past year.
+			Clearly, the transit system is not meeting people's needs, in particular: convenience and accessibility.
+			To illustrate why Angelenos don't see past these issues, below is a map that shows the extent of the city that can reach each of the 2028 Olympic venues by public transit within 30, 60, 90, and 120 minutes.
+		</p>
+
+		<h4>Select a venue</h4>
+		<select bind:value={venueSelected}>
+			{#each stadia as venue}
+				<option value={venue}>
+					{venue.venue_simplified}
+				</option>
+			{/each}
+		</select>
+		
+		<IsochroneMap venue={venueSelected} {isochronesFiltered}/>
+		
+		<p>
+			The buses are too slow, the trains are too far from where people live, and passengers do not feel safe.
+		<hr>
+		<p>
 			Los Angeles will host the 2028 Summer Olympics with an unprecedented promise: the events will
 			be car-free. 
 			"[To attend the LA 2028 Olympics] you will have to take transit, walk, bicycle,
@@ -81,18 +113,7 @@
 			takes more than 2 hours to get there by public transit from Whittier, a city 40 miles away.
 		</p>
 
-		<h4>Select a venue</h4>
-		<select bind:value={venueSelected}>
-			{#each stadia as venue}
-				<option value={venue}>
-					{venue.venue_simplified}
-				</option>
-			{/each}
-		</select>
 		
-		
-		
-		<IsochroneMap venue={venueSelected} {isochronesFiltered}/>
 		<h1>LA's Transit Plan</h1>
 		<p>
 			While cities like Paris used the Olympic Games as a political catalyst for new transportation
