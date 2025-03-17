@@ -70,10 +70,9 @@
 
 	let travelTimeCategories = {
 		1800: '< 30',
-		3600: '30-60',
-		5400: '60-90',
-		7200: '90-120',
-		9000: '> 120'
+		3600: '< 60',
+		5400: '< 90',
+		7200: '< 120',
 	};
 
 	// Colour scale
@@ -162,7 +161,7 @@
 		</g>
 	</svg>
 	<h3 class="flex justify-end mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
-	<PercentBar data={isochronesFiltered} />
+	<PercentBar data={isochronesFiltered} {travelTimeCategories}/>
 	
 	
 	<button onclick={handleTransitClick}

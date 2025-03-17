@@ -9,8 +9,7 @@
 
 	let {
 		data,
-		categories = [1800, 3600, 5400, 7200],
-		labelCategories = ['< 30', '30-60', '60-90', '90-120']
+    travelTimeCategories
 	} = $props();
 
 	console.log(data[0].properties.venue);
@@ -19,13 +18,8 @@
 	const height = 48;
 	const margin = { top: 8, right: 20, bottom: 24, left: 10 };
 
-	let travelTimeCategories = {
-		1800: '< 30',
-		3600: '30-60',
-		5400: '60-90',
-		7200: '90-120',
-		9000: '> 120'
-	};
+  let categories = Object.keys(travelTimeCategories);
+	let labelCategories = Object.values(travelTimeCategories);
 	// Scales
 
 	// Transform the data
