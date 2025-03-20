@@ -123,7 +123,7 @@
 		</g>-->
 		<g>
 			<!-- Census Tracts -->
-			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=".4" />
+			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=".4" fill-opacity=".8"/>
 			<!-- Isochrones -->
 			{#key isochronesSorted}
 				<Isochrone
