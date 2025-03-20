@@ -35,14 +35,30 @@
 			"Yeah, we'll see," they say.
 		</p>
 		<p>
-			While this must be frustrating for Metro, and the city's transportation planners, it's not surprising.
+			While this attitude must be frustrating for Metro and the city's transportation planners, it's not surprising.
 			Angelenos are reacting to their experiences getting around the city.
 			In USC Dornsife's LA Barometer surveys, nine out of ten people say they used cars to get around Los Angeles in the past year, while more than half used cars every day or most days.
 			Just one in four Angelenos said they used public transit in the past year.
 			Clearly, the transit system is not meeting people's needs, in particular: convenience and accessibility.
+		</p>
+		<p>
+			Here's a look at how accessible the 2028 Olympic venues are by public transit.
+		</p>
+		<TravelTimeBar data={isochronesRewind.features}/>
+		<p>
+			Very few Angelenos can reach any of the venues within 30 minutes by public transit.
+			Only half of the venues are accessible to at least half of the population within 90 minutes.
+			The downtown venues form the only truly transit-accessible zone with 63-85% of residents able to reach the venues within 90 minutes.
+			In the middle, the South Bay and Inglewood venues are accessible to roughly half (47-58%) of Angelenos within 90 minutes.
+			Despite being the venue for both the opening and closing ceremonies, SoFi Stadium is accessible to just 15% of the population within an hour by transit.
+			The Sepulveda Basin Recreation Area and Riviera Country Club are by far the least accessible, with just 16% and 9% of the population able to reach them within 90 minutes respectively.
+		</p>
+		
+		
+		<p>
+			The buses are too slow, the trains are too far from where people live, and passengers do not feel safe.
 			To illustrate why Angelenos don't see past these issues, below is a map that shows the extent of the city that can reach each of the 2028 Olympic venues by public transit within 30, 60, 90, and 120 minutes.
 		</p>
-
 		<h4>Select a venue</h4>
 		<select bind:value={venueSelected}>
 			{#each stadia as venue}
@@ -53,10 +69,6 @@
 		</select>
 		
 		<IsochroneMap venue={venueSelected} {isochronesFiltered}/>
-		
-		<p>
-			The buses are too slow, the trains are too far from where people live, and passengers do not feel safe.
-		<hr>
 		<p>
 			Los Angeles will host the 2028 Summer Olympics with an unprecedented promise: the events will
 			be car-free. 
@@ -96,7 +108,7 @@
 			transit system "before, during, and after the Games."
 		</p>
 
-		<TravelTimeBar data={isochronesRewind.features}/>
+		
 
 		<p>
 			This analysis used travel time data to identify the areas in Los Angeles which can access each
