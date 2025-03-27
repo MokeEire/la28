@@ -5,8 +5,8 @@
 	//import AxisLeft from '$lib/AxisLeftV5.svelte';
 
 	let {
-		title = 'How much of LA can get to the venues by Public Transit?',
-		subtitle = '% of Los Angeles population who can reach a venue within the travel time',
+		title = 'Getting to the venues by Public Transit',
+		subtitle = '% of Los Angeles population who can reach a venue, by travel time',
 		labelCategories = ['< 30', '< 60', '< 90', '< 120'],
 		categories = [1800, 3600, 5400, 7200],
 		colours = ['#ffffd4','#fed98e','#fe9929','#cc4c02'],
