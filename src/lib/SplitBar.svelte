@@ -34,18 +34,6 @@
         veryConvenient: .314
       },
       {
-        mode: 'Bus',
-        veryInconvenient: .188,
-        inconvenient: .203,
-        someInconvenient: .205,
-        neutral: .17,
-        neutralNegative: .17/2,
-        neutralPositive: .17/2,
-        someConvenient: .148,
-        convenient: .056,
-        veryConvenient: .03
-      },
-      {
         mode: 'Metro',
         veryInconvenient: .146,
         inconvenient: .173,
@@ -56,6 +44,18 @@
         someConvenient: .183,
         convenient: .08,
         veryConvenient: .027
+      },
+      {
+        mode: 'Bus',
+        veryInconvenient: .188,
+        inconvenient: .203,
+        someInconvenient: .205,
+        neutral: .17,
+        neutralNegative: .17/2,
+        neutralPositive: .17/2,
+        someConvenient: .148,
+        convenient: .056,
+        veryConvenient: .03
       }
     ];
   
@@ -103,7 +103,7 @@
     const neutralStack = $derived(stackGen.keys(neutralKeys)(data));
   
     let width = $state(600);
-    let height = 240;
+    let height = 200;
     let margin = { top: 40, right: 20, bottom: 20, left: 160 };
   
     const totalWidth = $derived(width - margin.left - margin.right);
