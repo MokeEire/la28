@@ -9,6 +9,7 @@
 		subtitle = '% of Los Angeles population who can reach a venue within the travel time',
 		labelCategories = ['< 30', '< 60', '< 90', '< 120'],
 		categories = [1800, 3600, 5400, 7200],
+		colours = ['#ffffd4','#fed98e','#fe9929','#cc4c02'],
 		data = [
 			{
 				Venue: 'Arena Downtown',
@@ -72,7 +73,7 @@
 
 	const colour = scaleOrdinal()
 		.domain(labelCategories)
-		.range(['green', 'yellow', 'orange', 'red', 'black']);
+		.range(colours);
 
 	// Stack data
 	//const stackGenerator = stack().keys(categories).order(stackOrderNone);
@@ -194,17 +195,21 @@
 						height={yScale.bandwidth()}
 						width={xScale(getVenueData(dataSorted, venue, time))}
 						fill={colour(travelTimeCategories[time])}
+						stroke="black"
+						stroke-width=".25"
 						opacity=.9
 					/>
-					{#if getVenueData(data, venue, time) > .02}
+					<!-- Text labels for bars >2% -->
+					 <!-- ISSUE:  -->
+					{#if getVenueData(data, venue, time) > .025}
 					<text class="font-sans"
 						x={xScale(getVenueData(data, venue, time))}
 						y={yScale(venue) + yScale.bandwidth() / 2}
-						fill={time === 1800 && getVenueData(data, venue, time) > 0.04 ? "white" : "currentColor"}
+						fill={time === 1800 && getVenueData(data, venue, time) > 0.04 ? "black" : "currentColor"}
 						font-size="11px"
 						dominant-baseline="middle"
 						text-anchor={getVenueData(data, venue, time) < 0.04 && time === 1800 ? "start" : "end"}
-						dx={getVenueData(data, venue, time) < 0.04 ? "2" : "-2"}
+						dx={getVenueData(data, venue, time) < 0.04 ? "4" : "-2"}
 						dy="1"
 					>
 						{getVenueData(data, venue, time).toLocaleString('en-US', {

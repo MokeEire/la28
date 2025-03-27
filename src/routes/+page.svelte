@@ -21,6 +21,8 @@
 				d.properties.travel_time <= 60 * 120
 		)
 	);
+
+	let colourPalette = ['#ffffb2','#fecc5c','#fd8d3c','#e31a1c']
 </script>
 
 <div class="app">
@@ -63,7 +65,7 @@
 		</p>
 		<SplitBar />
 		<p>Here's a look at how accessible the 2028 Olympic venues are by public transit.</p>
-		<TravelTimeBar data={isochronesRewind.features} />
+		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette}/>
 		<p>
 			Very few Angelenos can reach any of the venues within 30 minutes by public transit. Only half
 			of the venues are accessible to at least half of the population within 90 minutes. The
@@ -91,7 +93,7 @@
 			{/each}
 		</select>
 
-		<IsochroneMap venue={venueSelected} {isochronesFiltered} />
+		<IsochroneMap venue={venueSelected} {isochronesFiltered} colours={colourPalette}/>
 		<p>
 			Los Angeles will host the 2028 Summer Olympics with an unprecedented promise: the events will
 			be car-free. "[To attend the LA 2028 Olympics] you will have to take transit, walk, bicycle,

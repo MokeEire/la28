@@ -9,7 +9,8 @@
 
 	let {
 		data,
-    travelTimeCategories
+    travelTimeCategories,
+	colours
 	} = $props();
 
 	console.log(data[0].properties.venue);
@@ -50,7 +51,7 @@
 	// Colour scale
 	const colour = scaleOrdinal()
 		.domain(labelCategories)
-		.range(['green', 'yellow', 'orange', 'red', 'black']);
+		.range(colours);
 	let xScale = $derived(
 		scaleLinear()
 			.domain([0, 1])

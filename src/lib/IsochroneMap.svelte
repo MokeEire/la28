@@ -21,7 +21,8 @@
 	// Props
 	let { 
 		venue,
-		isochronesFiltered
+		isochronesFiltered,
+		colours = ['#ffffd4','#fed98e','#fe9929','#cc4c02'],
 	 } = $props();
 
 	//$inspect(venue.venue)
@@ -77,7 +78,7 @@
 
 	// Colour scale
 	const colour = $derived(
-		scaleOrdinal().domain(travelTimes).range(['green', 'yellow', 'orange', 'red', 'black'])
+		scaleOrdinal().domain(travelTimes).range(colours)
 	);
 
 	// Show transit lines value and function
@@ -161,7 +162,7 @@
 		</g>
 	</svg>
 	<h3 class="flex justify-end mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
-	<PercentBar data={isochronesFiltered} {travelTimeCategories}/>
+	<PercentBar data={isochronesFiltered} {travelTimeCategories} {colours}/>
 	
 	
 	<button onclick={handleTransitClick}
