@@ -115,8 +115,8 @@
     const neutralStack = $derived(stackGen.keys(neutralKeys)(data));
   
     let width = $state(600);
-    let height = 200;
-    let margin = { top: 40, right: 20, bottom: 20, left: 160 };
+    let height = 160;
+    let margin = { top: 20, right: 20, bottom: 20, left: 160 };
   
     const totalWidth = $derived(width - margin.left - margin.right);
     const totalHeight = height - margin.top - margin.bottom;
@@ -138,8 +138,8 @@
     let hoveredStackKey = $state(null);
     //$inspect(hoveredData);
   </script>
-  <h1>Convenience</h1>
-  <h2>How convenient - in terms of speed, ease of getting to where you are going, and parking – is it to use a ...</h2>
+  <h3 class="font-bold">Convenience</h3>
+  <p class="text-gray-500 text-sm font-medium">How convenient - in terms of speed, ease of getting to where you are going, and parking – is it to use a...</p>
   <div class="chart-container" bind:clientWidth={width}>
     <svg {width} {height} onmouseleave={() => hoveredData = null}>
       <g transform={`translate(${margin.left},${margin.top})`}>
@@ -155,6 +155,7 @@
               stroke={data[i].mode == (hoveredData ?? [0]).mode && stack.key == hoveredStackKey ? 'black' : 'transparent'}
               stroke-width="2"
               fill={categoryColors[stack.key as CategoryKey]} 
+              fill-opacity=".95"
               tabindex="0"
               onmouseover={() => {
                 hoveredData = data[i]
@@ -168,11 +169,10 @@
             }/>
             {#if data[i][stack.key] > 0.1}
             <text
+            class="font-semibold text-xs"
             y={yScale(data[i].mode) + (yScale.bandwidth()) / 2}
             x={xScale(-d[1])-(xScale(-d[1])-xScale(-d[0]))/2}
-            alignment-baseline="center"
             text-anchor="middle"
-            font-size="12"
             fill="white">{data[i][stack.key].toLocaleString('en-US', {
                 style: 'percent',
                 minimumFractionDigits: 0
@@ -193,6 +193,7 @@
               stroke={data[i].mode == (hoveredData ?? [0]).mode && stack.key == hoveredStackKey ? 'black' : 'transparent'}
               stroke-width="2"
               fill={categoryColors[stack.key as CategoryKey]} 
+              fill-opacity=".95"
               tabindex="0"
               onmouseover={() => {
                 hoveredData = data[i]
@@ -206,11 +207,10 @@
             }/>
             {#if data[i][stack.key] > .1}
                 <text
+                class="font-semibold text-xs"
                 y={yScale(data[i].mode) + (yScale.bandwidth()) / 2}
                 x={xScale(d[0])+(xScale(d[1])-xScale(d[0]))/2}
-                alignment-baseline="center"
                 text-anchor="middle"
-                font-size="12"
                 fill="white">{data[i][stack.key].toLocaleString('en-US', {
                     style: 'percent',
                     minimumFractionDigits: 0
@@ -230,6 +230,7 @@
               stroke={data[i].mode == (hoveredData ?? [0]).mode && stack.key == hoveredStackKey ? 'black' : 'transparent'}
               stroke-width="2"
               fill={categoryColors[stack.key as CategoryKey]} 
+              fill-opacity=".95"
               tabindex="0"
               onmouseover={() => {
                 hoveredData = data[i]
@@ -247,11 +248,10 @@
         <!-- Labels -->
         {#each data as d}
           <text
+          class="font-medium text-base"
             x={xScale(-minX) - margin.left}
             y={yScale(d.mode) + (yScale.bandwidth()) / 2}
-            alignment-baseline="middle"
             text-anchor="end"
-            font-size="16"
             fill="black">
             {d.mode}
           </text>
@@ -348,4 +348,16 @@
         margin-top: 1rem;
         text-align: right;
     }
+
+    h3 {
+        font-family: var(--font-sans);
+    }
+    p {
+      font-family: var(--font-sans);
+      margin-bottom: 0;
+    }
+    text {
+      font-family: var(--font-sans);
+    }
+
   </style>
