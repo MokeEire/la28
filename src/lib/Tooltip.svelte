@@ -1,6 +1,18 @@
-<script>
-    import { fly } from 'svelte/transition';
-	let { data, stackedKey, xScale, yScale } = $props();
+<script lang="ts">
+	import { fly } from 'svelte/transition';
+	let { data, stackedKey, labels, colours, xScale, yScale } = $props();
+
+	// Define category keys
+	type CategoryKey =
+		| 'veryInconvenient'
+		| 'inconvenient'
+		| 'someInconvenient'
+		| 'neutral'
+		| 'neutralNegative'
+		| 'neutralPositive'
+		| 'convenient'
+		| 'someConvenient'
+		| 'veryConvenient';
 
 	let x = $derived(xScale(data[stackedKey]));
 	let y = $derived(yScale(data.mode));
@@ -17,8 +29,8 @@
 	<h1>{data.mode}</h1>
 	<h2>
 		{data[stackedKey].toLocaleString('en-US', {
-        style: 'percent',
-        minimumFractionDigits: 1
+			style: 'percent',
+			minimumFractionDigits: 1
 		})} of people responded 
 		<span
 			class="font-semibold bg-[{colours[stackedKey as CategoryKey]}]"
@@ -32,35 +44,42 @@
 </div>
 
 <style>
-    .tooltip {
-    padding: 8px 6px;
-    background: white;
-    box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
-    border-radius: 3px;
-    pointer-events: none;
-    transition: top 300ms ease, left 300ms ease;
-}
-h1 {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 6px;
-    width: 100%;
-}
+	.tooltip {
+		padding: 8px 6px;
+		background: white;
+		box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
+		border-radius: 3px;
+		pointer-events: none;
+		transition:
+			top 300ms ease,
+			left 300ms ease;
+	}
+    p {
+        margin-bottom: 0;
+        font-family: var(--font-sans);
+    }
+	h1 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin-bottom: 0px;
+		width: 100%;
+        font-family: var(--font-sans);
+	}
 
-h2 {
-    font-size: 0.8rem;
-    font-weight: 300;
-    text-transform: uppercase;
-}
+	h2 {
+		font-size: 1rem;
+		font-weight: 400;
+        margin-top: 0;
+        font-family: var(--font-sans);
+	}
 
-span {
-    background: #dda0dd50;
-    font-size: 80%;
-    margin-left: 2px;
-    padding: 2px 4px;
-    display: inline-block;
-    vertical-align: bottom;
-    border-radius: 3px;
-    color: rgba(0, 0, 0, 0.7);
-}
+	span {
+		font-size: 80%;
+		margin-left: 2px;
+		padding: 2px 4px;
+		display: inline-block;
+		vertical-align: bottom;
+		border-radius: 3px;
+		color: rgba(0, 0, 0, 0.7);
+	}
 </style>
