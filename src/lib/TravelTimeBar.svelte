@@ -9,7 +9,7 @@
 		subtitle = '% of Los Angeles population who can reach a venue, by travel time',
 		labelCategories = ['< 30', '< 60', '< 90', '< 120'],
 		categories = [1800, 3600, 5400, 7200],
-		colours = ['#ffffd4','#fed98e','#fe9929','#cc4c02'],
+		colours = ['#ffffd4', '#fed98e', '#fe9929', '#cc4c02'],
 		data = [
 			{
 				Venue: 'Arena Downtown',
@@ -124,7 +124,9 @@
 						rx="4"
 						ry="4"
 						fill={colour(travelTimeCategories[time])}
-						opacity=.85
+						stroke="black"
+						stroke-width=".25"
+						opacity=".85"
 					/>
 					<!-- Category text -->
 					<text class="fill-gray-800 font-sans" x="20" y="10" font-size="12px" dominant-baseline="middle"
@@ -186,7 +188,9 @@
 					fill="lightgrey"
 					rx="3"
 					ry="3"
-					opacity=.7
+					stroke="black"
+					stroke-width=".25"
+					opacity=".7"
 				/>
 				{#each categories.reverse() as time}
 					<rect
@@ -201,15 +205,20 @@
 					/>
 					<!-- Text labels for bars >2% -->
 					 <!-- ISSUE:  -->
-					{#if getVenueData(data, venue, time) > .025}
-					<text class="font-sans"
+					{#if getVenueData(data, venue, time) > 0.025}
+						<text
+							class="font-sans"
 						x={xScale(getVenueData(data, venue, time))}
 						y={yScale(venue) + yScale.bandwidth() / 2}
-						fill={time === 1800 && getVenueData(data, venue, time) > 0.04 ? "black" : "currentColor"}
+							fill={time === 1800 && getVenueData(data, venue, time) > 0.04
+								? 'black'
+								: 'currentColor'}
 						font-size="11px"
 						dominant-baseline="middle"
-						text-anchor={getVenueData(data, venue, time) < 0.04 && time === 1800 ? "start" : "end"}
-						dx={getVenueData(data, venue, time) < 0.04 ? "4" : "-2"}
+							text-anchor={getVenueData(data, venue, time) < 0.04 && time === 1800
+								? 'start'
+								: 'end'}
+							dx={getVenueData(data, venue, time) < 0.04 ? '4' : '-2'}
 						dy="1"
 					>
 						{getVenueData(data, venue, time).toLocaleString('en-US', {
