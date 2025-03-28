@@ -92,7 +92,7 @@
       'convenient',
       'veryConvenient'
     ];
-  
+
     // Color mapping for categories
     const categoryLabels: Record<CategoryKey, string> = {
       veryInconvenient: 'Very Inconvenient',
