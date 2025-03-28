@@ -165,7 +165,7 @@
 			{#if showTransit}
 				<g>
 					{#each metroRoutes.features as route}
-						<path
+						<path 
 							transition:draw|global={{ duration: 800 }}
 							d={path(route.geometry)}
 							stroke={route.properties.route_color}

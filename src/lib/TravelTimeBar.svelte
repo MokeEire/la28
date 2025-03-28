@@ -29,9 +29,7 @@
 	} = $props();
 
 	let dataSorted = $derived(
-		sort(data, (a, b) =>
-			descending(a.properties.travel_time, b.properties.travel_time)
-		)
+		sort(data, (a, b) => descending(a.properties.travel_time, b.properties.travel_time))
 	);
 
 	const colors = ['#0072BC', '#F56901', '#ADA8BE', '#0C1B33'];
@@ -47,7 +45,7 @@
 		1800: '< 30',
 		3600: '< 60',
 		5400: '< 90',
-		7200: '< 120',
+		7200: '< 120'
 	};
 
 	let innerWidth = $derived(width - margin.left - margin.right);
@@ -66,14 +64,18 @@
 	const yScale = $derived(
 		scaleBand()
 			//.domain(data.map((d) => d.properties['venue']))
-			.domain(groupSort(data, (D) => max(D, (d) => d.properties.pop_pct), (d) => d.properties.venue_simplified))
+			.domain(
+				groupSort(
+					data,
+					(D) => max(D, (d) => d.properties.pop_pct),
+					(d) => d.properties.venue_simplified
+				)
+			)
 			.range([height - margin.bottom, margin.top])
 			.padding(0.25)
 	);
 
-	const colour = scaleOrdinal()
-		.domain(labelCategories)
-		.range(colours);
+	const colour = scaleOrdinal().domain(labelCategories).range(colours);
 
 	// Stack data
 	//const stackGenerator = stack().keys(categories).order(stackOrderNone);
@@ -112,10 +114,10 @@
 	</div>
 	<svg {width} {height} class="border-t-[1px] border-gray-200 fill-emerald-300">
 		<!-- Legend -->
-		<g transform={`translate(0,${margin.top/2})`}>
+		<g transform={`translate(0,${margin.top / 2})`}>
 			{#each Object.keys(travelTimeCategories) as time, i}
 				{console.log(time, i)}
-				<g transform={`translate(${margin.left+(i * (width-margin.left)) / 4}, -4)`}>
+				<g transform={`translate(${margin.left + (i * (width - margin.left)) / 4}, -4)`}>
 					<!-- Color box -->
 					<rect
 						style="border-radius:10px;"
@@ -129,8 +131,12 @@
 						opacity=".85"
 					/>
 					<!-- Category text -->
-					<text class="fill-gray-800 font-sans" x="20" y="10" font-size="12px" dominant-baseline="middle"
-						>{travelTimeCategories[time]} mins</text
+					<text
+						class="fill-gray-800 font-sans"
+						x="20"
+						y="10"
+						font-size="12px"
+						dominant-baseline="middle">{travelTimeCategories[time]} mins</text
 					>
 				</g>
 			{/each}
@@ -143,11 +149,12 @@
 			<line stroke="currentColor" x1={xScale(0)} x2={xScale(1)} />
 			<!-- Specify the number of ticks here -->
 			{#each xScale.ticks(5) as tick}
-					<line stroke="currentColor" y1={0} y2={6} x1={xScale(tick)} x2={xScale(tick)} />
+				<line stroke="currentColor" y1={0} y2={6} x1={xScale(tick)} x2={xScale(tick)} />
 
-				<text  class="font-sans"
+				<text
+					class="font-sans"
 					fill="currentColor"
-					text-anchor={tick < 1 ? (tick === 0 ? "start" : "middle") : "end"}
+					text-anchor={tick < 1 ? (tick === 0 ? 'start' : 'middle') : 'end'}
 					font-size="12"
 					dominant-baseline="middle"
 					y={16}
@@ -159,13 +166,13 @@
 					})}
 				</text>
 			{/each}
-			
 		</g>
 
 		<!-- Y-axis labels -->
 		<g transform="translate({margin.left},0)">
 			{#each yScale.domain() as venue}
-				<text  class="font-sans"
+				<text
+					class="font-sans"
 					fill="currentColor"
 					y={yScale(venue) + yScale.bandwidth() / 2}
 					x={-10}
@@ -201,31 +208,31 @@
 						fill={colour(travelTimeCategories[time])}
 						stroke="black"
 						stroke-width=".25"
-						opacity=.9
+						opacity=".9"
 					/>
 					<!-- Text labels for bars >2% -->
-					 <!-- ISSUE:  -->
+					<!-- ISSUE:  -->
 					{#if getVenueData(data, venue, time) > 0.025}
 						<text
 							class="font-sans"
-						x={xScale(getVenueData(data, venue, time))}
-						y={yScale(venue) + yScale.bandwidth() / 2}
+							x={xScale(getVenueData(data, venue, time))}
+							y={yScale(venue) + yScale.bandwidth() / 2}
 							fill={time === 1800 && getVenueData(data, venue, time) > 0.04
 								? 'black'
 								: 'currentColor'}
-						font-size="11px"
-						dominant-baseline="middle"
+							font-size="11px"
+							dominant-baseline="middle"
 							text-anchor={getVenueData(data, venue, time) < 0.04 && time === 1800
 								? 'start'
 								: 'end'}
 							dx={getVenueData(data, venue, time) < 0.04 ? '4' : '-2'}
-						dy="1"
-					>
-						{getVenueData(data, venue, time).toLocaleString('en-US', {
-							style: 'percent',
-							minimumFractionDigits: 0
-						})}
-					</text>
+							dy="1"
+						>
+							{getVenueData(data, venue, time).toLocaleString('en-US', {
+								style: 'percent',
+								minimumFractionDigits: 0
+							})}
+						</text>
 					{/if}
 				{/each}
 			{/each}
