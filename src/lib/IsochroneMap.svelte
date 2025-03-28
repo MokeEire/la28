@@ -4,6 +4,8 @@
 	import PercentBar from '$lib/PercentBar.svelte';
 	import Legend from '$lib/Legend.svelte';
 	import LegendHTML from '$lib/LegendHTML.svelte';
+	import RouteTooltip from '$lib/RouteTooltip.svelte';
+	import VenueTooltip from '$lib/VenueTooltip.svelte';
 
 	// Functions
 	import { draw } from 'svelte/transition';
@@ -99,6 +101,11 @@
 	let [x, y] = $derived(
 		projection([venueSelected.venue_geometry.coordinates[0], venueSelected.venue_geometry.coordinates[1]])
 	);
+	function getVenueCoords(venue) {
+		return projection([venue.venue_geometry.coordinates[0], venue.venue_geometry.coordinates[1]]);
+	}
+	let hoveredVenue = $state({venue_simplified: null});
+	let hoveredRoute = $state([{route_id: null}]);
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
@@ -142,7 +149,8 @@
 		</g>-->
 		<g>
 			<!-- Census Tracts -->
-			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=".4" fill-opacity=".8"/>
+			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=".4" fill-opacity=".8"
+			onmouseleave={() => {hoveredRoute = [{route_id: null}]}}/>
 			<!-- Isochrones -->
 			{#key isochronesSorted}
 				<Isochrone
@@ -162,8 +170,19 @@
 							d={path(route.geometry)}
 							stroke={route.properties.route_color}
 							fill="none"
-							stroke-width="3"
+							tabIndex="0"
+							stroke-linecap="round"
+							stroke-width={hoveredRoute.route_id == route.properties.route_id ? "7.5" : "2.5"}
+							onmouseover={() => {
+							  hoveredRoute = route.properties;
+							}
+						  }
+						  onfocus={() => {
+							  hoveredRoute = route.properties;
+							}
+						  }
 						/>
+						
 					{/each}
 					{#each metroLinkRoutes.features as route}
 						<path
@@ -171,15 +190,57 @@
 							d={path(route.geometry)}
 							stroke={route.properties.route.route_color}
 							fill="none"
-							stroke-width="2"
+							stroke-width={hoveredRoute.route_id == route.properties.route.route_id ? "7.5" : "2.5"}
+							onmouseover={() => {
+							  hoveredRoute = route.properties.route;
+							}
+						  }
+						  onfocus={() => {
+							  hoveredRoute = route.properties.route;
+							}
+						  }
 						/>
 					{/each}
 				</g>
 			{/if}
-			<circle cx={x} cy={y} r="6" stroke="white" stroke-width="2" />
+			{#each venues as venue}
+				<circle
+					cx={getVenueCoords(venue)[0]}
+					cy={getVenueCoords(venue)[1]}
+					r={(hoveredVenue.venue_simplified == venue.venue_simplified | venueSelected.venue_simplified == venue.venue_simplified) ? "10" : "6"}
+					stroke="white"
+					stroke-width="2"
+					stroke-opacity={venueSelected.venue_simplified == venue.venue_simplified ? 1 : .75}
+					fill-opacity={venueSelected.venue_simplified == venue.venue_simplified ? 1 : .65}
+					fill={venueSelected.venue_simplified == venue.venue_simplified ? "#2166ac" : "black"}
+					onmouseover={() => {
+						hoveredVenue = venue;
+					}}
+					onmouseleave={() => {
+						hoveredVenue = {venue_simplified: null};
+					}}
+					onclick={() => {
+						venueSelected = venue;
+					}}
+					style="transition: all 150ms ease;"
+				/>
+				
+			{/each}
 		</g>
 	</svg>
-	<h3 class="flex justify-end mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
+	{#if hoveredRoute.route_id}
+							<RouteTooltip
+								data={hoveredRoute}
+								{width}
+							/>
+						{/if}
+						{#if hoveredVenue.venue_simplified}
+							<VenueTooltip
+								data={hoveredVenue}
+								{projection}
+							/>
+						{/if}
+	
 	<PercentBar data={isochronesFiltered} {travelTimeCategories} {colours}/>
 	
 	
