@@ -61,16 +61,17 @@
   
     // Color mapping for categories
     const categoryColors: Record<CategoryKey, string> = {
-      veryInconvenient: '#aa0503',
-      inconvenient: '#df3d26',
-      someInconvenient: '#EC8F83',
+      veryInconvenient: '#b2182b',
+      inconvenient: '#ef8a62',
+      someInconvenient: '#fddbc7',
       neutral: '#cccccc',
       neutralNegative: '#cccccc',
       neutralPositive: '#cccccc',
-      someConvenient: '#85DCFF',
-      convenient: '#0087BB',
-      veryConvenient: '#005383'
+      someConvenient: '#d1e5f0',
+      convenient: '#67a9cf',
+      veryConvenient: '#2166ac'
     };
+    //['#b2182b','#ef8a62','#fddbc7','#f7f7f7','#d1e5f0','#67a9cf','#2166ac']
   
     // Configure stack generator with normalization and offset
     const stackGen = stack<DataItem, CategoryKey>()
