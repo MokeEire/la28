@@ -23,14 +23,12 @@
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
 		<p>
-			The state of public transit in Los Angeles sounds pretty good on paper: we have one of the
-			longest light rail systems in the country, LAX is finally being connected to the transit
-			network, and the much awaited D Line that will connect UCLA and Beverly Hills to Downtown LA
-			is seemingly on track to be completed by 2028. Against this backdrop of transit expansion, it
-			might seem reasonable that the 2028 Olympics will be "car-free", meaning fans <a
+			The Los Angeles Olympic Games in 2028 will be “car-free”, meaning fans <a
 				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
 				>"will have to take transit, walk, bicycle, or get dropped off"</a
-			> according to LA Metro CEO Stephanie Wiggans. Angelenos are still skeptical. Every person I've
+			> according to LA Metro CEO Stephanie Wiggans. 
+			This is a jarring promise to a city where only 1 in 4 residents used public transit at all in the past year, according to a 2024 USC Dornsife survey.
+			As a result, Angelenos are quite skeptical of the idea that the transit system is up to such a task. Every person I've
 			told about L.A.'s car-free ambitions for the Olympics has responded with disbelief, concern, or
 			a chuckle. "Yeah, we'll see," they say.
 		</p>
