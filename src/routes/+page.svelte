@@ -14,13 +14,7 @@
 
 	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
 
-	let isochronesFiltered = $derived(
-		isochronesRewind.features.filter(
-			(d) =>
-				d.properties.venue_simplified == venueSelected.venue_simplified &&
-				d.properties.travel_time <= 60 * 120
-		)
-	);
+	
 
 	let colourPalette = ['#ffffb2','#fecc5c','#fd8d3c','#e31a1c']
 </script>
@@ -40,6 +34,49 @@
 			told about L.A.'s car-free ambitions for the Olympics has responded with disbelief, concern, or
 			a chuckle. "Yeah, we'll see," they say.
 		</p>
+		<p>
+			While this attitude must be frustrating for Metro and the city's transportation planners, it's
+			hardly surprising. The vast majority of people in Los Angeles rely on cars to get around. The <a
+				href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A"
+				>LA Barometer</a
+			>, a survey conducted by USC Dornsife, found that in 2024,
+			<a href="https://cesr.usc.edu/sites/default/files/Mobility_Sustainability_Topline_Wave4.pdf"
+				>nine out of ten people say they used cars to get around Los Angeles in the past year</a
+			>, and the majority used a car every day or most days. In contrast, just one in four Angelenos
+			said they used public transit in the past year, and with less frequency than cars too. 30% of
+			bus riders and 15% of metro riders said they used their mode of transit every day or most
+			days.
+		</p>
+		<p>
+			The LA Barometer also asked about the convenience and safety of peoples' modes of travel.
+			While 60% of respondents said public buses were inconvenient for going to work or for personal
+			trips, around 50% said the same about the metro. Despite LA being famous for its traffic, over
+			70% of respondents said that driving was convenient for going to work or for personal trips.
+			Clearly, the transit system is not meeting people's needs, in particular: convenience and
+			accessibility.
+		</p>
+		<SplitBar />
+		<p>
+			I wanted to see what it would look like for Angelenos to travel to the proposed venues by public transit today. 
+			What I found was that half of the 14 venues are accessible to the majority of Angelenos within 90 minutes by public transit. 
+			However for four of the venues, most people can’t even reach them within two hours.
+			For the purposes of this analysis, I focus on 90 minute travel times because I suspect 90 minutes is toward the upper end of what people would consider a "reasonable" journey time across Los Angeles.
+		</p>
+		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette}/>
+		<p>
+			Short, 30 minute transit journeys to the venues are exceedingly rare. The
+			downtown venues form the only truly transit-accessible zone with 63-85% of residents able to
+			reach the venues within 90 minutes. In the middle, the South Bay and Inglewood venues are
+			accessible to roughly half (47-58%) of Angelenos within 90 minutes. Despite being the venue
+			for both the opening and closing ceremonies, SoFi Stadium is accessible to just 15% of the
+			population within an hour by transit. The Sepulveda Basin Recreation Area and Riviera Country
+			Club are by far the least accessible, with just 16% and 9% of the population able to reach
+			them within 90 minutes respectively.
+		</p>
+		
+
+		<IsochroneMap venues={stadia} {venueSelected} {isochronesRewind} colours={colourPalette}/>
+
 		<p>
 			While this attitude must be frustrating for Metro and the city's transportation planners, it's
 			not surprising. Angelenos have been clear and consistent about their experiences getting
@@ -65,18 +102,7 @@
 		</p>
 		<SplitBar />
 		<p>Here's a look at how accessible the 2028 Olympic venues are by public transit.</p>
-		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette}/>
-		<p>
-			Very few Angelenos can reach any of the venues within 30 minutes by public transit. Only half
-			of the venues are accessible to at least half of the population within 90 minutes. The
-			downtown venues form the only truly transit-accessible zone with 63-85% of residents able to
-			reach the venues within 90 minutes. In the middle, the South Bay and Inglewood venues are
-			accessible to roughly half (47-58%) of Angelenos within 90 minutes. Despite being the venue
-			for both the opening and closing ceremonies, SoFi Stadium is accessible to just 15% of the
-			population within an hour by transit. The Sepulveda Basin Recreation Area and Riviera Country
-			Club are by far the least accessible, with just 16% and 9% of the population able to reach
-			them within 90 minutes respectively.
-		</p>
+		
 
 		<p>
 			The buses are too slow, the trains are too far from where people live, and passengers do not
@@ -84,16 +110,7 @@
 			the extent of the city that can reach each of the 2028 Olympic venues by public transit within
 			30, 60, 90, and 120 minutes.
 		</p>
-		<h4>Select a venue</h4>
-		<select bind:value={venueSelected}>
-			{#each stadia as venue}
-				<option value={venue}>
-					{venue.venue_simplified}
-				</option>
-			{/each}
-		</select>
-
-		<IsochroneMap venue={venueSelected} {isochronesFiltered} colours={colourPalette}/>
+		
 		<p>
 			Los Angeles will host the 2028 Summer Olympics with an unprecedented promise: the events will
 			be car-free. "[To attend the LA 2028 Olympics] you will have to take transit, walk, bicycle,
@@ -176,17 +193,7 @@
 </div>
 
 <style>
-	select {
-		font-size: 1.5rem;
-		text-decoration: underline;
-		padding: 4px 8px;
-		background-color: transparent;
-		border-bottom: 2px solid var(--color-theme-2);
-	}
-
-	select option {
-		font-size: 1rem;
-	}
+	
 
 	@media (max-width: 720px) {
 		.app {

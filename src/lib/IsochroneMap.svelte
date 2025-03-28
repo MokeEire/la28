@@ -20,8 +20,9 @@
 
 	// Props
 	let { 
-		venue,
-		isochronesFiltered,
+		venues,
+		venueSelected,
+		isochronesRewind,
 		colours = ['#ffffd4','#fed98e','#fe9929','#cc4c02'],
 	 } = $props();
 
@@ -29,6 +30,14 @@
 	//let tractPop = isochrones.features.map((d) => d.properties.pop).reduce((a, b) => a + b, 0);
 	//let venueIsos = isochrones.features.map((d) => d.properties.includes(venue))
 	// Filter isochrones by venue and travel time + rewind to fix polygons
+	let isochronesFiltered = $derived(
+		isochronesRewind.features.filter(
+			(d) =>
+				d.properties.venue_simplified == venueSelected.venue_simplified &&
+				d.properties.travel_time <= 60 * 120
+		)
+	);
+
 	let isochronesSorted = $derived(
 		sort(isochronesFiltered, (a, b) =>
 			descending(a.properties.travel_time, b.properties.travel_time)
@@ -37,7 +46,7 @@
 	
 	let venuePop = $derived(
 		isochronesFiltered.filter(
-			(d) => d.properties.venue_simplified == venue.venue_simplified && d.properties.travel_time === 7200
+			(d) => d.properties.venue_simplified == venueSelected.venue_simplified && d.properties.travel_time === 7200
 		)
 	);
 	let venuePopPercent = $derived(
@@ -88,12 +97,21 @@
 		showTransit = !showTransit;
 	}
 	let [x, y] = $derived(
-		projection([venue.venue_geometry.coordinates[0], venue.venue_geometry.coordinates[1]])
+		projection([venueSelected.venue_geometry.coordinates[0], venueSelected.venue_geometry.coordinates[1]])
 	);
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
-	<h3 class="opacity-75">Events: {venue.events}</h3>
+	<h4>Select a venue <span class="text-gray-500 text-sm">or click on the map</span></h4>
+		<select bind:value={venueSelected}>
+			{#each venues as venue}
+				<option value={venue}>
+					{venue.venue_simplified}
+				</option>
+			{/each}
+		</select>
+	<h3 class="opacity-75">Events: {venueSelected.events}</h3>
+	<h3 class="flex justify-end mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
 	<LegendHTML legend_data={travelTimes} legend_color_function={colour} legend_label_array={travelTimeCategories} {width}/>
 
 	<svg {width} {height} class="svg-container">
@@ -131,7 +149,7 @@
 					isochroneData={isochronesSorted}
 					{path}
 					colourScale={colour}
-					venue={venue.venue_simplified}
+					venue={venueSelected.venue_simplified}
 				/>
 			{/key}
 
@@ -199,5 +217,17 @@
 		font-size: 0.9rem;
 		opacity: 0.9;
 		text-decoration: underline;
+	}
+
+	select {
+		font-size: 1.25rem;
+		text-decoration: underline;
+		padding: 4px 8px;
+		background-color: transparent;
+		border-bottom: 2px solid var(--color-theme-2);
+	}
+
+	select option {
+		font-size: 1rem;
 	}
 </style>
