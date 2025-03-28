@@ -50,12 +50,17 @@ p {
 }
 
 a {
-	color: var(--color-theme-1);
-	text-decoration: none;
+	text-decoration-color: var(--color-theme-1);
+	text-decoration-line: underline;
+	text-decoration-thickness: .05rem;
+	transition: all 100ms ease-in-out;
 }
 
 a:hover {
-	text-decoration: underline;
+	text-decoration-skip-ink: none;
+	text-decoration-thickness: .15rem;
+	color: var(--color-theme-1);
+	text-decoration-color: var(--color-text);
 }
 
 h1 {
