@@ -13,7 +13,6 @@
 	colours
 	} = $props();
 
-	console.log(data[0].properties.venue);
 
 	let width = $state(480);
 	const height = 48;
@@ -43,7 +42,6 @@
 
 	let transformedVenueData = $derived(data.length ? transformVenueData(data) : null);
 
-	$inspect(transformedVenueData);
 
 	// Get unique travel times
 	const travelTimes = $derived(union(data.map((d) => d.properties.travel_time)));
