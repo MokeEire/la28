@@ -91,10 +91,10 @@
 			rx="3"
 			ry="3"
 		/>
-		{#each labelCategories.reverse() as category, i}
+		{#each Object.entries(travelTimeCategories).reverse() as [time, category] (time)}
 			<rect
 				in:slide|global={{
-					duration: 20 * (categories.reverse()[i] / 60),
+					duration: 20 * (time / 60),
 					axis: 'x',
 					easing: cubicInOut
 				}}
