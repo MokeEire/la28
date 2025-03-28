@@ -36,7 +36,7 @@
 
 	let width = $state(480);
 	const height = 480;
-	const margin = { top: 40, right: 30, bottom: 30, left: 276 };
+	const margin = { top: 40, right: 20, bottom: 30, left: 276 };
 
 	//const categories = ['Rail', 'Bus', 'Walk', 'Car'];
 	// Scales
@@ -103,16 +103,16 @@
 </script>
 
 <div
-	class=" p relative box-border min-w-full rounded-xl border-gray-100 p-4 pt-0"
+	class="chart-container"
 	bind:clientWidth={width}
 >
-	<div class="flex w-full items-center justify-between pt-1 font-semibold text-gray-600">
-		<h3 class="">{title}</h3>
+	<div class="flex w-full items-center justify-between pt-1">
+		<h3 class="font-bold">{title}</h3>
 	</div>
-	<div class="flex w-full items-center justify-between pt-0 pb-2 text-gray-500 text-base">
-		<h4 class="">{subtitle}</h4>
+	<div class="flex w-full items-center justify-between pt-0">
+		<h4 class="text-gray-500 text-sm font-medium">{subtitle}</h4>
 	</div>
-	<svg {width} {height} class="border-t-[1px] border-gray-200 fill-emerald-300">
+	<svg {width} {height} >
 		<!-- Legend -->
 		<g transform={`translate(0,${margin.top / 2})`}>
 			{#each Object.keys(travelTimeCategories) as time, i}
@@ -132,7 +132,7 @@
 					/>
 					<!-- Category text -->
 					<text
-						class="fill-gray-800 font-sans"
+						class="fill-gray-800"
 						x="20"
 						y="10"
 						font-size="12px"
@@ -152,7 +152,6 @@
 				<line stroke="currentColor" y1={0} y2={6} x1={xScale(tick)} x2={xScale(tick)} />
 
 				<text
-					class="font-sans"
 					fill="currentColor"
 					text-anchor={tick < 1 ? (tick === 0 ? 'start' : 'middle') : 'end'}
 					font-size="12"
@@ -172,7 +171,6 @@
 		<g transform="translate({margin.left},0)">
 			{#each yScale.domain() as venue}
 				<text
-					class="font-sans"
 					fill="currentColor"
 					y={yScale(venue) + yScale.bandwidth() / 2}
 					x={-10}
@@ -214,7 +212,6 @@
 					<!-- ISSUE:  -->
 					{#if getVenueData(data, venue, time) > 0.025}
 						<text
-							class="font-sans"
 							x={xScale(getVenueData(data, venue, time))}
 							y={yScale(venue) + yScale.bandwidth() / 2}
 							fill={time === 1800 && getVenueData(data, venue, time) > 0.04
@@ -238,4 +235,19 @@
 			{/each}
 		</g>
 	</svg>
+	<div class="caption">
+		<p class="text-sm text-gray-500 text-right mb-0 mt-2">Source: <a href="https://traveltime.com/apis/isochrones">TravelTime API</a></p>
+		<p class="text-sm text-gray-500 text-right">For details on how the data was collected, see Methodology section</p>
+	</div>
 </div>
+
+<style>
+	.chart-container {
+		position: relative;
+		width: 100%;
+		margin-bottom: 1rem;
+	}
+	h3, h4, text, p {
+		font-family: var(--font-sans);
+	}
+</style>
