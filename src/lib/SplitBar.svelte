@@ -93,6 +93,17 @@
       'veryConvenient'
     ];
   
+    // Color mapping for categories
+    const categoryLabels: Record<CategoryKey, string> = {
+      veryInconvenient: 'Very Inconvenient',
+      inconvenient: 'Inconvenient',
+      someInconvenient: 'Somewhat Inconvenient',
+      neutral: 'Neither Inconvenient nor Convenient',
+      someConvenient: 'Somewhat Convenient',
+      convenient: 'Convenient',
+      veryConvenient: 'Very Convenient'
+    };
+  
     // Define negative and positive keys
     const negativeKeys: CategoryKey[] = ['neutralNegative', 'someInconvenient', 'inconvenient', 'veryInconvenient'];
     const positiveKeys: CategoryKey[] = ['neutralPositive', 'someConvenient', 'convenient', 'veryConvenient'];
@@ -319,7 +330,7 @@
       </g>
     </svg>
     {#if hoveredData}
-      <Tooltip data={hoveredData} stackedKey={hoveredStackKey} {xScale} {yScale}/>
+      <Tooltip data={hoveredData} stackedKey={hoveredStackKey} labels={categoryLabels} colours={categoryColors} {xScale} {yScale}/>
     {/if}
     <p class="caption">Source: <a href="https://dornsife.usc.edu/cesr/wp-content/uploads/sites/54/2024/06/UAS595_Topline.pdf">LABarometer survey on Mobility & Sustainability (Wave 4)</a></p>
   </div>

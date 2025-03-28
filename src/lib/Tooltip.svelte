@@ -4,14 +4,31 @@
 
 	let x = $derived(xScale(data[stackedKey]));
 	let y = $derived(yScale(data.mode));
+	const whiteTextKeys: CategoryKey[] = [
+		'veryInconvenient',
+		'inconvenient',
+		'convenient',
+		'veryConvenient'
+	];
 </script>
 
-<div class="tooltip" style="position: absolute; top: {y}px; left: {x}px" transition:fly>
-	<h1>{data.mode} <span>{stackedKey}</span></h1>
-	<h2>{data[stackedKey].toLocaleString('en-US', {
+<div class="tooltip" style="position: absolute; top: {y+64}px; left: {x-40}px" transition:fly>
+    <p class="text-gray-500 text-xs">How convenient - in terms of speed, ease of getting to where you are going, and parking – is it to use {data.mode == 'Private vehicle' ? 'a' : 'the'}</p>
+	<h1>{data.mode}</h1>
+	<h2>
+		{data[stackedKey].toLocaleString('en-US', {
         style: 'percent',
         minimumFractionDigits: 1
-    })}</h2>
+		})} of people responded 
+		<span
+			class="font-semibold bg-[{colours[stackedKey as CategoryKey]}]"
+			style="background-color:{colours[stackedKey as CategoryKey]};color:{whiteTextKeys.includes(
+				stackedKey
+			)
+				? 'white'
+				: 'black'};">{labels[stackedKey]}</span
+		>
+	</h2>
 </div>
 
 <style>
