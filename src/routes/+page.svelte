@@ -3,9 +3,7 @@
 	import IsochroneMap from '$lib/IsochroneMap.svelte';
 	import TravelTimeBar from '$lib/TravelTimeBar.svelte';
 	import SplitBar from '$lib/SplitBar.svelte';
-	import SplitBarOG from '$lib/SplitBarOG.svelte';
 	import * as turf from '@turf/turf';
-	import { union, sort, descending } from 'd3-array';
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
 	import stadia from '$lib/venues_complete.json';
