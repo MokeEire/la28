@@ -53,24 +53,24 @@
 		
 		<p>
 			These accessibility challenges are also reflected in how Angelenos perceive their transportation options. 
-			LABarometer survey data reveals a dramatic convenience gap between private vehicles and public transit.The LA Barometer also asked about the convenience and safety of peoples' modes of travel.
-			While 60% of respondents said public buses were inconvenient for going to work or for personal
-			trips, around 50% said the same about the metro. Despite LA being famous for its traffic, over
-			70% of respondents said that driving was convenient for going to work or for personal trips.
-			Clearly, the transit system is not meeting people's needs, in particular: convenience and
-			safety.
+			LABarometer survey data reveals a dramatic gaps between private vehicles and public transit for convenience and safety.
+			Despite LA being infamous for its traffic, over 70% of respondents said that driving was convenient for going to work or for personal trips.
+			Fewer than 30% of respondents said the same of buses or the metro. 
+			When it comes to safety, more than half of Angelenos said they felt unsafe using public transit, while 74% said they felt safe driving.
+			Clearly, the transit system is not meeting people's needs with regards to convenience and safety.
 		</p>
 		<SurveyCharts />
 		
+		
+		
+		<h1>LA's Transit Plan</h1>
 		<p>
-			The gulf between Olympic ambitions and transit reality raises questions about how LA will
+			These gulfs between Olympic ambitions and transit reality raises questions about how LA will
 			transform its transportation system, and whether changes made for the Games will leave a
 			lasting impact on the city's mobility. Indeed, one of the four objectives of the LA 2028
 			Transport Strategy is to change residents' transit behaviors and encourage broader use of LA's
 			transit system "before, during, and after the Games."
 		</p>
-		
-		<h1>LA's Transit Plan</h1>
 		<p>
 			While cities like Paris used the Olympic Games as a political catalyst for new transportation
 			infrastructure, Los Angeles took a different approach. Rather than proposing new transit
