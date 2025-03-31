@@ -166,7 +166,7 @@
 				</text>
 			{/each}
 		</g>
-
+		
 		<!-- Y-axis labels -->
 		<g transform="translate({margin.left},0)">
 			{#each yScale.domain() as venue}
@@ -182,6 +182,23 @@
 				</text>
 			{/each}
 		</g>
+
+		<g transform="translate({margin.left},0)">
+			<line stroke="currentColor" stroke-opacity=".95" x1={xScale(0.5)} x2={xScale(0.5)} y1 ={height-margin.bottom+12} y2 = {margin.top}/>
+			<text
+			fill="currentColor"
+			text-anchor='middle'
+			font-size="12"
+			dominant-baseline="middle"
+			y={height-margin.bottom+24}
+			x={xScale(0.5)}
+		>
+			{[0.5].toLocaleString('en-US', {
+				style: 'percent',
+				minimumFractionDigits: 0
+			})}
+		</g>
+
 		<!-- Bars -->
 		<g transform="translate({margin.left},0)">
 			{#each yScale.domain() as venue}
@@ -195,7 +212,7 @@
 					ry="3"
 					stroke="black"
 					stroke-width=".25"
-					opacity=".7"
+					opacity=".95"
 				/>
 				{#each categories.reverse() as time}
 					<rect
@@ -234,6 +251,7 @@
 				{/each}
 			{/each}
 		</g>
+		
 	</svg>
 	<div class="caption">
 		<p class="text-sm text-gray-500 text-right mb-0 mt-2">Source: <a href="https://traveltime.com/apis/isochrones">TravelTime API</a></p>
