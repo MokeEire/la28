@@ -8,7 +8,7 @@
 
 <div 
     class="tooltip" 
-    style="background-color:{data.route_color}; color:{data.agency_id == 'Metrolink' ? '#'+data.route_text_color: data.route_text_color};position: absolute; bottom: {0}px; right: {margin.right}px" transition:fly>
+    style="background-color:{data.route_color}; color:{data.agency_id == 'Metrolink' ? '#'+data.route_text_color: data.route_text_color};position: absolute; bottom: {margin.bottom}px; right: {margin.right}px" transition:fly>
 	<h1>{data.route_long_name} </h1>
 </div>
 

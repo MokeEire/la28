@@ -243,19 +243,24 @@
 							/>
 						{/if}
 	
-	<PercentBar data={isochronesFiltered} {travelTimeCategories} {colours}/>
 	
 	
-	<button onclick={handleTransitClick}
+	
+	
+</div>
+<PercentBar data={isochronesFiltered} {travelTimeCategories} {colours}/>
+<button onclick={handleTransitClick}
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
 	>
-</div>
+	<div class="caption">
+		<p class="text-sm text-gray-500 text-right mb-0 mt-2">Source: <a href="https://traveltime.com/apis/isochrones">TravelTime API</a></p>
+		<p class="text-sm text-gray-500 text-right">For details on how the data was collected, see Methodology section</p>
+	</div>
 
 <style>
 	.chart-container {
 		position: relative;
 		width: 100%;
-		margin-bottom: 1rem;
 	}
 
 	.svg-container {
@@ -275,6 +280,7 @@
 	}
 
 	button {
+		position: absolute;
 		padding: 4px 8px;
 		color: rgb(80, 80, 80);
 		font-size: 0.9rem;
