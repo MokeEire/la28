@@ -22,51 +22,45 @@
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
 		<p>
-			The 2028 Olympic Games in Los Angeles will be <span class="font-medium italic">car-free</span>, meaning fans <a
-				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
-				>"will have to take transit, walk, bicycle, or get dropped off"</a
-			> according to LA Metro CEO Stephanie Wiggans. 
-			This is a jarring promise to a city in which just one in four who report using any form of public transit in the past year, according to the latest<a href="https://cesr.usc.edu/sites/default/files/Mobility_Sustainability_Topline_Wave4.pdf"
-			>LABarometer survey on mobility</a
-		>.
-		In contrast, nine in ten people use cars to get around Los Angeles, and the majority use a car every day or most days.
-			Clearly LA's public transit system is not meeting the needs of its residents. 
-			Looking at the proposed venues for the 2028 Olympics, what is the current state of public transit in Los Angeles? 
-			This analysis uses a time-based approach to assess the accessibility of the venues by public transit for the population of Los Angeles.
-			To understand the magnitude of LA's Olympic challenge, I analyzed how accessible the proposed Olympic venues are today by public transit. 
-			The results reveal a stark reality: most Angelenos would need to spend over an hour to reach any venue, with some nearly impossible to access even within two hours.
+			The Paris Olympics set a high bar for Olympic transportation in 2024 with 87% of spectators using public transit to attend the games. 
+			In 2028, Los Angeles is attempting a similar feat. 
+			Mayor Karen Bass <a href="https://www.theguardian.com/sport/article/2024/aug/10/las-mayor-says-2028-will-be-no-car-games-despite-citys-notorious-traffic">has said</a> 2028 will be a "no-car Games" and LA Metro CEO Stephanie Wiggins has said fans <a
+			href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
+			>"will have to take transit, walk, bicycle, or get dropped off"</a
+		>. 
+			Asking Los Angeles to rely on the transit system is a jarring challenge to a city in which 75% of the population report using no form of public transit in the past year, according to the <a href="https://dornsife.usc.edu/news/stories/metro-unsafe-say-those-no-longer-riding-post-pandemic/">latest LABarometer survey</a>. 
+			Nine in ten people use cars to get around Los Angeles, and the majority use a car every day or most days. 
 		</p>
+		<p>
+			To understand the magnitude of LA's Olympic challenge, I analyzed how accessible the proposed Olympic venues are by public transit by looking at the journey times Angelenos face today. 
+			The results reveal a stark reality: most Angelenos would need to spend 60-90 minutes to reach any venue.  
+			Events like BMX, skateboarding, and archery are planned to be held at the Sepulveda Basin Recreation Area, but currently this venue is inaccessible to the majority of the city even within two hours. 
+			For residents of Whittier in Southeast Los Angeles County, reaching the venue by public transit takes longer than traveling from London to Paris. 
+			This three-hour journey across just 40 miles of LA illustrates why most Angelenos rely on cars for daily transportation.
 		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette}/>
 
 		<p>
-			The summary above shows the percentage of the population that can reach each venue by public transit within 30, 60, 90, and 120 minutes.
-			Most Angelenos today can expect to spend over 1 hour to get to any of the venues. 
-			Despite being the venue	for both the opening and closing ceremonies, SoFi Stadium is accessible to just 15% of the
-			population within an hour by transit.
-			While half of the 14 venues are accessible to the majority of Angelenos within 90 minutes by public transit, 
-			venues like the Sepulveda Basin Recreation Area and Riviera Country Club aren't accessible to most of the population within two hours by transit.
-			The downtown venues are the most accessible, with 63-85% of residents able to reach them within 90 minutes.
-		</p>
-
-		<p>
-			I wanted to see what it would look like for Angelenos to travel to the proposed venues by public transit today. 
-			
-			However for four of the venues, most people can’t even reach them within two hours.
-			For the purposes of this analysis, I focus on 90 minute travel times because I suspect 90 minutes is toward the upper end of what people would consider a "reasonable" journey time across Los Angeles.
+			The chart above shows the percentage of the Los Angeles population that can reach each venue by public transit within each time frame: 30, 60, 90, or 120 minutes. 
+			Most Angelenos can expect to spend over 1 hour to get to any of the venues today. 
+			While the downtown venues are the most accessible, with 63-85% of residents able to reach them within 90 minutes, venues critical to the Games present major challenges. 
+			SoFi Stadium - set to host both the opening and closing ceremonies - is accessible to just 15% of the population within an hour by transit. 
+			More concerning, venues like Sepulveda Basin Recreation Area (hosting BMX and skateboarding events) and Riviera Country Club (hosting golf) remain unreachable for most residents even with a two-hour transit journey. 
+			The interactive map below shows transit accessibility to the proposed venues through what's called an "isochrone" visualization—essentially a time-based heat map.
 		</p>
 
 		<IsochroneMap venues={stadia} {venueSelected} {isochronesRewind} colours={colourPalette}/>
 		
 		<p>
-			Short, 30 minute transit journeys to the venues are exceedingly rare. The
-			downtown venues form the only truly transit-accessible zone with 63-85% of residents able to
-			reach the venues within 90 minutes. In the middle, the South Bay and Inglewood venues are
-			accessible to roughly half (47-58%) of Angelenos within 90 minutes. Despite being the venue
-			for both the opening and closing ceremonies, SoFi Stadium is accessible to just 15% of the
-			population within an hour by transit. The Sepulveda Basin Recreation Area and Riviera Country
-			Club are by far the least accessible, with just 16% and 9% of the population able to reach
-			them within 90 minutes respectively.
+			These accessibility challenges are also reflected in how Angelenos perceive their transportation options. 
+			LABarometer survey data reveals a dramatic convenience gap between private vehicles and public transit.The LA Barometer also asked about the convenience and safety of peoples' modes of travel.
+			While 60% of respondents said public buses were inconvenient for going to work or for personal
+			trips, around 50% said the same about the metro. Despite LA being famous for its traffic, over
+			70% of respondents said that driving was convenient for going to work or for personal trips.
+			Clearly, the transit system is not meeting people's needs, in particular: convenience and
+			accessibility.
 		</p>
+		<SplitBar />
+		
 		<p>
 			The gulf between Olympic ambitions and transit reality raises questions about how LA will
 			transform its transportation system, and whether changes made for the Games will leave a
@@ -74,6 +68,7 @@
 			Transport Strategy is to change residents' transit behaviors and encourage broader use of LA's
 			transit system "before, during, and after the Games."
 		</p>
+		
 		<h1>LA's Transit Plan</h1>
 		<p>
 			While cities like Paris used the Olympic Games as a political catalyst for new transportation
@@ -95,57 +90,6 @@
 			operations during the Games. However, these temporary fixes mask a deeper challenge: the
 			long-term health of LA's public transit system.
 		</p>
-
-		<p>
-			While this attitude must be frustrating for Metro and the city's transportation planners, it's
-			hardly surprising. The vast majority of people in Los Angeles rely on cars to get around. The <a
-				href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A"
-				>LA Barometer</a
-			>, a survey conducted by USC Dornsife, found that in 2024,
-			<a href="https://cesr.usc.edu/sites/default/files/Mobility_Sustainability_Topline_Wave4.pdf"
-				>nine out of ten people say they used cars to get around Los Angeles in the past year</a
-			>, and the majority used a car every day or most days. In contrast, just one in four Angelenos
-			said they used public transit in the past year, and with less frequency than cars too. 30% of
-			bus riders and 15% of metro riders said they used their mode of transit every day or most
-			days.
-		</p>
-		<p>
-			These accessibility challenges are reflected in how Angelenos perceive their transportation options. 
-			LABarometer survey data reveals a dramatic convenience gap between private vehicles and public transit.The LA Barometer also asked about the convenience and safety of peoples' modes of travel.
-			While 60% of respondents said public buses were inconvenient for going to work or for personal
-			trips, around 50% said the same about the metro. Despite LA being famous for its traffic, over
-			70% of respondents said that driving was convenient for going to work or for personal trips.
-			Clearly, the transit system is not meeting people's needs, in particular: convenience and
-			accessibility.
-		</p>
-		<SplitBar />
-		
-		
-
-		<p>
-			While this attitude must be frustrating for Metro and the city's transportation planners, it's
-			not surprising. Angelenos have been clear and consistent about their experiences getting
-			around the city: transit is slower, less reliable, and less safe than driving. As a result,
-			the vast majority of people in Los Angeles rely on cars to get around. The <a
-				href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A"
-				>LA Barometer</a
-			>, a survey conducted by USC Dornsife, found that in 2024,
-			<a href="https://cesr.usc.edu/sites/default/files/Mobility_Sustainability_Topline_Wave4.pdf"
-				>nine out of ten people say they used cars to get around Los Angeles in the past year</a
-			>, and the majority used a car every day or most days. In contrast, just one in four Angelenos
-			said they used public transit in the past year, and with less frequency than cars too. 30% of
-			bus riders and 15% of metro riders said they used their mode of transit every day or most
-			days.
-		</p>
-		
-
-		<p>
-			Consider this: for residents of Whittier in Southeast Los Angeles County, reaching the
-			Sepulveda Basin Recreation Area—a future Olympic venue—by public transit takes longer than
-			traveling from London to Paris. This almost three-hour journey across just 40 miles of LA
-			illustrates why most Angelenos rely on cars for daily transportation.
-		</p>
-		
 
 		<h1>Methodology</h1>
 		<p>
