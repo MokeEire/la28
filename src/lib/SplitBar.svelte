@@ -146,7 +146,6 @@
         <!-- Negative stacks -->
         {#each negativeStack as stack}
           {#each stack as d, i}
-          {console.log(xScale(d[1]), xScale(d[0]), xScale(d[1]) - xScale(d[0]) )}
             <rect
               x={xScale(-d[1])}
               y={yScale(data[i].mode)}

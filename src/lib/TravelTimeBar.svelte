@@ -116,7 +116,6 @@
 		<!-- Legend -->
 		<g transform={`translate(0,${margin.top / 2})`}>
 			{#each Object.keys(travelTimeCategories) as time, i}
-				{console.log(time, i)}
 				<g transform={`translate(${margin.left + (i * (width - margin.left)) / 4}, -4)`}>
 					<!-- Color box -->
 					<rect
