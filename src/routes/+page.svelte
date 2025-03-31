@@ -2,7 +2,7 @@
 	import Navbar from '$lib/Navbar.svelte';
 	import IsochroneMap from '$lib/IsochroneMap.svelte';
 	import TravelTimeBar from '$lib/TravelTimeBar.svelte';
-	import SplitBar from '$lib/SplitBar.svelte';
+	import SurveyCharts from '$lib/SurveyCharts.svelte';
 	import * as turf from '@turf/turf';
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
@@ -58,9 +58,9 @@
 			trips, around 50% said the same about the metro. Despite LA being famous for its traffic, over
 			70% of respondents said that driving was convenient for going to work or for personal trips.
 			Clearly, the transit system is not meeting people's needs, in particular: convenience and
-			accessibility.
+			safety.
 		</p>
-		<SplitBar />
+		<SurveyCharts />
 		
 		<p>
 			The gulf between Olympic ambitions and transit reality raises questions about how LA will
