@@ -1,10 +1,14 @@
 <script>
     import { fly } from 'svelte/transition';
-	let { data, width } = $props();
+	let { data, width, margin } = $props();
+
+    $inspect(data)
 
 </script>
 
-<div class="tooltip" style="background-color:{data.route_color}; color:{data.route_text_color};position: absolute; top: {width/10}px; left: {width*.6}px" transition:fly>
+<div 
+    class="tooltip" 
+    style="background-color:{data.route_color}; color:{data.agency_id == 'Metrolink' ? '#'+data.route_text_color: data.route_text_color};position: absolute; bottom: {0}px; right: {margin.right}px" transition:fly>
 	<h1>{data.route_long_name} </h1>
 </div>
 

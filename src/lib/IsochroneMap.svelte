@@ -233,6 +233,7 @@
 							<RouteTooltip
 								data={hoveredRoute}
 								{width}
+								{margin}
 							/>
 						{/if}
 						{#if hoveredVenue.venue_simplified}
