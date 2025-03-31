@@ -37,6 +37,7 @@
 			Events like BMX, skateboarding, and archery are planned to be held at the Sepulveda Basin Recreation Area, but currently this venue is inaccessible to the majority of the city even within two hours. 
 			For residents of Whittier in Southeast Los Angeles County, reaching the venue by public transit takes longer than traveling from London to Paris. 
 			This three-hour journey across just 40 miles of LA illustrates why most Angelenos rely on cars for daily transportation.
+			</p>
 		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette}/>
 
 		<p>
