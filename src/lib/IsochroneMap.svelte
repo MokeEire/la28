@@ -23,10 +23,11 @@
 	// Props
 	let { 
 		venues,
-		venueSelected,
 		isochronesRewind,
 		colours = ['#ffffd4','#fed98e','#fe9929','#cc4c02'],
 	 } = $props();
+
+	 let venueSelected = $state(venues[9]);
 
 	//$inspect(venue.venue)
 	//let tractPop = isochrones.features.map((d) => d.properties.pop).reduce((a, b) => a + b, 0);

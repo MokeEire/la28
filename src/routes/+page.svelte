@@ -9,7 +9,7 @@
 	import stadia from '$lib/venues_complete.json';
 	import isochrones from '$lib/isochronesTransit.geojson.json';
 
-	let venueSelected = $state(stadia[9]);
+	
 
 	let isochronesRewind = turf.rewind(isochrones, { reverse: true });
 
@@ -48,7 +48,7 @@
 			The interactive map below shows transit accessibility to the proposed venues through what's called an "isochrone" visualization—essentially a time-based heat map.
 		</p>
 
-		<IsochroneMap venues={stadia} {venueSelected} {isochronesRewind} colours={colourPalette}/>
+		<IsochroneMap venues={stadia} {isochronesRewind} colours={colourPalette}/>
 		
 		<p>
 			These accessibility challenges are also reflected in how Angelenos perceive their transportation options. 
