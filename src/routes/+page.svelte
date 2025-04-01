@@ -22,9 +22,9 @@
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
 		<p>
-			The Paris Olympics set a high bar for Olympic transportation in 2024 with 87% of spectators using public transit to attend the games. 
+			The Paris Olympics set a high bar for Olympic transportation in 2024 with <a href="https://press.paris2024.org/assets/paris-2024-sustainability-legacy-post-games-report-summary-430a1-7578a.html">87% of spectators using public transit to attend the games</a>. 
 			In 2028, Los Angeles is attempting a similar feat. 
-			Mayor Karen Bass <a href="https://www.theguardian.com/sport/article/2024/aug/10/las-mayor-says-2028-will-be-no-car-games-despite-citys-notorious-traffic">has said</a> 2028 will be a "no-car Games" and LA Metro CEO Stephanie Wiggins has said fans <a
+			Mayor Karen Bass <a href="https://www.theguardian.com/sport/article/2024/aug/10/las-mayor-says-2028-will-be-no-car-games-despite-citys-notorious-traffic">announced</a> 2028 will be a "no-car Games" and LA Metro CEO Stephanie Wiggins has said fans <a
 			href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
 			>"will have to take transit, walk, bicycle, or get dropped off"</a
 		>. 
@@ -53,7 +53,7 @@
 		
 		<p>
 			These accessibility challenges are also reflected in how Angelenos perceive their transportation options. 
-			LABarometer survey data reveals a dramatic gaps between private vehicles and public transit for convenience and safety.
+			<a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">LABarometer survey data</a> reveals a dramatic gaps in how people perceive convenience and safety travelling by private vehicles and public transit.
 			Despite LA being infamous for its traffic, over 70% of respondents said that driving was convenient for going to work or for personal trips.
 			Fewer than 30% of respondents said the same of buses or the metro. 
 			When it comes to safety, more than half of Angelenos said they felt unsafe using public transit, while 74% said they felt safe driving.
