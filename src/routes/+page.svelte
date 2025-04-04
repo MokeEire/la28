@@ -101,6 +101,16 @@
 			two-hour journey time, half of the venues are inaccessible to at least a quarter of the
 			population
 		</p>
+		<h2>Data Sources and Tools</h2>
+		<p> 
+			To analyze transit accessibility to the proposed 2028 Olympic venues, I used multiple data sources and analytical tools:
+		</p>
+			<ul>
+			<li>Olympic venues: I obtained the list of proposed Olympic venues from the official LA 2028 website</li>
+			<li>Population data: I incorporated census tract population data from the National Historical Geographic Information System (NHGIS) to calculate accessibility percentages</li>
+			<li>Isochrones: I generated isochrones using the TravelTime API, which provides travel time data for public transit routes</li>
+			<li>GTFS: I accessed LA Metro's GTFS (General Transit Feed Specification) data directly from their official repository to obtain current transit routes and schedules</li>
+			</ul>
 		
 
 		
