@@ -105,6 +105,9 @@
 	function getVenueCoords(venue) {
 		return projection([venue.venue_geometry.coordinates[0], venue.venue_geometry.coordinates[1]]);
 	}
+	let selectedVenueCoords = $derived(
+		getVenueCoords(venueSelected)
+	)
 	let hoveredVenue = $state({venue_simplified: null});
 	let hoveredRoute = $state([{route_id: null}]);
 </script>
@@ -158,7 +161,7 @@
 					isochroneData={isochronesSorted}
 					{path}
 					colourScale={colour}
-					venue={venueSelected.venue_simplified}
+					venueCoords={selectedVenueCoords}
 				/>
 			{/key}
 
