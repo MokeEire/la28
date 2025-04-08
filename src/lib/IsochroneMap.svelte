@@ -6,9 +6,11 @@
 	import LegendHTML from '$lib/LegendHTML.svelte';
 	import RouteTooltip from '$lib/RouteTooltip.svelte';
 	import VenueTooltip from '$lib/VenueTooltip.svelte';
+	import IsochroneTooltip from '$lib/IsochroneTooltip.svelte';
 
 	// Functions
-	import { draw } from 'svelte/transition';
+	import { draw, fade } from 'svelte/transition';
+	import { quadOut } from 'svelte/easing';
 	import { geoAlbers, geoPath } from 'd3-geo';
 	import { union, sort, descending } from 'd3-array';
 	import { scaleOrdinal } from 'd3-scale';
@@ -110,6 +112,19 @@
 	)
 	let hoveredVenue = $state({venue_simplified: null});
 	let hoveredRoute = $state([{route_id: null}]);
+
+	function scaleFromVenue(node, options) {
+        return {
+            duration: options.duration,
+			delay: options.delay || 0,
+            easing: options.easing,
+            css: t => `transform:scale(${t}); transform-origin: ${selectedVenueCoords[0]}px ${selectedVenueCoords[1]}px;`
+        }
+	}
+
+	let hoveredData = $state();
+	let m = $state({ x: 0, y: 0 });
+	$inspect(m)
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
@@ -125,7 +140,13 @@
 	<h3 class="flex justify-end mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
 	<LegendHTML legend_data={travelTimes} legend_color_function={colour} legend_label_array={travelTimeCategories} {width}/>
 
-	<svg {width} {height} class="svg-container">
+	<svg {width} {height} class="svg-container" onpointermove={(event) => {
+		m.x = event.offsetX;
+		m.y = event.offsetY;
+	}}
+	onmouseleave={() => {
+		hoveredData = null;
+	}}>
 		<!-- svelte-ignore a11y_click_events_have_key_events --->
 		<!-- Legend 
 		<g transform={`translate(${margin.left}, ${margin.top})`}>
@@ -154,16 +175,37 @@
 		<g>
 			<!-- Census Tracts -->
 			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=".4" fill-opacity=".8"
-			onmouseleave={() => {hoveredRoute = [{route_id: null}]}}/>
+			onmouseleave={() => {hoveredRoute = [{route_id: null}];hoveredData = null;}}/>
 			<!-- Isochrones -->
-			{#key isochronesSorted}
-				<Isochrone
-					isochroneData={isochronesSorted}
-					{path}
-					colourScale={colour}
-					venueCoords={selectedVenueCoords}
+			
+			{#each isochronesSorted as isochrone, i (isochrone.properties.id)}
+				<path class="isochrone" in:scaleFromVenue|global={{ duration: isochrone.properties.travel_time/4, delay: (3-i)*400, easing: quadOut }}
+					d={path(isochrone.geometry)}
+					stroke="grey"
+					fill={colour(isochrone.properties.travel_time)}
+					opacity=".9"
+					onmouseover={() => {
+						hoveredData = isochrone;
+					}}
+					onfocus={() => {
+						hoveredData = isochrone;
+					}}
 				/>
-			{/key}
+			{/each}
+			{#if hoveredData}
+				{#key hoveredData.properties.id}
+					<path
+					d={path(hoveredData)}
+					fill="transparent"
+					stroke="black"
+					stroke-width="1.5"
+					stroke-opacity="0.85"
+					pointer-events="none"
+					in:draw
+					out:fade
+					/>
+				{/key}
+			{/if}
 
 			<!-- Transit lines -->
 			{#if showTransit}
@@ -225,6 +267,7 @@
 					}}
 					onclick={() => {
 						venueSelected = venue;
+						hoveredData = venuePop[0];
 					}}
 					style="transition: all 150ms ease;"
 				/>
@@ -245,7 +288,7 @@
 								{projection}
 							/>
 						{/if}
-	
+						<IsochroneTooltip data={hoveredData} {m}/>
 	
 	
 	
@@ -280,6 +323,10 @@
 
 	.chart-container h3 {
 		font-size: 1rem;
+	}
+
+	.isochrone {
+		cursor: pointer;
 	}
 
 	button {
