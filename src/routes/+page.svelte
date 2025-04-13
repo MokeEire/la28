@@ -27,16 +27,21 @@
 			Mayor Karen Bass <a href="https://www.theguardian.com/sport/article/2024/aug/10/las-mayor-says-2028-will-be-no-car-games-despite-citys-notorious-traffic">announced</a> 2028 will be a "no-car Games" and LA Metro CEO Stephanie Wiggins has said fans <a
 			href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
 			>"will have to take transit, walk, bicycle, or get dropped off"</a
-		>. 
-			Asking Los Angeles to rely on the transit system is a jarring challenge to a city in which 75% of the population report using no form of public transit in the past year, according to the <a href="https://dornsife.usc.edu/news/stories/metro-unsafe-say-those-no-longer-riding-post-pandemic/">latest LABarometer survey</a>. 
-			Nine in ten people use cars to get around Los Angeles, and the majority use a car every day or most days. 
+		> to attend the events. 
+		This vision seems to be completely at odds with the realities of transportation in Los Angeles, where <a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">75% of residents report using no form of public transit in the past year</a>, and nine in ten rely on cars for mobility—the majority using them daily or nearly daily. 
 		</p>
+		
 		<p>
-			To understand the magnitude of LA's Olympic challenge, I analyzed how accessible the proposed Olympic venues are by public transit by looking at the journey times Angelenos face today. 
-			The results reveal a stark reality: most Angelenos would need to spend 60-90 minutes to reach any venue.  
-			Events like BMX, skateboarding, and archery are planned to be held at the Sepulveda Basin Recreation Area, but currently this venue is inaccessible to the majority of the city even within two hours. 
-			For residents of Whittier in Southeast Los Angeles County, reaching the venue by public transit takes longer than traveling from London to Paris. 
-			This three-hour journey across just 40 miles of LA illustrates why most Angelenos rely on cars for daily transportation.
+			The <a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">LABarometer surveys</a> provide some insight into LA’s love of driving, revealing dramatic disparities in convenience and safety between cars and public transit. 
+			Despite LA's notorious traffic, over 70% of respondents characterized driving as convenient for both commuting and personal trips, while fewer than 30% said the same about Metro rail and only 16% for buses. 
+			Safety perceptions show an even more pronounced divide: 74% of Angelenos reported feeling safe while driving, compared to less than half feeling secure on public transit. 
+			LA's current transit system is falling significantly short of meeting passengers’ fundamental needs for efficient and secure transportation.
+		</p>
+		<SurveyCharts />
+		<p>
+			To understand how convenient the proposed Olympic venues are by public transit, I looked at the journey times Angelenos face today if they were to only use transit, walk, or cycle. 
+			While these journey times cannot reflect the journey times we will experience during the Games in 2028, they reveal the magnitude of the challenge to make LA accessible by transit and further demonstrate why Angelenos are often skeptical that the city will accomplish it. 
+			The results reveal a stark reality: for any given venue, a transit journey for most Angelenos would take 60-90 minutes. 
 			</p>
 		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette}/>
 
@@ -51,15 +56,7 @@
 
 		<IsochroneMap venues={stadia} {isochronesRewind} colours={colourPalette}/>
 		
-		<p>
-			These accessibility challenges are also reflected in how Angelenos perceive their transportation options. 
-			<a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">LABarometer survey data</a> reveals a dramatic gaps in how people perceive convenience and safety travelling by private vehicles and public transit.
-			Despite LA being infamous for its traffic, over 70% of respondents said that driving was convenient for going to work or for personal trips.
-			Fewer than 30% of respondents said the same of buses or the metro. 
-			When it comes to safety, more than half of Angelenos said they felt unsafe using public transit, while 74% said they felt safe driving.
-			Clearly, the transit system is not meeting people's needs with regards to convenience and safety.
-		</p>
-		<SurveyCharts />
+		
 		
 		
 		
