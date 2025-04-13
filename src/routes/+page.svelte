@@ -90,27 +90,37 @@
 		</p>
 
 		<h1>Methodology</h1>
+		<p class="mb-4 font-mono text-sm text-gray-500">
+			You can explore the code for this project <a href="">here on GitHub</a>.
+		</p>
 		<p>
-			This analysis used travel time data to identify the areas in Los Angeles which can access each
-			venue by public transit within 30, 60, 90, and 120 minutes and the population which lives
-			there. Using public transit: Less than 10% of LA County's population can reach any venue
-			within 30 minutes, Only half the population can access venues within 90 minutes Even with a
-			two-hour journey time, half of the venues are inaccessible to at least a quarter of the
-			population
+			The goal of this analysis was to explore the accessibility of LA's proposed Olympic venues by public transit.
+			The process involved the following steps
 		</p>
-		<h2>Data Sources and Tools</h2>
+		<ol>
+			<li>Collect and geocode the venues</li>
+			<li>Generate isochrones for each venue using the TravelTime API</li>
+			<li>Join population to the isochrones</li>
+		</ol>
+		<h2>Collect and geocode the venues</h2>
 		<p> 
-			To analyze transit accessibility to the proposed 2028 Olympic venues, I used multiple data sources and analytical tools:
+			I gathered the list of proposed Olympic venues from the official LA 2028 website and entered the data into Google Sheets.
+			To geocode the venues, I used the tidygeocoder package in R.
 		</p>
-			<ul>
-			<li>Olympic venues: I obtained the list of proposed Olympic venues from the official LA 2028 website</li>
-			<li>Population data: I incorporated census tract population data from the National Historical Geographic Information System (NHGIS) to calculate accessibility percentages</li>
-			<li>Isochrones: I generated isochrones using the TravelTime API, which provides travel time data for public transit routes</li>
-			<li>GTFS: I accessed LA Metro's GTFS (General Transit Feed Specification) data directly from their official repository to obtain current transit routes and schedules</li>
-			</ul>
-		
+		<h2>Generate the isochrones</h2>
+		<p>
+			I generated isochrones for each venue using the TravelTime API, which provides travel time data for public transit routes.
+			I used the isochrones API to create isochrones for each venue, specifying the travel time intervals of 30, 60, 90, and 120 minutes.
+			The isochrones were generated using the public transit mode and the "fastest" routing profile.
+			I also specified the "walk" and "cycle" modes to generate isochrones for those modes as well.
+		</p>
+		<h2>Join population data to the isochrones</h2>
+		<p>
+			I used the US Census Bureau's population data to calculate the percentage of the population that can reach each venue within each time interval.
+			I used the isochrones generated in the previous step to calculate the percentage of the population that can reach each venue within 30, 60, 90, and 120 minutes.
+			I used the population data from the US Census Bureau to calculate the percentage of the population that can reach each venue within each time interval.
+		</p>
 
-		
 	</div>
 
 	<!--<GetGTFSData />-->
@@ -120,7 +130,23 @@
 
 <style>
 	
+	ol {
+    margin: 1em 0;
+    padding-left: 1.5em;
+    list-style-type: decimal;
+}
 
+ol li {
+    margin-bottom: 0.5em;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #333; /* Adjust color as needed */
+}
+
+ol li::marker {
+    color: var(--color-theme-1); /* Customize marker color */
+    font-weight: bold;
+}
 	@media (max-width: 720px) {
 		.app {
 			padding: 1em;
