@@ -1,5 +1,5 @@
 <div class="heading">
-    <h1>Will LA pull off a car-free Olympics in 2028?</h1>
+    <h1>How Accessible are LA's Olympic Venues?</h1>
   </div>
   
   <style>
