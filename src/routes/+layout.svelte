@@ -8,16 +8,16 @@
     </main>
     <footer>
         <div class="social-links">
-            <a href="https://github.com/your-profile" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/MokeEire" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="https://public.tableau.com/app/profile/your-profile" target="_blank" rel="noopener noreferrer" aria-label="Tableau">
+            <a href="https://public.tableau.com/app/profile/mokeeire" target="_blank" rel="noopener noreferrer" aria-label="Tableau">
                 <i class="fas fa-chart-bar"></i>
             </a>
-            <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://linkedin.com/in/markkbarrett" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="https://linktr.ee/your-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkTree">
+            <a href="https://linktr.ee/MokeEire" target="_blank" rel="noopener noreferrer" aria-label="LinkTree">
                 <i class="fas fa-link"></i>
             </a>
         </div>
