@@ -52,13 +52,10 @@
 			SoFi Stadium - set to host both the opening and closing ceremonies - is accessible to just 15% of the population within an hour by transit. 
 			More concerning, venues like Sepulveda Basin Recreation Area (hosting BMX and skateboarding events) and Riviera Country Club (hosting golf) remain unreachable for most residents even with a two-hour transit journey. 
 			The interactive map below shows transit accessibility to the proposed venues through what's called an "isochrone" visualization—essentially a time-based heat map.
+			While isochrones typically explore where you can reach from a specific point within a certain amount of time, the visuals below explore the points you could leave from in order to reach each venue in the given time period e.g. under 60 mins.
 		</p>
 
 		<IsochroneMap venues={stadia} {isochronesRewind} colours={colourPalette}/>
-		
-		
-		
-		
 		
 		<h1>LA's Transit Plan</h1>
 		<p>
@@ -104,21 +101,22 @@
 		</ol>
 		<h2>Collect and geocode the venues</h2>
 		<p> 
-			I gathered the list of proposed Olympic venues from the official LA 2028 website and entered the data into Google Sheets.
-			To geocode the venues, I used the tidygeocoder package in R.
+			I gathered the list of Olympic venues from the <a href="https://la28.org/en/games-plan/venues.html">official LA 2028 website</a> and entered the data into Google Sheets.
+			To geocode the venues, I used the <a href="https://jessecambon.github.io/tidygeocoder/">tidygeocoder</a> package in R.
 		</p>
 		<h2>Generate the isochrones</h2>
 		<p>
-			I generated isochrones for each venue using the TravelTime API, which provides travel time data for public transit routes.
-			I used the isochrones API to create isochrones for each venue, specifying the travel time intervals of 30, 60, 90, and 120 minutes.
+			I generated isochrones for each venue using the <a href="https://docs.traveltime.com/api/overview/introduction">TravelTime API</a>, which provides travel time data for public transit routes.
+			I prepared API queries for each venue and timeframe (30, 60, 90, and 120 minutes) using the <a href="https://github.com/traveltime-dev/traveltime-sdk-r">timetravelR</a> package in R.
 			The isochrones were generated using the public transit mode and the "fastest" routing profile.
-			I also specified the "walk" and "cycle" modes to generate isochrones for those modes as well.
+			I also increased the allowable walking time at the start and end of the journey from 10 to 20 minutes.
 		</p>
 		<h2>Join population data to the isochrones</h2>
 		<p>
-			I used the US Census Bureau's population data to calculate the percentage of the population that can reach each venue within each time interval.
-			I used the isochrones generated in the previous step to calculate the percentage of the population that can reach each venue within 30, 60, 90, and 120 minutes.
-			I used the population data from the US Census Bureau to calculate the percentage of the population that can reach each venue within each time interval.
+			I gathered the 2020 census tract population and spatial data for Los Angeles County from NHGIS.
+			The population of a census tract is considered to be able to access a venue if the census tract spatially intersects with the isochrone.
+			While this isn't perfect (e.g. only a small portion of the census tract might overlap with isochrone), it is a close approximation. 
+			To be more precise, one could go to the block level.
 		</p>
 
 	</div>
