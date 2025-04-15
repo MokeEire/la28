@@ -25,7 +25,7 @@
   
     let width = $state(600);
     let height = 160;
-    let margin = { top: 20, right: 20, bottom: 20, left: 160 };
+    let margin = { top: 20, right: 20, bottom: 20, left: 120 };
   
     const totalWidth = $derived(width - margin.left - margin.right);
     const totalHeight = height - margin.top - margin.bottom;
@@ -186,9 +186,10 @@
         {#each data as d}
           <text
           class="font-medium text-base"
-            x={xScale(-minX) - margin.left}
+            x={xScale(-.6) - margin.left}
             y={yScale(d.mode) + (yScale.bandwidth()) / 2}
             text-anchor="end"
+            dx="4"
             fill="black">
             {d.mode}
           </text>
