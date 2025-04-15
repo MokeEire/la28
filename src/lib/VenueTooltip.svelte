@@ -7,14 +7,14 @@
 	);
 </script>
 
-<div class="tooltip" style="position: absolute; top: {y+80}px; left: {x}px" transition:fly>
+<div class="tooltip" style="position: absolute; top: {y+116}px; left: {x-160}px" transition:fly>
 	<h1>{data.venue_simplified}</h1>
-	
 </div>
 
 <style>
     .tooltip {
-    padding: 8px 6px;
+    padding: 4px 2px;
+    text-align-last: right;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
     border-radius: 3px;

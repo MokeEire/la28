@@ -282,7 +282,7 @@
 								{margin}
 							/>
 						{/if}
-						{#if hoveredVenue.venue_simplified}
+						{#if hoveredVenue.venue_simplified && (venueSelected.venue_simplified != hoveredVenue.venue_simplified ?? venueSelected.venue_simplified)}
 							<VenueTooltip
 								data={hoveredVenue}
 								{projection}
