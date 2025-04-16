@@ -39,27 +39,25 @@
 		</p>
 		<SurveyCharts />
 		<p>
-			To understand how convenient the proposed Olympic venues are by public transit, I looked at the journey times Angelenos face today if they were to only use transit, walk, or cycle. 
-			While these journey times cannot reflect the journey times we will experience during the Games in 2028, they reveal the magnitude of the challenge to make LA accessible by transit and further demonstrate why Angelenos are often skeptical that the city will accomplish it. 
-			The results reveal a stark reality: for any given venue, a transit journey for most Angelenos would take 60-90 minutes. 
+			To understand how convenient the proposed Olympic venues are by public transit, I looked at the journey times Angelenos face today using transit, walking, or cycling. 
+			This data reveals a key challenge for LA's transit system: for any given venue, most people cannot get to the venue within an hour using public transit. 
 			</p>
 		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette}/>
-
 		<p>
-			The chart above shows the percentage of the Los Angeles population that can reach each venue by public transit within each time frame: 30, 60, 90, or 120 minutes. 
-			Most Angelenos can expect to spend over 1 hour to get to any of the venues today. 
-			While the downtown venues are the most accessible, with 63-85% of residents able to reach them within 90 minutes, venues critical to the Games present major challenges. 
+			LA's Olympic venues are spread across the city. 
+			There are clusters in downtown and South Bay, and others in the San Fernando Valley, Santa Monica, and Inglewood.
+			While the downtown venues are the most accessible, with 63-85% of residents able to reach them within 90 minutes, some of the critical venues present major challenges. 
 			SoFi Stadium - set to host both the opening and closing ceremonies - is accessible to just 15% of the population within an hour by transit. 
-			More concerning, venues like Sepulveda Basin Recreation Area (hosting BMX and skateboarding events) and Riviera Country Club (hosting golf) remain unreachable for most residents even with a two-hour transit journey. 
+			Other venues like Sepulveda Basin Recreation Area (hosting BMX and skateboarding events) and Riviera Country Club (hosting golf) remain unreachable for most residents even with a two-hour transit journey. 
+		</p>
+		<p>
 			The interactive map below shows transit accessibility to the proposed venues through what's called an "isochrone" visualization—essentially a time-based heat map.
 			While isochrones typically explore where you can reach from a specific point within a certain amount of time, the visuals below explore the points you could leave from in order to reach each venue in the given time period e.g. under 60 mins.
 		</p>
-
 		<IsochroneMap venues={stadia} {isochronesRewind} colours={colourPalette}/>
 		
-		<h1>LA's Transit Plan</h1>
 		<p>
-			These gulfs between Olympic ambitions and transit reality raises questions about how LA will
+			The gulfs between Olympic ambitions and transit reality raises questions about how LA will
 			transform its transportation system, and whether changes made for the Games will leave a
 			lasting impact on the city's mobility. Indeed, one of the four objectives of the LA 2028
 			Transport Strategy is to change residents' transit behaviors and encourage broader use of LA's
@@ -70,7 +68,10 @@
 			infrastructure, Los Angeles took a different approach. Rather than proposing new transit
 			projects, LA's Olympic plan largely relies on completing projects that were already in the
 			works—primarily its airport transit connector and the extension of the Purple Line towards
-			Beverly Hills and UCLA. However, progress and priorities have shifted significantly since the
+			Beverly Hills and UCLA. 
+		</p>
+		<p>
+			However, progress and priorities have shifted significantly since the
 			bid. Since 2018, Metro has substituted 11 of the original 28 infrastructure projects with ones
 			deemed more achievable by 2028. In fact, three of the replacement projects were already
 			completed when the list was revised, suggesting a focus on meeting numerical targets rather
@@ -127,6 +128,15 @@
 </div>
 
 <style>
+
+h1 {
+	font-size: 1.7rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+}
+
 	
 	ol {
     margin: 1em 0;
