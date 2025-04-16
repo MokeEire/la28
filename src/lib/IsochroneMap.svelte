@@ -137,7 +137,6 @@
 			{/each}
 		</select>
 	<h3 class="opacity-75">Events: {venueSelected.events}</h3>
-	<h3 class="flex justify-end mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
 	<LegendHTML legend_data={travelTimes} legend_color_function={colour} legend_label_array={travelTimeCategories} {width}/>
 
 	<svg {width} {height} class="svg-container" onpointermove={(event) => {
@@ -292,8 +291,8 @@
 	
 	
 	
-	
-</div>
+						<h3 class="flex justify-start mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
+					</div>
 <PercentBar data={isochronesFiltered} {travelTimeCategories} {colours}/>
 <button onclick={handleTransitClick}
 		>{#if showTransit}Hide{:else}Show{/if} Transit</button
