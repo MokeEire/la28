@@ -6,7 +6,8 @@
     .heading {
       margin: 0;
       padding: 0px;
-      background-color: #9418dc;
+      background-color: var(--color-theme-1);
+      opacity: .8;
       color: white;
       text-align: center;
     }
