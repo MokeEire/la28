@@ -124,7 +124,6 @@
 
 	let hoveredData = $state();
 	let m = $state({ x: 0, y: 0 });
-	$inspect(m)
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
@@ -178,9 +177,9 @@
 			<!-- Isochrones -->
 			
 			{#each isochronesSorted as isochrone, i (isochrone.properties.id)}
-				<path class="isochrone" in:scaleFromVenue|global={{ duration: isochrone.properties.travel_time/4, delay: (3-i)*400, easing: quadOut }}
+				<path class="isochrone" in:scaleFromVenue|global={{ duration: isochrone.properties.travel_time/10, delay: (3-i)*400, easing: quadOut }}
 					d={path(isochrone.geometry)}
-					stroke="grey"
+					stroke="transparent"
 					fill={colour(isochrone.properties.travel_time)}
 					opacity=".9"
 					onmouseover={() => {
@@ -200,8 +199,7 @@
 					stroke-width="1.5"
 					stroke-opacity="0.85"
 					pointer-events="none"
-					in:draw
-					out:fade
+					transition:fade
 					/>
 				{/key}
 			{/if}
@@ -266,7 +264,7 @@
 					}}
 					onclick={() => {
 						venueSelected = venue;
-						hoveredData = venuePop[0];
+						hoveredData = null;
 					}}
 					style="transition: all 150ms ease;"
 				/>
