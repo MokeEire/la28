@@ -94,27 +94,20 @@
 		</p>
 		
 		<p>
-			While cities like Paris used the Olympic Games as a political catalyst for new transportation
-			infrastructure, Los Angeles took a different approach. 
-			Rather than proposing new transit projects, LA's Olympic plan largely relies on completing projects that were already in the
-			works—primarily its airport transit connector and the extension of the Purple Line towards
-			Beverly Hills and UCLA. 
-		</p>
-		<p>
-			However, progress and priorities have shifted significantly since the
-			bid. Since 2018, Metro has substituted 11 of the original 28 infrastructure projects with ones
-			deemed more achievable by 2028. In fact, three of the replacement projects were already
-			completed when the list was revised, suggesting a focus on meeting numerical targets rather
-			than transforming the city's transit system.Of the eight transportation projects originally
-			listed in LA's Olympics bid that were expected to be completed by 2024, only one has been
-			completed. This track record raises concerns about whether the remaining projects will be
-			ready for the Games
+			It is also concerning how priorities have shifted since the original Olympics bid back in 2014. 
+			Of the eight transportation projects originally listed in the bid that were expected to be completed by 2024, 
+			only one has been completed. 
+			Since 2018, Metro has substituted 11 of the original 28 infrastructure projects with ones
+			deemed more achievable by 2028. 
+			In fact, three of the replacement projects were already	completed when the list was revised, 
+			suggesting a focus on meeting numerical targets rather than transforming the city's transit system. 
+			This track record raises concerns about whether the remaining projects will be ready for the Games.
 		</p>
 		<p>
 			LA's Olympic transportation plan includes numerous temporary solutions—dedicated Olympic
 			lanes, supplementary shuttle services, and adjusted schedules—that will likely ensure smooth
-			operations during the Games. However, these temporary fixes mask a deeper challenge: the
-			long-term health of LA's public transit system.
+			operations during the Games. 
+			However, these temporary fixes mask a deeper challenge: the	long-term health of LA's public transit system.
 		</p>
 
 		<h1>Methodology</h1>
