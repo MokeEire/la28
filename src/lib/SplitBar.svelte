@@ -25,7 +25,7 @@
   
     let width = $state(600);
     let height = 160;
-    let margin = { top: 20, right: 20, bottom: 20, left: 120 };
+    let margin = { top: 20, right: 20, bottom: 20, left: 160 };
   
     const totalWidth = $derived(width - margin.left - margin.right);
     const totalHeight = height - margin.top - margin.bottom;
@@ -97,7 +97,7 @@
                 hoveredStackKey = stack.key
               }
             }/>
-            {#if data[i][stack.key] > 0.1}
+            {#if data[i][stack.key] > 0.1  && width > 400}
             <text
             class="font-semibold text-xs"
             y={yScale(data[i].mode) + (yScale.bandwidth()) / 2}
@@ -135,7 +135,7 @@
                 hoveredStackKey = stack.key
               }
             }/>
-            {#if data[i][stack.key] > .1}
+            {#if data[i][stack.key] > .1 && width > 400}
                 <text
                 class="font-semibold text-xs"
                 y={yScale(data[i].mode) + (yScale.bandwidth()) / 2}
@@ -186,7 +186,7 @@
         {#each data as d}
           <text
           class="font-medium text-base"
-            x={xScale(-.6) - margin.left}
+            x={-40}
             y={yScale(d.mode) + (yScale.bandwidth()) / 2}
             text-anchor="end"
             dx="4"
