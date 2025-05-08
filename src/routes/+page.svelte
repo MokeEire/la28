@@ -110,7 +110,7 @@
 			However, these temporary fixes mask a deeper challenge: the	long-term health of LA's public transit system.
 		</p>
 
-		<h1>Methodology</h1>
+		<h2>Methodology</h2>
 		<p class="mb-4 font-mono text-sm text-gray-500">
 			You can explore the code for this project <a href="https://github.com/MokeEire/la28-r">here on GitHub</a>.
 		</p>
@@ -125,19 +125,19 @@
 			<li>Generate isochrones for each venue using the TravelTime API</li>
 			<li>Join population to the isochrones</li>
 		</ol>
-		<h2>Collect and geocode the venues</h2>
+		<h3>Collect and geocode the venues</h3>
 		<p> 
 			I gathered the list of Olympic venues from the <a href="https://la28.org/en/games-plan/venues.html">official LA 2028 website</a> and entered the data into Google Sheets.
 			To geocode the venues, I used the <a href="https://jessecambon.github.io/tidygeocoder/">tidygeocoder</a> package in R.
 		</p>
-		<h2>Generate the isochrones</h2>
+		<h3>Generate the isochrones</h3>
 		<p>
 			I generated isochrones for each venue using the <a href="https://docs.traveltime.com/api/overview/introduction">TravelTime API</a>, which provides travel time data for public transit routes.
 			I prepared API queries for each venue and timeframe (30, 60, 90, and 120 minutes) using the <a href="https://github.com/traveltime-dev/traveltime-sdk-r">timetravelR</a> package in R.
 			I specified public transit as the travel mode, used the "fastest" routing profile, and increased the 
 			allowable walking time at the start and end of the journey from 10 to 20 minutes.
 		</p>
-		<h2>Join population data to the isochrones</h2>
+		<h3>Join population data to the isochrones</h3>
 		<p>
 			I retrieved census tract population and spatial data for Los Angeles County from NHGIS.
 			The latest data available is from 2020.
