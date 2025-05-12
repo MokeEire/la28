@@ -99,6 +99,26 @@
 
 	// 1. Venue, then  time category
 
+	// State for tooltip
+	let tooltipData = $state(null);
+	let tooltipPosition = $state({ x: 0, y: 0 });
+
+	function handleMouseMove(event, d, key) {
+		const value = getVenueData(data, d.data.venue, key);
+		tooltipData = {
+			venue: d.data.venue,
+			time: travelTimeCategories[key],
+			value: value // Use the raw value instead of d[1] - d[0]
+		};
+		tooltipPosition = {
+			x: event.clientX,
+			y: event.clientY
+		};
+	}
+
+	function handleMouseLeave() {
+		tooltipData = null;
+	}
 	// 2. Time Category, then venue?
 </script>
 
@@ -130,12 +150,8 @@
 						opacity=".85"
 					/>
 					<!-- Category text -->
-					<text
-						class="fill-gray-800"
-						x="20"
-						y="10"
-						font-size="12px"
-						dominant-baseline="middle">{travelTimeCategories[time]} mins</text
+					<text class="fill-gray-800" x="20" y="10" font-size="12px" dominant-baseline="middle"
+						>{travelTimeCategories[time]} mins</text
 					>
 				</g>
 			{/each}
@@ -165,7 +181,7 @@
 				</text>
 			{/each}
 		</g>
-		
+
 		<!-- Y-axis labels -->
 		<g transform="translate({margin.left},0)">
 			{#each yScale.domain() as venue}
@@ -183,20 +199,28 @@
 		</g>
 
 		<g transform="translate({margin.left},0)">
-			<line stroke="currentColor" stroke-opacity=".95" x1={xScale(0.5)} x2={xScale(0.5)} y1 ={height-margin.bottom+12} y2 = {margin.top}/>
+			<line
+				stroke="currentColor"
+				stroke-opacity=".95"
+				x1={xScale(0.5)}
+				x2={xScale(0.5)}
+				y1={height - margin.bottom + 12}
+				y2={margin.top}
+			/>
 			<text
-			fill="currentColor"
-			text-anchor='middle'
-			font-size="12"
-			dominant-baseline="middle"
-			y={height-margin.bottom+24}
-			x={xScale(0.5)}
+				fill="currentColor"
+				text-anchor="middle"
+				font-size="12"
+				dominant-baseline="middle"
+				y={height - margin.bottom + 24}
+				x={xScale(0.5)}
+			>
+				{[0.5].toLocaleString('en-US', {
+					style: 'percent',
+					minimumFractionDigits: 0
+				})}
+			</text></g
 		>
-			{[0.5].toLocaleString('en-US', {
-				style: 'percent',
-				minimumFractionDigits: 0
-			})}
-		</g>
 
 		<!-- Bars -->
 		<g transform="translate({margin.left},0)">
@@ -214,34 +238,34 @@
 					opacity=".95"
 				/>
 				{#each categories.reverse() as time}
+					{@const value = getVenueData(data, venue, time)}
 					<rect
 						x={xScale(0)}
 						y={yScale(venue)}
 						height={yScale.bandwidth()}
-						width={xScale(getVenueData(dataSorted, venue, time))}
+						width={xScale(value)}
 						fill={colour(travelTimeCategories[time])}
 						stroke="black"
 						stroke-width=".25"
 						opacity=".9"
+						onmousemove={(e) => handleMouseMove(e, { data: { venue } }, time)}
+						onmouseleave={handleMouseLeave}
 					/>
 					<!-- Text labels for bars >2% -->
 					<!-- ISSUE:  -->
-					{#if getVenueData(data, venue, time) > 0.025}
+					<!-- Text labels for bars >2% -->
+					{#if value > 0.025}
 						<text
-							x={xScale(getVenueData(data, venue, time))}
+							x={xScale(value)}
 							y={yScale(venue) + yScale.bandwidth() / 2}
-							fill={time === 1800 && getVenueData(data, venue, time) > 0.04
-								? 'black'
-								: 'currentColor'}
+							fill={time === 1800 && value > 0.04 ? 'black' : 'currentColor'}
 							font-size="11px"
 							dominant-baseline="middle"
-							text-anchor={getVenueData(data, venue, time) < 0.04 && time === 1800
-								? 'start'
-								: 'end'}
-							dx={getVenueData(data, venue, time) < 0.04 ? '4' : '-2'}
+							text-anchor={value < 0.04 && time === 1800 ? 'start' : 'end'}
+							dx={value < 0.04 ? '4' : '-2'}
 							dy="1"
 						>
-							{getVenueData(data, venue, time).toLocaleString('en-US', {
+							{value.toLocaleString('en-US', {
 								style: 'percent',
 								minimumFractionDigits: 0
 							})}
@@ -253,9 +277,30 @@
 		
 	</svg>
 	<div class="caption">
-		<p class="text-sm text-gray-500 text-right mb-0 mt-2">Source: <a href="https://traveltime.com/apis/isochrones">TravelTime API</a></p>
-		<p class="text-sm text-gray-500 text-right">For details on how the data was collected, see Methodology section</p>
+		<p class="text-sm text-gray-500 text-right mb-0 mt-2">
+			Source: <a href="https://traveltime.com/apis/isochrones">TravelTime API</a>
+		</p>
+		<p class="text-sm text-gray-500 text-right">
+			For details on how the data was collected, see Methodology section
+		</p>
 	</div>
+	<!-- Tooltip -->
+	{#if tooltipData}
+		<div
+			class="tooltip"
+			style="position: fixed; left: {tooltipPosition.x + 10}px; top: {tooltipPosition.y + 10}px;"
+		>
+			<div class="bg-white p-2 rounded shadow-lg border border-gray-200">
+				<div class="font-bold">{tooltipData.venue}</div>
+				<div class="text-sm">
+					{tooltipData.time}: {tooltipData.value.toLocaleString('en-US', {
+						style: 'percent',
+						minimumFractionDigits: 0
+					})}
+				</div>
+			</div>
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -264,7 +309,10 @@
 		width: 100%;
 		margin-bottom: 1rem;
 	}
-	h3, h4, text, p {
+	h3,
+	h4,
+	text,
+	p {
 		font-family: var(--font-sans);
 	}
 </style>
