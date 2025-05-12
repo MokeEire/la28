@@ -23,13 +23,13 @@
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
 
 	// Props
-	let { 
+	let {
 		venues,
 		isochronesRewind,
-		colours = ['#ffffd4','#fed98e','#fe9929','#cc4c02'],
-	 } = $props();
+		colours = ['#ffffd4', '#fed98e', '#fe9929', '#cc4c02']
+	} = $props();
 
-	 let venueSelected = $state(venues[9]);
+	let venueSelected = $state(venues[9]);
 
 	//$inspect(venue.venue)
 	//let tractPop = isochrones.features.map((d) => d.properties.pop).reduce((a, b) => a + b, 0);
@@ -48,10 +48,12 @@
 			descending(a.properties.travel_time, b.properties.travel_time)
 		)
 	);
-	
+
 	let venuePop = $derived(
 		isochronesFiltered.filter(
-			(d) => d.properties.venue_simplified == venueSelected.venue_simplified && d.properties.travel_time === 7200
+			(d) =>
+				d.properties.venue_simplified == venueSelected.venue_simplified &&
+				d.properties.travel_time === 7200
 		)
 	);
 	let venuePopPercent = $derived(
@@ -87,13 +89,11 @@
 		1800: '< 30',
 		3600: '< 60',
 		5400: '< 90',
-		7200: '< 120',
+		7200: '< 120'
 	};
 
 	// Colour scale
-	const colour = $derived(
-		scaleOrdinal().domain(travelTimes).range(colours)
-	);
+	const colour = $derived(scaleOrdinal().domain(travelTimes).range(colours));
 
 	// Show transit lines value and function
 	let showTransit = $state(false);
@@ -102,49 +102,104 @@
 		showTransit = !showTransit;
 	}
 	let [x, y] = $derived(
-		projection([venueSelected.venue_geometry.coordinates[0], venueSelected.venue_geometry.coordinates[1]])
+		projection([
+			venueSelected.venue_geometry.coordinates[0],
+			venueSelected.venue_geometry.coordinates[1]
+		])
 	);
 	function getVenueCoords(venue) {
 		return projection([venue.venue_geometry.coordinates[0], venue.venue_geometry.coordinates[1]]);
 	}
-	let selectedVenueCoords = $derived(
-		getVenueCoords(venueSelected)
-	)
-	let hoveredVenue = $state({venue_simplified: null});
-	let hoveredRoute = $state([{route_id: null}]);
+	let selectedVenueCoords = $derived(getVenueCoords(venueSelected));
+	let hoveredVenue = $state({ venue_simplified: null });
+	let hoveredRoute = $state([{ route_id: null }]);
 
 	function scaleFromVenue(node, options) {
-        return {
-            duration: options.duration,
+		return {
+			duration: options.duration,
 			delay: options.delay || 0,
-            easing: options.easing,
-            css: t => `transform:scale(${t}); transform-origin: ${selectedVenueCoords[0]}px ${selectedVenueCoords[1]}px;`
-        }
+			easing: options.easing,
+			css: (t) =>
+				`transform:scale(${t}); transform-origin: ${selectedVenueCoords[0]}px ${selectedVenueCoords[1]}px;`
+		};
+	}
+
+	function scaleFromPath(node, options) {
+		// Get the path's bounding box
+		const bbox = node.getBBox();
+		// Calculate the center point of the path
+		const centerX = bbox.x + bbox.width / 2;
+		const centerY = bbox.y + bbox.height / 2;
+		
+		return {
+			duration: options.duration,
+			delay: options.delay || 0,
+			easing: options.easing,
+			css: (t) => {
+				// Start with a small scale and gradually increase
+				const scale = 0.1 + (t * 0.9);
+				// Start with low opacity and gradually increase
+				const opacity = 0.3 + (t * 0.6);
+				return `
+					transform: scale(${scale});
+					transform-origin: ${centerX}px ${centerY}px;
+					opacity: ${opacity};
+				`;
+			}
+		};
 	}
 
 	let hoveredData = $state();
 	let m = $state({ x: 0, y: 0 });
+	let venueTooltipPosition = $state({ x: 0, y: 0 });
+	let isochroneTooltipPosition = $state({ x: 0, y: 0 });
+
+	function handleMouseMove(event, venue) {
+		hoveredVenue = venue;
+		venueTooltipPosition = {
+			x: event.clientX,
+			y: event.clientY
+		};
+	}
+
+	function handleIsochroneMouse(event, isochrone) {
+		hoveredData = isochrone;
+		isochroneTooltipPosition = {
+			x: event.clientX,
+			y: event.clientY
+		};
+	}
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
 	<h4>Select a venue <span class="text-gray-500 text-sm">or click on the map</span></h4>
-		<select bind:value={venueSelected}>
-			{#each venues as venue}
-				<option value={venue}>
-					{venue.venue_simplified}
-				</option>
-			{/each}
-		</select>
+	<select bind:value={venueSelected}>
+		{#each venues as venue}
+			<option value={venue}>
+				{venue.venue_simplified}
+			</option>
+		{/each}
+	</select>
 	<h3 class="opacity-75">Events: {venueSelected.events}</h3>
-	<LegendHTML legend_data={travelTimes} legend_color_function={colour} legend_label_array={travelTimeCategories} {width}/>
+	<LegendHTML
+		legend_data={travelTimes}
+		legend_color_function={colour}
+		legend_label_array={travelTimeCategories}
+		{width}
+	/>
 
-	<svg {width} {height} class="svg-container" onpointermove={(event) => {
-		m.x = event.offsetX;
-		m.y = event.offsetY;
-	}}
-	onmouseleave={() => {
-		hoveredData = null;
-	}}>
+	<svg
+		{width}
+		{height}
+		class="svg-container"
+		onpointermove={(event) => {
+			m.x = event.offsetX;
+			m.y = event.offsetY;
+		}}
+		onmouseleave={() => {
+			hoveredData = null;
+		}}
+	>
 		<!-- svelte-ignore a11y_click_events_have_key_events --->
 		<!-- Legend 
 		<g transform={`translate(${margin.left}, ${margin.top})`}>
@@ -172,34 +227,51 @@
 		</g>-->
 		<g>
 			<!-- Census Tracts -->
-			<path d={path(tracts)} fill="white" stroke="#333" stroke-opacity=".4" fill-opacity=".8"
-			onmouseleave={() => {hoveredRoute = [{route_id: null}];hoveredData = null;}}/>
+			<path
+				d={path(tracts)}
+				fill="white"
+				stroke="#333"
+				stroke-opacity=".4"
+				fill-opacity=".8"
+				onmouseleave={() => {
+					hoveredRoute = [{ route_id: null }];
+					hoveredData = null;
+				}}
+			/>
 			<!-- Isochrones -->
-			
+
 			{#each isochronesSorted as isochrone, i (isochrone.properties.id)}
-				<path class="isochrone" in:scaleFromVenue|global={{ duration: isochrone.properties.travel_time/10, delay: (3-i)*400, easing: quadOut }}
+				<path
+					class="isochrone"
+					in:scaleFromPath|global={{
+						duration: isochrone.properties.travel_time / 10,
+						delay: (3 - i) * 400,
+						easing: quadOut
+					}}
 					d={path(isochrone.geometry)}
 					stroke="transparent"
 					fill={colour(isochrone.properties.travel_time)}
 					opacity=".9"
-					onmouseover={() => {
-						hoveredData = isochrone;
+					onmouseover={(e) => {
+						handleIsochroneMouse(e, isochrone);
+						hoveredVenue = { venue_simplified: null };
 					}}
-					onfocus={() => {
+					onfocus={(e) => {
 						hoveredData = isochrone;
+						hoveredVenue = { venue_simplified: null };
 					}}
 				/>
 			{/each}
 			{#if hoveredData}
 				{#key hoveredData.properties.id}
 					<path
-					d={path(hoveredData)}
-					fill="transparent"
-					stroke="black"
-					stroke-width="1.5"
-					stroke-opacity="0.85"
-					pointer-events="none"
-					transition:fade
+						d={path(hoveredData)}
+						fill="transparent"
+						stroke="black"
+						stroke-width="1.5"
+						stroke-opacity="0.85"
+						pointer-events="none"
+						transition:fade
 					/>
 				{/key}
 			{/if}
@@ -208,24 +280,21 @@
 			{#if showTransit}
 				<g>
 					{#each metroRoutes.features as route}
-						<path 
+						<path
 							transition:draw|global={{ duration: 800 }}
 							d={path(route.geometry)}
 							stroke={route.properties.route_color}
 							fill="none"
 							tabIndex="0"
 							stroke-linecap="round"
-							stroke-width={hoveredRoute.route_id == route.properties.route_id ? "7.5" : "2.5"}
+							stroke-width={hoveredRoute.route_id == route.properties.route_id ? '7.5' : '2.5'}
 							onmouseover={() => {
-							  hoveredRoute = route.properties;
-							}
-						  }
-						  onfocus={() => {
-							  hoveredRoute = route.properties;
-							}
-						  }
+								hoveredRoute = route.properties;
+							}}
+							onfocus={() => {
+								hoveredRoute = route.properties;
+							}}
 						/>
-						
 					{/each}
 					{#each metroLinkRoutes.features as route}
 						<path
@@ -233,15 +302,15 @@
 							d={path(route.geometry)}
 							stroke={route.properties.route.route_color}
 							fill="none"
-							stroke-width={hoveredRoute.route_id == route.properties.route.route_id ? "7.5" : "2.5"}
+							stroke-width={hoveredRoute.route_id == route.properties.route.route_id
+								? '7.5'
+								: '2.5'}
 							onmouseover={() => {
-							  hoveredRoute = route.properties.route;
-							}
-						  }
-						  onfocus={() => {
-							  hoveredRoute = route.properties.route;
-							}
-						  }
+								hoveredRoute = route.properties.route;
+							}}
+							onfocus={() => {
+								hoveredRoute = route.properties.route;
+							}}
 						/>
 					{/each}
 				</g>
@@ -250,17 +319,21 @@
 				<circle
 					cx={getVenueCoords(venue)[0]}
 					cy={getVenueCoords(venue)[1]}
-					r={(hoveredVenue.venue_simplified == venue.venue_simplified | venueSelected.venue_simplified == venue.venue_simplified) ? "10" : "6"}
+					r={(hoveredVenue.venue_simplified == venue.venue_simplified) |
+					(venueSelected.venue_simplified == venue.venue_simplified)
+						? '10'
+						: '6'}
 					stroke="white"
 					stroke-width="2"
-					stroke-opacity={venueSelected.venue_simplified == venue.venue_simplified ? 1 : .75}
-					fill-opacity={venueSelected.venue_simplified == venue.venue_simplified ? 1 : .65}
-					fill={venueSelected.venue_simplified == venue.venue_simplified ? "#2166ac" : "black"}
+					stroke-opacity={venueSelected.venue_simplified == venue.venue_simplified ? 1 : 0.75}
+					fill-opacity={venueSelected.venue_simplified == venue.venue_simplified ? 1 : 0.65}
+					fill={venueSelected.venue_simplified == venue.venue_simplified ? '#2166ac' : 'black'}
 					onmouseover={() => {
-						hoveredVenue = venue;
+						hoveredData = null;
+						handleMouseMove(event, venue);
 					}}
 					onmouseleave={() => {
-						hoveredVenue = {venue_simplified: null};
+						hoveredVenue = { venue_simplified: null };
 					}}
 					onclick={() => {
 						venueSelected = venue;
@@ -268,37 +341,33 @@
 					}}
 					style="transition: all 150ms ease;"
 				/>
-				
 			{/each}
 		</g>
 	</svg>
 	{#if hoveredRoute.route_id}
-							<RouteTooltip
-								data={hoveredRoute}
-								{width}
-								{margin}
-							/>
-						{/if}
-						{#if hoveredVenue.venue_simplified && (venueSelected.venue_simplified != hoveredVenue.venue_simplified ?? venueSelected.venue_simplified)}
-							<VenueTooltip
-								data={hoveredVenue}
-								{projection}
-							/>
-						{/if}
-						<IsochroneTooltip data={hoveredData} {m}/>
-	
-	
-	
-						<h3 class="flex justify-start mx-4 opacity-75">{venuePopPercent} of residents live within 2 hrs of the venue by public transit</h3>
-					</div>
-<PercentBar data={isochronesFiltered} {travelTimeCategories} {colours}/>
+		<RouteTooltip data={hoveredRoute} {width} {margin} />
+	{/if}
+	{#if hoveredVenue.venue_simplified && (venueSelected.venue_simplified != hoveredVenue.venue_simplified ?? venueSelected.venue_simplified)}
+		<VenueTooltip data={hoveredVenue} {projection} {venueTooltipPosition}/>
+	{/if}
+	<IsochroneTooltip data={hoveredData} {isochroneTooltipPosition} />
+
+	<h3 class="flex justify-start mx-4 opacity-75">
+		{venuePopPercent} of residents live within 2 hrs of the venue by public transit
+	</h3>
+</div>
+<PercentBar data={isochronesFiltered} {travelTimeCategories} {colours} />
 <button onclick={handleTransitClick}
-		>{#if showTransit}Hide{:else}Show{/if} Transit</button
-	>
-	<div class="caption">
-		<p class="text-sm text-gray-500 text-right mb-0 mt-2">Source: <a href="https://traveltime.com/apis/isochrones">TravelTime API</a></p>
-		<p class="text-sm text-gray-500 text-right">For details on how the data was collected, see Methodology section</p>
-	</div>
+	>{#if showTransit}Hide{:else}Show{/if} Transit</button
+>
+<div class="caption">
+	<p class="text-sm text-gray-500 text-right mb-0 mt-2">
+		Source: <a href="https://traveltime.com/apis/isochrones">TravelTime API</a>
+	</p>
+	<p class="text-sm text-gray-500 text-right">
+		For details on how the data was collected, see Methodology section
+	</p>
+</div>
 
 <style>
 	.chart-container {
