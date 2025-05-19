@@ -38,7 +38,7 @@
 	let isochronesFiltered = $derived(
 		isochronesRewind.features.filter(
 			(d) =>
-				d.properties.venue_simplified == venueSelected.venue_simplified &&
+				d.properties.venue == venueSelected.venue &&
 				d.properties.travel_time <= 60 * 120
 		)
 	);
@@ -52,7 +52,7 @@
 	let venuePop = $derived(
 		isochronesFiltered.filter(
 			(d) =>
-				d.properties.venue_simplified == venueSelected.venue_simplified &&
+				d.properties.venue == venueSelected.venue &&
 				d.properties.travel_time === 7200
 		)
 	);
@@ -111,7 +111,7 @@
 		return projection([venue.venue_geometry.coordinates[0], venue.venue_geometry.coordinates[1]]);
 	}
 	let selectedVenueCoords = $derived(getVenueCoords(venueSelected));
-	let hoveredVenue = $state({ venue_simplified: null });
+	let hoveredVenue = $state({ venue: null });
 	let hoveredRoute = $state([{ route_id: null }]);
 
 	function scaleFromVenue(node, options) {
@@ -176,7 +176,7 @@
 	<select bind:value={venueSelected}>
 		{#each venues as venue}
 			<option value={venue}>
-				{venue.venue_simplified}
+				{venue.venue}
 			</option>
 		{/each}
 	</select>
@@ -254,11 +254,11 @@
 					opacity=".9"
 					onmouseover={(e) => {
 						handleIsochroneMouse(e, isochrone);
-						hoveredVenue = { venue_simplified: null };
+						hoveredVenue = { venue: null };
 					}}
 					onfocus={(e) => {
 						hoveredData = isochrone;
-						hoveredVenue = { venue_simplified: null };
+						hoveredVenue = { venue: null };
 					}}
 				/>
 			{/each}
@@ -319,21 +319,21 @@
 				<circle
 					cx={getVenueCoords(venue)[0]}
 					cy={getVenueCoords(venue)[1]}
-					r={(hoveredVenue.venue_simplified == venue.venue_simplified) |
-					(venueSelected.venue_simplified == venue.venue_simplified)
+					r={(hoveredVenue.venue == venue.venue) |
+					(venueSelected.venue == venue.venue)
 						? '10'
 						: '6'}
 					stroke="white"
 					stroke-width="2"
-					stroke-opacity={venueSelected.venue_simplified == venue.venue_simplified ? 1 : 0.75}
-					fill-opacity={venueSelected.venue_simplified == venue.venue_simplified ? 1 : 0.65}
-					fill={venueSelected.venue_simplified == venue.venue_simplified ? '#2166ac' : 'black'}
+					stroke-opacity={venueSelected.venue == venue.venue ? 1 : 0.75}
+					fill-opacity={venueSelected.venue == venue.venue ? 1 : 0.65}
+					fill={venueSelected.venue == venue.venue ? '#2166ac' : 'black'}
 					onmouseover={() => {
 						hoveredData = null;
 						handleMouseMove(event, venue);
 					}}
 					onmouseleave={() => {
-						hoveredVenue = { venue_simplified: null };
+						hoveredVenue = { venue: null };
 					}}
 					onclick={() => {
 						venueSelected = venue;
@@ -347,7 +347,7 @@
 	{#if hoveredRoute.route_id}
 		<RouteTooltip data={hoveredRoute} {width} {margin} />
 	{/if}
-	{#if hoveredVenue.venue_simplified && (venueSelected.venue_simplified != hoveredVenue.venue_simplified ?? venueSelected.venue_simplified)}
+	{#if hoveredVenue.venue && (venueSelected.venue != hoveredVenue.venue ?? venueSelected.venue)}
 		<VenueTooltip data={hoveredVenue} {projection} {venueTooltipPosition}/>
 	{/if}
 	<IsochroneTooltip data={hoveredData} {isochroneTooltipPosition} />

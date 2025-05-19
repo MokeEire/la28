@@ -9,7 +9,7 @@
 
 <div class="tooltip" style="position: fixed; left: {venueTooltipPosition.x + 10}px; top: {venueTooltipPosition.y + 10}px;" transition:fly>
 	<h2>Show map for</h2>
-    <h1>{data.venue_simplified}</h1>
+    <h1>{data.venue}</h1>
 </div>
 
 <style>
