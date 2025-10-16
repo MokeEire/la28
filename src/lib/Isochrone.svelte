@@ -1,5 +1,6 @@
 <script>
 		import { quadOut } from 'svelte/easing';
+		import IsochroneTooltip from '$lib/IsochroneTooltip.svelte';
 
 		let {
 			isochroneData,
@@ -18,6 +19,12 @@
             css: t => `transform:scale(${t}); transform-origin: ${venueCoords[0]}px ${venueCoords[1]}px;`
         }
     }   
+	let hoveredData = $state(null);
+
+
+    export function returnSelectedIsochrone() {
+        return hoveredData
+    }
 </script>
 
 {#each isochroneData as isochrone, i}
@@ -28,6 +35,8 @@
 			stroke="grey"
 			fill={colourScale(isochrone.properties.travel_time)}
 			opacity=".9"
-            
+            onclick={() => {
+				hoveredData = isochrone;
+			  }}
 		/>
 {/each}
