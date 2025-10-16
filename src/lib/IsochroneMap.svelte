@@ -1,8 +1,8 @@
 <script>
 	// Components
-	import Isochrone from '$lib/Isochrone.svelte';
+	//import Isochrone from '$lib/Isochrone.svelte';
 	import PercentBar from '$lib/PercentBar.svelte';
-	import Legend from '$lib/Legend.svelte';
+	//import Legend from '$lib/Legend.svelte';
 	import LegendHTML from '$lib/LegendHTML.svelte';
 	import RouteTooltip from '$lib/RouteTooltip.svelte';
 	import VenueTooltip from '$lib/VenueTooltip.svelte';
@@ -17,8 +17,8 @@
 
 	// Data
 	import tracts from '$lib/nhgis_la_subset.geojson.json';
-	import laOutline from '$lib/nhgis_la_outline.geojson.json';
-	import isochrones from '$lib/isochronesTransit2025.geojson.json';
+	//import laOutline from '$lib/nhgis_la_outline.geojson.json';
+	//import isochrones from '$lib/isochronesTransit2025.geojson.json';
 	import metroRoutes from '$lib/metroRoutes.geojson.json';
 	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
 
@@ -29,7 +29,7 @@
 		colours = ['#ffffd4', '#fed98e', '#fe9929', '#cc4c02']
 	} = $props();
 
-	let venueSelected = $state(venues[9]);
+	let venueSelected = $state(venues[12]);
 
 	//$inspect(venue.venue)
 	//let tractPop = isochrones.features.map((d) => d.properties.pop).reduce((a, b) => a + b, 0);
@@ -42,7 +42,7 @@
 				d.properties.travel_time <= 60 * 120
 		)
 	);
-
+	
 	let isochronesSorted = $derived(
 		sort(isochronesFiltered, (a, b) =>
 			descending(a.properties.travel_time, b.properties.travel_time)
