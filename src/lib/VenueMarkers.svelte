@@ -1,7 +1,7 @@
 <script>
 	import { MapLibre, Marker, Popup, DefaultMarker, GeoJSON, LineLayer } from 'svelte-maplibre';
 	import LineToNearestStop from '$lib/LineToNearestStop.svelte';
-	export let venues;
+	let { venues } = $props();
 
 	//console.log(venues[0])
 	//console.log(lineString([venues[0].venue_geometry.coordinates, venues[0].nearest_stop[0].geometry.coordinates]))

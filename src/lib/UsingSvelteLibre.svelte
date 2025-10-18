@@ -5,9 +5,7 @@
 	//import {lineString} from '@turf/turf';
 	import LineToNearestStop from '$lib/LineToNearestStop.svelte';
 	import VenueMarkers from '$lib/VenueMarkers.svelte';
-	export let metroRoutes;
-	export let metroLinkRoutes;
-	export let showMetrolink;
+	let { metroRoutes, metroLinkRoutes, showMetrolink } = $props();
 
 	//console.log(venues[0])
 	//console.log(lineString([venues[0].venue_geometry.coordinates, venues[0].nearest_stop[0].geometry.coordinates]))

@@ -3,7 +3,7 @@
 	import { MapLibre, Marker, Popup, DefaultMarker, GeoJSON, LineLayer } from 'svelte-maplibre';
     import { lineString } from '@turf/turf';
 
-    export let venue;
+    let { venue } = $props();
     let nearestStopLine = lineString([venue.venue_geometry.coordinates, venue.nearest_stop[0].geometry.coordinates])
 </script>
 

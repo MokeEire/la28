@@ -5,7 +5,7 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 
 	let map;
-	let mapContainer: HTMLDivElement;
+	let mapContainer: HTMLDivElement = $state();
 
 	onMount(() => {
 		const map = new maplibregl.Map({
