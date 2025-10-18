@@ -12,6 +12,7 @@
 
 	let time = $state(9)
 	let arrtime = $derived(`2025-10-14T0${time}:00:00-0700`)
+	/*
 	function filterGeoJSON(geojson, condition) {
 		const filteredFeatures = geojson.features.filter(condition);
 		return {
@@ -23,15 +24,15 @@
 	//console.log(isochronesNew.features.filter((d) => d.properties.arrival_time == '2025-05-20T09:00:00-0700'));
 	/*isochronesNew.features.forEach((feature) => {
   		console.log(typeof(feature))//.filter((d) => d.properties.arrival_time == '2025-05-20T09:00:00-0700')
-	});*/
+	});
 	// Example usage: filter features with a specific property value
 	let isochronesFiltered = filterGeoJSON(isochronesNew, function (feature) {
 		return feature.properties.arrival_time == arrtime;
 	});
 	//$inspect(isochronesFiltered);
 	//$inspect(isochronesNew)
-
-	let isochronesRewind = turf.rewind(isochronesFiltered, { reverse: true });
+	*/
+	let isochronesRewind = turf.rewind(isochronesNew, { reverse: true });
 
 
 	let colourPalette = ['#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'];
