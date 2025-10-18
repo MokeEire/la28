@@ -56,13 +56,14 @@
 				d.properties.travel_time === 7200
 		)
 	);
+	
 	let venuePopPercent = $derived(
-		(venuePop[0].properties.pop / 9301156).toLocaleString('en-US', {
+		(venuePop[0].properties.pop_pct).toLocaleString('en-US', {
 			style: 'percent',
 			minimumFractionDigits: 1
 		})
 	);
-
+		$inspect(isochronesSorted);
 	let width = $state(600);
 	let height = $derived(width * 0.5);
 
@@ -240,7 +241,7 @@
 			/>
 			<!-- Isochrones -->
 
-			{#each isochronesSorted as isochrone, i (isochrone.properties.id)}
+			{#each isochronesSorted as isochrone }
 				<path
 					class="isochrone"
 					in:scaleFromPath|global={{
