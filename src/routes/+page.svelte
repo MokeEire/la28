@@ -8,10 +8,10 @@
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
 	import stadia from '$lib/venues_complete.json';
 	//import isochrones from '$lib/isochronesTransit.geojson.json';
-	import isochronesNew from '$lib/isochronesTransit2025-05-19.geojson.json';
+	import isochronesNew from '$lib/isochronesTransitCurrent.geojson.json';
 
 	let time = $state(9)
-	let arrtime = $derived(`2025-05-20T0${time}:00:00-0700`)
+	let arrtime = $derived(`2025-10-14T0${time}:00:00-0700`)
 	function filterGeoJSON(geojson, condition) {
 		const filteredFeatures = geojson.features.filter(condition);
 		return {
@@ -32,6 +32,7 @@
 	//$inspect(isochronesNew)
 
 	let isochronesRewind = turf.rewind(isochronesFiltered, { reverse: true });
+
 
 	let colourPalette = ['#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'];
 </script>
