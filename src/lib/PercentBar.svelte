@@ -7,18 +7,13 @@
 	import { cubicInOut, cubicOut, linear } from 'svelte/easing';
 	//import AxisLeft from '$lib/AxisLeftV5.svelte';
 
-	let {
-		data,
-    travelTimeCategories,
-	colours
-	} = $props();
-
+	let { data, travelTimeCategories, colours } = $props();
 
 	let width = $state(480);
 	const height = 48;
 	const margin = { top: 8, right: 20, bottom: 24, left: 10 };
 
-  let categories = Object.keys(travelTimeCategories);
+	let categories = Object.keys(travelTimeCategories);
 	let labelCategories = Object.values(travelTimeCategories);
 	// Scales
 
@@ -42,14 +37,11 @@
 
 	let transformedVenueData = $derived(data.length ? transformVenueData(data) : null);
 
-
 	// Get unique travel times
 	const travelTimes = $derived(union(data.map((d) => d.properties.travel_time)));
 
 	// Colour scale
-	const colour = scaleOrdinal()
-		.domain(labelCategories)
-		.range(colours);
+	const colour = scaleOrdinal().domain(labelCategories).range(colours);
 	let xScale = $derived(
 		scaleLinear()
 			.domain([0, 1])
@@ -75,11 +67,7 @@
 	class=" p relative box-border min-w-full rounded-xl border-gray-100 p-4 pt-0"
 	bind:clientWidth={width}
 >
-	<svg
-		width={width - margin.left - margin.right}
-		{height}
-		class="fill-emerald-300"
-	>
+	<svg width={width - margin.left - margin.right} {height} class="fill-emerald-300">
 		<!-- <AxisLeft {width} {height} {margin} {yScale} ticksNumber={5} /> -->
 		<!-- Bars and Total Values -->
 		<rect
