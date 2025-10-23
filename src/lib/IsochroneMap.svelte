@@ -7,6 +7,7 @@
 	import RouteTooltip from '$lib/RouteTooltip.svelte';
 	import VenueTooltip from '$lib/VenueTooltip.svelte';
 	import IsochroneTooltip from '$lib/IsochroneTooltip.svelte';
+	import TransitLines from '$lib/TransitLines.svelte';
 
 	// Functions
 	import { draw, fade } from 'svelte/transition';
@@ -19,8 +20,6 @@
 	import tracts from '$lib/nhgis_la_subset.geojson.json';
 	//import laOutline from '$lib/nhgis_la_outline.geojson.json';
 	//import isochrones from '$lib/isochronesTransit2025.geojson.json';
-	import metroRoutes from '$lib/metroRoutes.geojson.json';
-	import metroLinkRoutes from '$lib/metroLinkRoutes.geojson.json';
 
 	// Props
 	let {
@@ -63,7 +62,7 @@
 			minimumFractionDigits: 1
 		})
 	);
-		$inspect(isochronesSorted);
+		//$inspect(isochronesSorted);
 	let width = $state(600);
 	let height = $derived(width * 0.5);
 
@@ -113,7 +112,6 @@
 	}
 	let selectedVenueCoords = $derived(getVenueCoords(venueSelected));
 	let hoveredVenue = $state({ venue: null });
-	let hoveredRoute = $state([{ route_id: null }]);
 
 	function scaleFromVenue(node, options) {
 		return {
@@ -201,31 +199,6 @@
 			hoveredData = null;
 		}}
 	>
-		<!-- svelte-ignore a11y_click_events_have_key_events --->
-		<!-- Legend 
-		<g transform={`translate(${margin.left}, ${margin.top})`}>
-			<Legend legend_data={travelTimes} legend_color_function={colour} legend_label_array={travelTimeCategories} {width}/>
-		</g> --->
-		<!-- 
-		<g transform={`translate(${margin.left}, ${margin.top})`}>
-			{#each travelTimes as time, i}
-				<g transform={`translate(${width/2 + (i * width/2) / 4}, -4)`}>
-					<!-- Color box
-					<rect
-						style="border-radius:10px;"
-						width="16"
-						height="16"
-						rx="4"
-						ry="4"
-						fill={colour(time)}
-					/>
-					<!-- Category text 
-					<text class="fill-gray-800" x="20" y="10" font-size="14px" alignment-baseline="middle"
-						>{travelTimeCategories[time]} mins</text
-					>
-				</g>
-			{/each}
-		</g>-->
 		<g>
 			<!-- Census Tracts -->
 			<path
@@ -235,7 +208,6 @@
 				stroke-opacity=".4"
 				fill-opacity=".8"
 				onmouseleave={() => {
-					hoveredRoute = [{ route_id: null }];
 					hoveredData = null;
 				}}
 			/>
@@ -279,42 +251,7 @@
 
 			<!-- Transit lines -->
 			{#if showTransit}
-				<g>
-					{#each metroRoutes.features as route}
-						<path
-							transition:draw|global={{ duration: 800 }}
-							d={path(route.geometry)}
-							stroke={route.properties.route_color}
-							fill="none"
-							tabIndex="0"
-							stroke-linecap="round"
-							stroke-width={hoveredRoute.route_id == route.properties.route_id ? '7.5' : '2.5'}
-							onmouseover={() => {
-								hoveredRoute = route.properties;
-							}}
-							onfocus={() => {
-								hoveredRoute = route.properties;
-							}}
-						/>
-					{/each}
-					{#each metroLinkRoutes.features as route}
-						<path
-							transition:draw|global={{ delay: 400, duration: 800 }}
-							d={path(route.geometry)}
-							stroke={route.properties.route.route_color}
-							fill="none"
-							stroke-width={hoveredRoute.route_id == route.properties.route.route_id
-								? '7.5'
-								: '2.5'}
-							onmouseover={() => {
-								hoveredRoute = route.properties.route;
-							}}
-							onfocus={() => {
-								hoveredRoute = route.properties.route;
-							}}
-						/>
-					{/each}
-				</g>
+				<TransitLines {path} />
 			{/if}
 			{#each venues as venue}
 				<circle
@@ -345,9 +282,7 @@
 			{/each}
 		</g>
 	</svg>
-	{#if hoveredRoute.route_id}
-		<RouteTooltip data={hoveredRoute} {width} {margin} />
-	{/if}
+	
 	{#if hoveredVenue.venue && (venueSelected.venue != hoveredVenue.venue ?? venueSelected.venue)}
 		<VenueTooltip data={hoveredVenue} {projection} {venueTooltipPosition}/>
 	{/if}
