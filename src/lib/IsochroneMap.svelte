@@ -307,7 +307,9 @@
 		{venuePopPercent} of residents live within 2 hrs of the venue by public transit
 	</h3>
 </div>
-<PercentBar data={isochronesFiltered} {travelTimeCategories} {colours} />
+{#key venueSelected.venue}
+	<PercentBar data={isochronesFiltered} {travelTimeCategories} {colours} />
+{/key}
 <button onclick={handleTransitClick}
 	>{#if showTransit}Hide{:else}Show{/if} Transit</button
 >
