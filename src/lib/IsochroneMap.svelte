@@ -17,9 +17,7 @@
 	import { scaleOrdinal } from 'd3-scale';
 
 	// Data
-	import tracts from '$lib/nhgis_la_subset.geojson.json';
-	//import laOutline from '$lib/nhgis_la_outline.geojson.json';
-	//import isochrones from '$lib/isochronesTransit2025.geojson.json';
+	import tracts from '$lib/data/census_tracts.geojson.json';
 
 	// Props
 	let {
