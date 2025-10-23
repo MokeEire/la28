@@ -36,12 +36,10 @@
 	// Filter isochrones by venue and travel time + rewind to fix polygons
 	let isochronesFiltered = $derived(
 		isochronesRewind.features.filter(
-			(d) =>
-				d.properties.venue == venueSelected.venue &&
-				d.properties.travel_time <= 60 * 120
+			(d) => d.properties.venue == venueSelected.venue && d.properties.travel_time <= 60 * 120
 		)
 	);
-	
+
 	let isochronesSorted = $derived(
 		sort(isochronesFiltered, (a, b) =>
 			descending(a.properties.travel_time, b.properties.travel_time)
@@ -50,19 +48,17 @@
 
 	let venuePop = $derived(
 		isochronesFiltered.filter(
-			(d) =>
-				d.properties.venue == venueSelected.venue &&
-				d.properties.travel_time === 7200
+			(d) => d.properties.venue == venueSelected.venue && d.properties.travel_time === 7200
 		)
 	);
-	
+
 	let venuePopPercent = $derived(
-		(venuePop[0].properties.pop_pct).toLocaleString('en-US', {
+		venuePop[0].properties.pop_pct.toLocaleString('en-US', {
 			style: 'percent',
 			minimumFractionDigits: 1
 		})
 	);
-		//$inspect(isochronesSorted);
+	//$inspect(isochronesSorted);
 	let width = $state(600);
 	let height = $derived(width * 0.5);
 
@@ -129,16 +125,16 @@
 		// Calculate the center point of the path
 		const centerX = bbox.x + bbox.width / 2;
 		const centerY = bbox.y + bbox.height / 2;
-		
+
 		return {
 			duration: options.duration,
 			delay: options.delay || 0,
 			easing: options.easing,
 			css: (t) => {
 				// Start with a small scale and gradually increase
-				const scale = 0.1 + (t * 0.9);
+				const scale = 0.1 + t * 0.9;
 				// Start with low opacity and gradually increase
-				const opacity = 0.3 + (t * 0.6);
+				const opacity = 0.3 + t * 0.6;
 				return `
 					transform: scale(${scale});
 					transform-origin: ${centerX}px ${centerY}px;
@@ -191,6 +187,8 @@
 		{width}
 		{height}
 		class="svg-container"
+		role="img"
+		aria-label={`Isochrone map showing transit accessibility to ${venueSelected.venue}. ${venuePopPercent} of residents live within 2 hours by public transit.`}
 		onpointermove={(event) => {
 			m.x = event.offsetX;
 			m.y = event.offsetY;
@@ -203,6 +201,8 @@
 			<!-- Census Tracts -->
 			<path
 				d={path(tracts)}
+				role="graphics-symbol"
+				aria-label="Census tract boundaries of Los Angeles County"
 				fill="white"
 				stroke="#333"
 				stroke-opacity=".4"
@@ -213,9 +213,11 @@
 			/>
 			<!-- Isochrones -->
 
-			{#each isochronesSorted as isochrone }
+			{#each isochronesSorted as isochrone}
 				<path
 					class="isochrone"
+					role="graphics-symbol"
+					aria-label={`Isochrone showing the area around ${venueSelected.venue} that people can access the venue within ${isochrone.properties.travel_time / 60} minutes travel time by public transit.`}
 					in:scaleFromPath|global={{
 						duration: isochrone.properties.travel_time / 10,
 						delay: (3 - i) * 400,
@@ -257,16 +259,22 @@
 				<circle
 					cx={getVenueCoords(venue)[0]}
 					cy={getVenueCoords(venue)[1]}
-					r={(hoveredVenue.venue == venue.venue) |
-					(venueSelected.venue == venue.venue)
+					r={(hoveredVenue.venue == venue.venue) | (venueSelected.venue == venue.venue)
 						? '10'
 						: '6'}
+					role="button"
+					aria-label={`Location of ${venue.venue}. Click to select this venue.`}
+					tabindex="0"
 					stroke="white"
 					stroke-width="2"
 					stroke-opacity={venueSelected.venue == venue.venue ? 1 : 0.75}
 					fill-opacity={venueSelected.venue == venue.venue ? 1 : 0.65}
 					fill={venueSelected.venue == venue.venue ? '#2166ac' : 'black'}
 					onmouseover={() => {
+						hoveredData = null;
+						handleMouseMove(event, venue);
+					}}
+					onfocus={(e) => {
 						hoveredData = null;
 						handleMouseMove(event, venue);
 					}}
@@ -277,14 +285,21 @@
 						venueSelected = venue;
 						hoveredData = null;
 					}}
+					onkeydown={(event) => {
+						if (event.key === 'Enter' || event.key === ' ') {
+							event.preventDefault();
+							venueSelected = venue;
+							hoveredData = null;
+						}
+					}}
 					style="transition: all 150ms ease;"
 				/>
 			{/each}
 		</g>
 	</svg>
-	
+
 	{#if hoveredVenue.venue && (venueSelected.venue != hoveredVenue.venue ?? venueSelected.venue)}
-		<VenueTooltip data={hoveredVenue} {projection} {venueTooltipPosition}/>
+		<VenueTooltip data={hoveredVenue} {projection} {venueTooltipPosition} />
 	{/if}
 	<IsochroneTooltip data={hoveredData} {isochroneTooltipPosition} />
 
@@ -314,14 +329,7 @@
 	.svg-container {
 	}
 
-	.chart-container h1 {
-		font-size: 1.5rem;
-		font-weight: 600;
-	}
-
-	.chart-container h2 {
-		font-size: 1.1rem;
-	}
+	
 
 	.chart-container h3 {
 		font-size: 1rem;
