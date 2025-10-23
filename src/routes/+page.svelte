@@ -6,12 +6,11 @@
 	import * as turf from '@turf/turf';
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
-	import stadia from '$lib/venues_complete.json';
-	//import isochrones from '$lib/isochronesTransit.geojson.json';
+	import venues from '$lib/venues_complete.json';
 	import isochronesNew from '$lib/isochronesTransitCurrent.geojson.json';
 
-	let time = $state(9)
-	let arrtime = $derived(`2025-10-14T0${time}:00:00-0700`)
+	//let time = $state(9)
+	//let arrtime = $derived(`2025-10-14T0${time}:00:00-0700`)
 	/*
 	function filterGeoJSON(geojson, condition) {
 		const filteredFeatures = geojson.features.filter(condition);
@@ -120,7 +119,7 @@
 			given time period e.g. under 60 mins.
 		</p>
 
-		<IsochroneMap venues={stadia} {isochronesRewind} colours={colourPalette} />
+		<IsochroneMap {venues} {isochronesRewind} colours={colourPalette} />
 
 		<p>
 			The gulfs between Olympic ambitions and transit reality raises questions about how LA will
