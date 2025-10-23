@@ -1,11 +1,8 @@
 <script>
 	// This awesome component is from: https://datavisualizationwithsvelte.com/basics/stacked-bar-chart
 	import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale';
-	import { stack, stackOrderNone } from 'd3-shape';
-	import { union } from 'd3-array';
 	import { slide } from 'svelte/transition';
-	import { cubicInOut, cubicOut, linear } from 'svelte/easing';
-	//import AxisLeft from '$lib/AxisLeftV5.svelte';
+	import { sineInOut } from 'svelte/easing';
 
 	let { data, travelTimeCategories, colours } = $props();
 
@@ -37,9 +34,6 @@
 
 	let transformedVenueData = $derived(data.length ? transformVenueData(data) : null);
 
-	// Get unique travel times
-	const travelTimes = $derived(union(data.map((d) => d.properties.travel_time)));
-
 	// Colour scale
 	const colour = scaleOrdinal().domain(labelCategories).range(colours);
 	let xScale = $derived(
@@ -56,11 +50,6 @@
 			.padding(0.25)
 	);
 
-	// Stack data
-	//const stackGenerator = stack().keys(labelCategories).order(stackOrderNone);
-	//const stackedData = $derived(stackGenerator(transformedVenueData));
-
-	//$inspect(stackedData);
 </script>
 
 <div
@@ -82,9 +71,10 @@
 		{#each Object.entries(travelTimeCategories).reverse() as [time, category] (time)}
 			<rect
 				in:slide|global={{
-					duration: 20 * (time / 60),
+					delay:(time / 15),
+					duration: 800,
 					axis: 'x',
-					easing: cubicInOut
+					easing: sineInOut
 				}}
 				x={xScale(0)}
 				y={yScale(transformedVenueData[0]['venue'])}
