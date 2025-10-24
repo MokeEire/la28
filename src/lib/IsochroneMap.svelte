@@ -22,19 +22,21 @@
 	// Props
 	let {
 		venues,
-		isochronesRewind,
+		venueSelected,
+		isochrones,
 		colours = ['#ffffd4', '#fed98e', '#fe9929', '#cc4c02']
 	} = $props();
 
-	let venueSelected = $state(venues[12]);
+	//let venueSelected = $state(venues[12]);
+	let timeMax = 90
 
 	//$inspect(venue.venue)
 	//let tractPop = isochrones.features.map((d) => d.properties.pop).reduce((a, b) => a + b, 0);
 	//let venueIsos = isochrones.features.map((d) => d.properties.includes(venue))
 	// Filter isochrones by venue and travel time + rewind to fix polygons
 	let isochronesFiltered = $derived(
-		isochronesRewind.features.filter(
-			(d) => d.properties.venue == venueSelected.venue && d.properties.travel_time <= 60 * 120
+		isochrones.features.filter(
+			(d) => d.properties.venue == venueSelected.venue && d.properties.travel_time <= 60 * timeMax
 		)
 	);
 
@@ -46,7 +48,7 @@
 
 	let venuePop = $derived(
 		isochronesFiltered.filter(
-			(d) => d.properties.venue == venueSelected.venue && d.properties.travel_time === 7200
+			(d) => d.properties.venue == venueSelected.venue && d.properties.travel_time === 60 * timeMax
 		)
 	);
 
@@ -163,8 +165,10 @@
 		};
 	}
 </script>
+<div class="chart-wrapper">
 
 <div class="chart-container" bind:clientWidth={width}>
+	<!--
 	<h4>Select a venue <span class="text-gray-500 text-sm">or click on the map</span></h4>
 	<select bind:value={venueSelected}>
 		{#each venues as venue}
@@ -172,7 +176,7 @@
 				{venue.venue}
 			</option>
 		{/each}
-	</select>
+	</select>-->
 	<h3 class="opacity-75">Events: {venueSelected.events}</h3>
 	<LegendHTML
 		legend_data={travelTimes}
@@ -302,7 +306,7 @@
 	<IsochroneTooltip data={hoveredData} {isochroneTooltipPosition} />
 
 	<h3 class="flex justify-start mx-4 opacity-75">
-		{venuePopPercent} of residents live within 2 hrs of the venue by public transit
+		{venuePopPercent} of residents live within {timeMax} mins of the venue by public transit
 	</h3>
 </div>
 {#key venueSelected.venue}
@@ -319,8 +323,14 @@
 		For details on how the data was collected, see Methodology section
 	</p>
 </div>
+</div>
 
 <style>
+	.chart-wrapper {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
 	.chart-container {
 		position: relative;
 		width: 100%;

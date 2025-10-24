@@ -9,7 +9,7 @@
 	<div class="tooltip" style="position: fixed; left: {isochroneTooltipPosition.x + 10}px; top: {isochroneTooltipPosition.y + 10}px;">
 		<h1>{data.properties.venue}</h1>
 		<h2>
-			Within {data.properties.travel_time_mins} minutes, {data.properties.pop_pct.toLocaleString(
+			Within {data.properties.travel_time / 60} minutes, {data.properties.pop_pct.toLocaleString(
 				'en-US',
 				{
 					style: 'percent',

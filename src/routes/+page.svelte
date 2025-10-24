@@ -7,7 +7,8 @@
 
 	// source: https://en.wikipedia.org/wiki/Venues_of_the_2028_Summer_Olympics_and_Paralympics
 	import venues from '$lib/venues_complete.json';
-	import isochronesNew from '$lib/isochronesTransitCurrent.geojson.json';
+	import isochronesTransit from '$lib/isochronesTransitCurrent.geojson.json';
+	import isochronesDrive from '$lib/data/isochronesDriveCurrent.geojson.json';
 
 	//let time = $state(9)
 	//let arrtime = $derived(`2025-10-14T0${time}:00:00-0700`)
@@ -31,10 +32,11 @@
 	//$inspect(isochronesFiltered);
 	//$inspect(isochronesNew)
 	*/
-	let isochronesRewind = turf.rewind(isochronesNew, { reverse: true });
+	let isochronesTransitRewind = turf.rewind(isochronesTransit, { reverse: true });
+	let isochronesDriveRewind = turf.rewind(isochronesDrive, { reverse: true });
 
 
-	let colourPalette = ['#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'];
+	let venueSelected = $state(venues[12]);
 </script>
 
 <div class="app">
@@ -97,7 +99,7 @@
 			60, 90, and 120 minutes by public transit.
 		</p>
 
-		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette} />
+		<TravelTimeBar data={isochronesTransitRewind.features} categories={[1800, 3600, 5400]} colours={colourPalette} />
 
 		<p>
 			LA's Olympic venues are spread across the city. There are clusters in downtown and South Bay,
@@ -119,7 +121,19 @@
 			given time period e.g. under 60 mins.
 		</p>
 
-		<IsochroneMap {venues} {isochronesRewind} colours={colourPalette} />
+
+		<h4>Select a venue <span class="text-gray-500 text-sm">or click on the map</span></h4>
+	<select bind:value={venueSelected}>
+		{#each venues as venue}
+			<option value={venue}>
+				{venue.venue}
+			</option>
+		{/each}
+	</select>
+		<div class="wide">
+			<IsochroneMap {venues} {venueSelected} isochrones={isochronesTransitRewind} colours={colourPalette} />
+			<IsochroneMap {venues} {venueSelected} isochrones={isochronesDriveRewind} colours={colourPalette} />
+		</div>
 
 		<p>
 			The gulfs between Olympic ambitions and transit reality raises questions about how LA will
@@ -205,6 +219,12 @@
 </div>
 
 <style>
+	.wide {
+		display: flex;
+		position: relative;
+		left: -50%;
+		width: 100%;
+	}
 	h1 {
 		font-size: 1.7rem;
 	}
