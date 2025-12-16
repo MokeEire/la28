@@ -42,10 +42,10 @@
 	// Scales
 
 	let travelTimeCategories = {
-		1800: '< 30',
-		3600: '< 60',
-		5400: '< 90',
-		7200: '< 120'
+		1800: '< 30 mins',
+		3600: '30 mins — 1 hr',
+		5400: '1 — 1.5 hrs',
+		7200: '1.5 — 2 hrs'
 	};
 
 	let innerWidth = $derived(width - margin.left - margin.right);
@@ -151,7 +151,7 @@
 					/>
 					<!-- Category text -->
 					<text class="fill-gray-800" x="20" y="10" font-size="12px" dominant-baseline="middle"
-						>{travelTimeCategories[time]} mins</text
+						>{travelTimeCategories[time]}</text
 					>
 				</g>
 			{/each}
