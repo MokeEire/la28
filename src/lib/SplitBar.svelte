@@ -15,7 +15,7 @@
       | 'someConvenient'
       | 'veryConvenient';
   
-    let { data, title, subtitle, categoryKeys, categoryLabels, categoryColours, stackGen, positiveKeys, negativeKeys, neutralKeys, whiteTextKeys } = $props();
+    let { data, title, subtitle, categoryKeys, categoryLabels, categoryColours, stackGen, positiveKeys, negativeKeys, neutralKeys, whiteTextKeys, label } = $props();
     
   
     // Generate negative and positive stacks
@@ -25,7 +25,7 @@
   
     let width = $state(600);
     let height = 160;
-    let margin = { top: 20, right: 20, bottom: 20, left: 160 };
+    let margin = { top: 25, right: 20, bottom: 20, left: 160 };
   
     const totalWidth = $derived(width - margin.left - margin.right);
     const totalHeight = height - margin.top - margin.bottom;
@@ -55,6 +55,26 @@
 
         <!-- Center line and ticks -->
         {#key totalHeight}
+
+        <text
+            x={totalWidth}
+            y={-2}
+            dx="-4"
+            text-anchor="end"
+            font-size="12"
+            fill="grey">
+            More {label} →
+        </text>
+
+        <text
+            x={xScale(xTicks[0])}
+            y={-2}
+            dx="4"
+            text-anchor="start"
+            font-size="12"
+            fill="grey">
+            ← Less {label}
+        </text>
           
   
           {#each xTicks as tick}

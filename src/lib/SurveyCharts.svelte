@@ -194,7 +194,7 @@
       veryUnsafe: 'Very Unsafe',
       unsafe: 'Unsafe',
       someUnsafe: 'Somewhat Unsafe',
-      neutral: 'Neither Inconvenient nor Safe',
+      neutral: 'Neither Unsafe nor Safe',
       someSafe: 'Somewhat Safe',
       safe: 'Safe',
       verySafe: 'Very Safe'
@@ -265,7 +265,8 @@
     {positiveKeys}
     {negativeKeys}
     {neutralKeys}
-    whiteTextKeys={whiteTextKeysConvenience} />
+    whiteTextKeys={whiteTextKeysConvenience} 
+    label={"Convenient"}/>
 
     <SplitBar
     data={safetyData}
@@ -278,7 +279,8 @@
     positiveKeys={positiveSafetyKeys}
     negativeKeys={negativeSafetyKeys}
     neutralKeys={neutralSafetyKeys}
-    whiteTextKeys={whiteTextKeysSafety} />
+    whiteTextKeys={whiteTextKeysSafety} 
+    label={"Safe"}/>
     <p class="caption">Source: <a href="https://dornsife.usc.edu/cesr/wp-content/uploads/sites/54/2024/06/UAS595_Topline.pdf">LABarometer survey on Mobility & Sustainability (Wave 4)</a></p>
 
   <style>
