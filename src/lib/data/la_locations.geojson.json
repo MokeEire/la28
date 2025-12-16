@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "LAX",
+        "dx": -30,
+        "dy": 5
+      },
+      "geometry": {
+        "coordinates": [
+          -118.41029983403305,
+          33.94182555786513
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Downtown",
+        "dx": 50,
+        "dy": -5
+      },
+      "geometry": {
+        "coordinates": [
+          -118.25452579250086,
+          34.049449953509736
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Santa Monica",
+        "dx": -60,
+        "dy": 10
+      },
+      "geometry": {
+        "coordinates": [
+          -118.49749930390426,
+          34.013810925819186
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Long Beach",
+        "dx": 60,
+        "dy": 25
+      },
+      "geometry": {
+        "coordinates": [
+          -118.19128171183823,
+          33.76783039726732
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+}
