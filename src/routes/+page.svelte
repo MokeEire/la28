@@ -41,32 +41,63 @@
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
 		<p>
-			Los Angeles is known for many things: the beaches, Hollywood, and the sprawling freeways
-			usually come to mind. But one thing it is not known for is its public transportation system.
-			Yet in 2028, Los Angeles will host the Summer Olympics, and our leaders <a
-				href="https://www.theguardian.com/sport/article/2024/aug/10/las-mayor-says-2028-will-be-no-car-games-despite-citys-notorious-traffic"
-				>are promising</a
-			> a "no-car Games."
+			Sitting in bumper-to-bumper traffic on a cris-crossing conrcrete artery connecting freeway to freeway
+			is a quintessential Los Angeles experience. The film La La Land immortalized this daily ritual in 
+			<a href="https://www.youtube.com/watch?v=xVVqlm8Fq3Y">its opening scene</a>	almost a decade ago and
+			this is still the reality of commuting today.
+			Despite dealing with some of the heaviest traffic in the nation, 
+			<a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">USC's LABarometer surveys</a>
+			found that just 1 in 4 Angelenos used the public transit system in the past year.
+			
 		</p>
 		<p>
-			The Paris Olympics set a high bar for accessible transportation at a global event. Their
-			post-Games report <a
-				href="https://press.paris2024.org/assets/paris-2024-sustainability-legacy-post-games-report-summary-430a1-7578a.html"
-				>found</a
-			>
-			that 87% of spectators used public transit or other sustainable means to attend the games.
-			Despite
-			<a
-				href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A"
-				>75% of residents using no form of public transit in the past year</a
-			>, and the majority using cars daily or nearly daily, city leadership has doubled down on a
-			car-free Games. LA Metro CEO Stephanie Wiggins
-			<a
+			Against this backdrop, the <a
+				href="https://www.theguardian.com/sport/article/2024/aug/10/las-mayor-says-2028-will-be-no-car-games-despite-citys-notorious-traffic"
+				>announcement by LA leadership</a
+			> that Angelenos <a
 				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
-				>has said</a
-			>
-			fans will not be able to drive to any of the venues. Instead they "will have to take transit, walk,
-			bicycle, or get dropped off".
+				>will not be able to drive to the 2028 Olympics</a
+			> feels out of touch with the everyday experience of living in Los Angeles.
+			For many across the city and county, public transit just isn't a viable option because 
+			transit stations are not conveniently located, people don't feel safe, and it often takes three to four times longer than driving.
+		</p>
+		<p>
+			What would it look like to get to the 2028 Olympic venues today using only public transit, walking, or cycling?
+			I collected travel time data to understand which venues were most accessible by public transit and 
+			how the transit journeys compared to driving for Angelenos. 
+		</p>
+
+		
+		<h1>Accessibility</h1>
+		<p>
+			How much of Los Angeles can reach the venues by transit? 
+			To explore this question, I looked at the areas you could travel from to reach the venue within 30 mins, 1 hour, 90 mins, and 2 hours using public transit.
+			Each of these areas are called isochrones, and the map below shows the isochrones for each venue.
+		</p>
+
+		<IsochroneMap {venues} {isochronesRewind} colours={colourPalette} />
+
+		<p>
+			The interactive map below shows transit accessibility to the proposed venues through what's
+			called an "isochrone" visualization—essentially a time-based heat map. While isochrones
+			typically explore where you can reach from a specific point within a certain amount of time,
+			the visuals below explore the points you could leave from in order to reach each venue in the
+			given time period e.g. under 60 mins.
+			The chart below compares the percentage of Angelenos who can reach each venue within 
+			each timeframe.
+		</p>
+
+		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette} />
+
+		<p>
+			While the downtown venues are somewhat accessible, nearly half the venues can't be reached within 2 hours by transit.
+		</p>
+
+		<p>
+			This analysis is based on our current transit system.
+			The good news is that there are a number of transit projects that are underway which are aiming to open before 2028.
+			However, two key questions remain: will the projects actually get done on time? 
+			And will they improve the convenience, accessibility, and safety of transit enough to make a meaningful difference for Angelenos trying to get to the venues?
 		</p>
 
 		<p>
@@ -86,40 +117,10 @@
 
 		<SurveyCharts />
 
-		<p>
-			To understand if people could actually get to the proposed Olympic venues by public transit, I
-			looked at the journey times Angelenos face today if they were to only use transit, walk, or
-			cycle. While these journey times can't reflect the journey times we will experience in 2028,
-			they reveal the magnitude of the challenge in transit accessibility and further demonstrate
-			why Angelenos are often skeptical that the city will accomplish it. The data shows a stark
-			reality: for any given venue, a transit journey for most Angelenos would take at least an
-			hour. The chart below shows the percentage of LA residents who can reach each venue within 30,
-			60, 90, and 120 minutes by public transit.
-		</p>
+		
 
-		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette} />
 
-		<p>
-			LA's Olympic venues are spread across the city. There are clusters in downtown and South Bay,
-			and others in the San Fernando Valley, Santa Monica, and Inglewood. The downtown venues are
-			the most accessible, with 63-85% of residents able to reach them within 90 minutes. Some of
-			the critical venues like SoFi Stadium - set to host both the opening and closing ceremonies -
-			are accessible to just 15% of the population within an hour by transit. Other venues like
-			Sepulveda Basin Recreation Area (hosting BMX and skateboarding events) and Riviera Country
-			Club (hosting golf) remain unreachable for most residents even with a two-hour transit
-			journey. In fact, using transit to get to the Sepulveda Basin Recreation Area from Whittier, a
-			city in southeast LA County, takes longer than traveling from London to Paris.
-		</p>
-
-		<p>
-			The interactive map below shows transit accessibility to the proposed venues through what's
-			called an "isochrone" visualization—essentially a time-based heat map. While isochrones
-			typically explore where you can reach from a specific point within a certain amount of time,
-			the visuals below explore the points you could leave from in order to reach each venue in the
-			given time period e.g. under 60 mins.
-		</p>
-
-		<IsochroneMap {venues} {isochronesRewind} colours={colourPalette} />
+		
 
 		<p>
 			The gulfs between Olympic ambitions and transit reality raises questions about how LA will
