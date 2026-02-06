@@ -2,6 +2,8 @@
 
 An interactive data visualization exploring how accessible the 2028 Los Angeles Olympic venues are by public transit. LA leadership has announced that Angelenos will not be able to drive to the Games, yet the city's transit system remains a challenge for most residents. This project investigates what it would look like to reach every proposed venue using only public transit, walking, or cycling—and how much of Los Angeles is left behind.
 
+> 📊 **Data collection & processing lives in [`la28-r`](https://github.com/MokeEire/la28-r)** — the companion R repo where isochrone data is generated from the TravelTime API and joined with census population data.
+
 ## About the Project
 
 Los Angeles is synonymous with car culture, yet the 2028 Olympics aim to be "no-car Games." This project examines the gap between that ambition and the current state of LA's public transit by:
@@ -14,12 +16,14 @@ Los Angeles is synonymous with car culture, yet the 2028 Olympics aim to be "no-
 
 The centrepiece of the project is an interactive isochrone map built with D3 and SVG. When a user selects a venue (via dropdown or by clicking a marker on the map), the map animates colour-coded isochrone polygons radiating outward from the venue, each representing a travel-time band. Census tract boundaries provide geographic context, and optional Metro rail and bus lines can be toggled on. Hovering over an isochrone or venue displays a tooltip with details such as population coverage. Below the map, a percent bar summarizes the share of residents within each time band.
 
+![Isochrone map showing transit accessibility to Olympic venues](screenshots/isochrone-map.png)
+
 ## Data Sources
 
 | Data | Source | Notes |
 |---|---|---|
 | **Census tracts** (population & boundaries) | [NHGIS](https://www.nhgis.org/) | 2020 Census tract-level population for Los Angeles County |
-| **Isochrones** (transit travel-time polygons) | [TravelTime API](https://traveltime.com/apis/isochrones) | Generated for each venue at 30, 60, 90, and 120 min thresholds using public transit mode with a 20-min walking allowance |
+| **Isochrones** (transit travel-time polygons) | [TravelTime API](https://traveltime.com/apis/isochrones) | Generated for each venue at 30, 60, 90, and 120 min thresholds using public transit mode with a 20-min walking allowance. Collected and processed in the [`la28-r`](https://github.com/MokeEire/la28-r) repo. |
 | **Metro route geometries** | GTFS feeds via [`gtfs-to-geojson`](https://github.com/BlinkTagInc/gtfs-to-geojson) | Converted from LA Metro's GTFS data to GeoJSON for map overlays |
 | **Survey data** | [USC LABarometer](https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A) | Public opinion on transit convenience and safety |
 | **Venue list & locations** | [LA 2028 official site](https://la28.org/en/games-plan/venues.html) | Geocoded with the [tidygeocoder](https://jessecambon.github.io/tidygeocoder/) R package |
