@@ -41,7 +41,7 @@
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
 		<p>
-			Sitting in bumper-to-bumper traffic on a cris-crossing conrcrete artery connecting freeway to freeway
+			Sitting in bumper-to-bumper traffic on a cris-crossing concrete artery connecting freeway to freeway
 			is a quintessential Los Angeles experience. The film La La Land immortalized this daily ritual in 
 			<a href="https://www.youtube.com/watch?v=xVVqlm8Fq3Y">its opening scene</a>	almost a decade ago and
 			this is still the reality of commuting today.
@@ -71,18 +71,13 @@
 		<h1>Accessibility</h1>
 		<p>
 			How much of Los Angeles can reach the venues by transit? 
-			To explore this question, I looked at the areas you could travel from to reach the venue within 30 mins, 1 hour, 90 mins, and 2 hours using public transit.
+			To explore this question, I looked at the areas from which you could reach the venue within 30 mins, 1 hour, 90 mins, and 2 hours using public transit.
 			Each of these areas are called isochrones, and the map below shows the isochrones for each venue.
 		</p>
 
 		<IsochroneMap {venues} {isochronesRewind} colours={colourPalette} />
 
 		<p>
-			The interactive map below shows transit accessibility to the proposed venues through what's
-			called an "isochrone" visualization—essentially a time-based heat map. While isochrones
-			typically explore where you can reach from a specific point within a certain amount of time,
-			the visuals below explore the points you could leave from in order to reach each venue in the
-			given time period e.g. under 60 mins.
 			The chart below compares the percentage of Angelenos who can reach each venue within 
 			each timeframe.
 		</p>
@@ -101,7 +96,7 @@
 		</p>
 
 		<p>
-			While I love using transit in Los Angeles, I readily admit it doesn't work for everyone. The
+			Transit in Los Angeles is undergoing huge improvements, but it still doesn't work for everyone. The
 			problems of accessibility and safety are too much of a hurdle for many Angelenos to use public
 			transit. The <a
 				href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A"
