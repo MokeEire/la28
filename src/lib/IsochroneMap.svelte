@@ -1,4 +1,7 @@
 <script>
+	// Data
+	import locations from '$lib/data/la_locations.geojson.json';
+	$inspect(locations);
 	// Components
 	//import Isochrone from '$lib/Isochrone.svelte';
 	import PercentBar from '$lib/PercentBar.svelte';
@@ -104,6 +107,11 @@
 	function getVenueCoords(venue) {
 		return projection([venue.venue_geometry.coordinates[0], venue.venue_geometry.coordinates[1]]);
 	}
+
+	function getLocationCoords(location) {
+		return projection([location.geometry.coordinates[0], location.geometry.coordinates[1]]);
+	}
+
 	let selectedVenueCoords = $derived(getVenueCoords(venueSelected));
 	let hoveredVenue = $state({ venue: null });
 
@@ -211,12 +219,12 @@
 			/>
 			<!-- Isochrones -->
 
-			{#each isochronesSorted as isochrone}
+			{#each isochronesSorted as isochrone, i}
 				<path
 					class="isochrone"
 					role="graphics-symbol"
 					aria-label={`Isochrone showing the area around ${venueSelected.venue} that people can access the venue within ${isochrone.properties.travel_time / 60} minutes travel time by public transit.`}
-					in:scaleFromPath|global={{
+					in:scaleFromPath={{
 						duration: isochrone.properties.travel_time / 10,
 						delay: (3 - i) * 400,
 						easing: quadOut
@@ -253,6 +261,8 @@
 			{#if showTransit}
 				<TransitLines {path} />
 			{/if}
+			
+			<!-- Venues -->
 			{#each venues as venue}
 				<circle
 					cx={getVenueCoords(venue)[0]}
@@ -292,6 +302,26 @@
 					}}
 					style="transition: all 150ms ease;"
 				/>
+			{/each}
+
+			<!-- Location Names -->
+			{#each locations.features as location}
+			{console.log(getLocationCoords(location))}
+				<text
+					x={getLocationCoords(location)[0]}
+					y={getLocationCoords(location)[1]}
+					font-size="16px"
+					fill="#333"
+					fill-opacity="0.75"
+					stroke="white"
+					stroke-width="6"
+					stroke-opacity="0.85"
+					paint-order="stroke"
+					dx={location.properties.dx ?? 0}
+					dy={location.properties.dy ?? 0}
+					text-anchor="middle"
+					font-weight="500"
+				>{location.properties.name}</text>
 			{/each}
 		</g>
 	</svg>

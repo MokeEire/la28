@@ -20,8 +20,8 @@
       "type": "Feature",
       "properties": {
         "name": "Downtown",
-        "dx": 50,
-        "dy": -5
+        "dx": 55,
+        "dy": -10
       },
       "geometry": {
         "coordinates": [
