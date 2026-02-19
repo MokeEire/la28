@@ -41,10 +41,10 @@
 	<Navbar />
 	<div class="max-w-prose mx-auto my-8">
 		<p>
-			Sitting in bumper-to-bumper traffic on a cris-crossing concrete artery connecting freeway to freeway
-			is a quintessential Los Angeles experience. The film La La Land immortalized this daily ritual in 
-			<a href="https://www.youtube.com/watch?v=xVVqlm8Fq3Y">its opening scene</a>	almost a decade ago and
-			this is still the reality of commuting today.
+			Sitting in bumper-to-bumper traffic on one of the many cris-crossing concrete arteries connecting Los Angeles
+			is a quintessential Angeleno experience. The film La La Land immortalized this daily ritual in 
+			<a href="https://www.youtube.com/watch?v=xVVqlm8Fq3Y">its opening dance number</a>	almost a decade ago and
+			the scene has not lost its relevance.
 			Despite dealing with some of the heaviest traffic in the nation, 
 			<a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">USC's LABarometer surveys</a>
 			found that just 1 in 4 Angelenos used the public transit system in the past year.
@@ -57,9 +57,11 @@
 			> that Angelenos <a
 				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
 				>will not be able to drive to the 2028 Olympics</a
-			> feels out of touch with the everyday experience of living in Los Angeles.
-			For many across the city and county, public transit just isn't a viable option because 
-			transit stations are not conveniently located, people don't feel safe, and it often takes three to four times longer than driving.
+			> seems out of touch with the everyday experience of their constituents.
+			For many across the city and county, public transit just isn't a viable option. 
+			Transit often takes three to four times longer than driving and while some areas of the city are well served by transit, 
+			there are plenty of neighborhoods with limited or no access.
+			With the city's persistent homelessness crisis and dilapidated sidewalks, people often don't feel safe on or around the transit system either.
 		</p>
 		<p>
 			What would it look like to get to the 2028 Olympic venues today using only public transit, walking, or cycling?
