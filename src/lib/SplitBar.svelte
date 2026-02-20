@@ -50,7 +50,7 @@
   <h3 class="font-bold">{title}</h3>
   <p class="text-gray-500 text-sm font-medium">{subtitle}</p>
   <div class="chart-container" bind:clientWidth={width}>
-    <svg {width} {height} onmouseleave={() => hoveredData = null}>
+    <svg {width} {height} onmouseleave={() => hoveredData = null} role="img" aria-label={title}>
       <g transform={`translate(${margin.left},${margin.top})`}>
 
         <!-- Center line and ticks -->
@@ -61,8 +61,8 @@
             y={-2}
             dx="-4"
             text-anchor="end"
-            font-size="12"
-            fill="grey">
+            font-size="14"
+            fill={categoryColours[positiveKeys[3]]}>
             More {label} →
         </text>
 
@@ -71,8 +71,8 @@
             y={-2}
             dx="4"
             text-anchor="start"
-            font-size="12"
-            fill="grey">
+            font-size="14"
+            fill={categoryColours[negativeKeys[3]]}>
             ← Less {label}
         </text>
           
@@ -123,6 +123,7 @@
             y={yScale(data[i].mode) + (yScale.bandwidth()) / 2}
             x={xScale(-d[1])-(xScale(-d[1])-xScale(-d[0]))/2}
             text-anchor="middle"
+            dominant-baseline="middle"
             fill="white">{data[i][stack.key].toLocaleString('en-US', {
                 style: 'percent',
                 minimumFractionDigits: 0
@@ -161,6 +162,7 @@
                 y={yScale(data[i].mode) + (yScale.bandwidth()) / 2}
                 x={xScale(d[0])+(xScale(d[1])-xScale(d[0]))/2}
                 text-anchor="middle"
+                dominant-baseline="middle"
                 fill="white">{data[i][stack.key].toLocaleString('en-US', {
                     style: 'percent',
                     minimumFractionDigits: 0
