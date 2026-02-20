@@ -45,65 +45,22 @@
 			is a quintessential Angeleno experience. The film La La Land immortalized this daily ritual in 
 			<a href="https://www.youtube.com/watch?v=xVVqlm8Fq3Y">its opening dance number</a>	almost a decade ago and
 			the scene has not lost its relevance.
-			Despite dealing with some of the heaviest traffic in the nation, 
-			<a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">USC's LABarometer surveys</a>
+			Despite dealing with some of the heaviest traffic in the nation, USC's 
+			<a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">LABarometer surveys</a>
 			found that just 1 in 4 Angelenos used the public transit system in the past year.
 			
 		</p>
 		<p>
-			Against this backdrop, the <a
-				href="https://www.theguardian.com/sport/article/2024/aug/10/las-mayor-says-2028-will-be-no-car-games-despite-citys-notorious-traffic"
-				>announcement by LA leadership</a
-			> that Angelenos <a
-				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
-				>will not be able to drive to the 2028 Olympics</a
-			> seems out of touch with the everyday experience of their constituents.
 			For many across the city and county, public transit just isn't a viable option. 
 			Transit often takes three to four times longer than driving and while some areas of the city are well served by transit, 
 			there are plenty of neighborhoods with limited or no access.
 			With the city's persistent homelessness crisis and dilapidated sidewalks, people often don't feel safe on or around the transit system either.
 		</p>
 		<p>
-			What would it look like to get to the 2028 Olympic venues today using only public transit, walking, or cycling?
-			I collected travel time data to understand which venues were most accessible by public transit and 
-			how the transit journeys compared to driving for Angelenos. 
-		</p>
-
-		
-		<h1>Accessibility</h1>
-		<p>
-			How much of Los Angeles can reach the venues by transit? 
-			To explore this question, I looked at the areas from which you could reach the venue within 30 mins, 1 hour, 90 mins, and 2 hours using public transit.
-			Each of these areas are called isochrones, and the map below shows the isochrones for each venue.
-		</p>
-
-		<IsochroneMap {venues} {isochronesRewind} colours={colourPalette} />
-
-		<p>
-			The chart below compares the percentage of Angelenos who can reach each venue within 
-			each timeframe.
-		</p>
-
-		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette} />
-
-		<p>
-			While the downtown venues are somewhat accessible, nearly half the venues can't be reached within 2 hours by transit.
-		</p>
-
-		<p>
-			This analysis is based on our current transit system.
-			The good news is that there are a number of transit projects that are underway which are aiming to open before 2028.
-			However, two key questions remain: will the projects actually get done on time? 
-			And will they improve the convenience, accessibility, and safety of transit enough to make a meaningful difference for Angelenos trying to get to the venues?
-		</p>
-
-		<p>
 			Transit in Los Angeles is undergoing huge improvements, but it still doesn't work for everyone. The
 			problems of accessibility and safety are too much of a hurdle for many Angelenos to use public
-			transit. The <a
-				href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A"
-				>LABarometer surveys</a
-			> illustrate these challenges and reveal the dramatic disparities in convenience and safety between
+			transit. The LABarometer surveys
+			illustrate these challenges and reveal the dramatic disparities in convenience and safety between
 			cars and public transit. Despite LA being notorious for its traffic, over 70% of respondents said
 			driving is convenient for both commuting and personal trips, while fewer than 30% said the same
 			about Metro rail and only 16% for buses. Safety perceptions show an even more pronounced divide:
@@ -113,11 +70,36 @@
 		</p>
 
 		<SurveyCharts />
+		<p>
+			Against this backdrop, the <a
+				href="https://www.theguardian.com/sport/article/2024/aug/10/las-mayor-says-2028-will-be-no-car-games-despite-citys-notorious-traffic"
+				>announcement by LA leadership</a
+			> that fans <a
+				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
+				>will not be able to drive to the 2028 Olympics</a
+			> seems out of touch with the everyday experience of Angelenos.
+			I collected travel time data to each of the Olympic venues to understand what a car-free Olympics would look like today. 
+			How much of Los Angeles can reach the venues by transit? 
+			Using the <a
+				href="https://docs.traveltime.com/api/overview/introduction">TravelTime API</a
+			>, I identified the areas around each venue from which you could travel by public transit, walking, or cycling (or a combination) within 30 mins, 1 hour, 90 mins, and 2 hours.
+			The map below shows each of these areas (called isochrones), and calculates the proportion of Angelenos who live within these areas based on the last census.
+		</p>
 
-		
+		<IsochroneMap {venues} {isochronesRewind} colours={colourPalette} />
 
+		<p>
+			While the downtown venues are somewhat accessible, nearly half the venues can't be reached within 2 hours by transit.
+		</p>
 
-		
+		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette} />
+
+		<p>
+			Of course, this analysis is based on our current transit system (data is from late 2025).
+			The good news is that there are a number of transit projects that are underway which are aiming to open before 2028.
+			However, two key questions remain: will the projects actually get done on time? 
+			And will they improve the convenience, accessibility, and safety of transit enough to make a meaningful difference for Angelenos trying to get to the venues?
+		</p>
 
 		<p>
 			The gulfs between Olympic ambitions and transit reality raises questions about how LA will
