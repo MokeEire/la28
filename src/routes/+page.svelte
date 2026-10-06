@@ -140,17 +140,17 @@
 			>.
 		</p>
 		<p>
-			The goal of this analysis was to explore how accessible LA's proposed Olympic venues are by
-			public transit. I used an isochrone API from TravelTime to identify what areas of Los Angeles
-			could reach each venue within different time frames and used census data to estimate how many
-			people live in those areas. To do this, I followed these steps:
+			The goal of this analysis is to explore the accessibility of LA's proposed Olympic venues by
+			public transit. Accessibility is measured as the proportion of the population who can access a venue within a given timeframe. Using TravelTime's isochrone API, we can identify the areas of Los Angeles
+			which can reach each venue within a time frame (call this the <em>accessibility zone</em>). Using census data we can estimate how many
+			people live in those areas by overlapping census tracts with the accessibility zone calculated with TravelTime. To do this, I followed these steps:
 		</p>
 		<ol>
-			<li>Collect and geocode the venues</li>
-			<li>Generate isochrones for each venue using the TravelTime API</li>
+			<li>Geocode the venues</li>
+			<li>Generate accessibility isochrones for each venue using the TravelTime API</li>
 			<li>Join population to the isochrones</li>
 		</ol>
-		<h3>Collect and geocode the venues</h3>
+		<h3>Geocode the venues</h3>
 		<p>
 			I gathered the list of Olympic venues from the <a
 				href="https://la28.org/en/games-plan/venues.html">official LA 2028 website</a
@@ -158,7 +158,7 @@
 			and entered the data into Google Sheets. To geocode the venues, I used the
 			<a href="https://jessecambon.github.io/tidygeocoder/">tidygeocoder</a> package in R.
 		</p>
-		<h3>Generate the isochrones</h3>
+		<h3>Generate accessibility isochrones</h3>
 		<p>
 			I generated isochrones for each venue using the <a
 				href="https://docs.traveltime.com/api/overview/introduction">TravelTime API</a
