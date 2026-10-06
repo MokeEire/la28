@@ -44,28 +44,28 @@
 			Sitting in bumper-to-bumper traffic on one of the many cris-crossing concrete arteries connecting Los Angeles
 			is a quintessential Angeleno experience. The film La La Land immortalized this daily ritual in 
 			<a href="https://www.youtube.com/watch?v=xVVqlm8Fq3Y">its opening dance number</a>	almost a decade ago and
-			the scene has not lost its relevance.
-			Despite dealing with some of the heaviest traffic in the nation, USC's 
+			the scene remains relevant today.
+			Despite cars dealing with some of the heaviest traffic in the nation, USC's 
 			<a href="https://uasdata.usc.edu/index.php?r=eNpLtDK0qi62MrFSKkhMT1WyLrYytFwwskuTcjKT9XISkxKL8nNTS1KLlKxrAVwnPw5A">LABarometer surveys</a>
-			found that just 1 in 4 Angelenos used the public transit system in the past year.
+			found that just 1 in 4 Angelenos traveled by public transit in the past year.
 			
 		</p>
 		<p>
 			For many across the city and county, public transit just isn't a viable option. 
-			Transit often takes three to four times longer than driving and while some areas of the city are well served by transit, 
+			Transit often takes three to four times longer than driving. While some areas of the city are well served by transit, 
 			there are plenty of neighborhoods with limited or no access.
-			With the city's persistent homelessness crisis and dilapidated sidewalks, people often don't feel safe on or around the transit system either.
+			The city's persistent homelessness crisis and dilapidated sidewalks mean people often don't feel safe on or around transit either.
 		</p>
 		<p>
 			Transit in Los Angeles is undergoing huge improvements, but it still doesn't work for everyone. The
 			problems of accessibility and safety are too much of a hurdle for many Angelenos to use public
 			transit. The LABarometer surveys
-			illustrate these challenges and reveal the dramatic disparities in convenience and safety between
+			illustrate the dramatic disparities in convenience and safety between
 			cars and public transit. Despite LA being notorious for its traffic, over 70% of respondents said
 			driving is convenient for both commuting and personal trips, while fewer than 30% said the same
 			about Metro rail and only 16% for buses. Safety perceptions show an even more pronounced divide:
-			74% of Angelenos feel safe while driving, while less than half feeling secure on public transit.
-			LA's current transit system is falling significantly short of meeting passengers’ fundamental needs
+			74% of Angelenos feel safe while driving, while less than half feel secure on public transit.
+			LA's current transit system is falling significantly short of passengers’ fundamental needs
 			for efficient and secure transportation.
 		</p>
 
@@ -78,7 +78,7 @@
 				href="https://abc7.com/post/2028-olympics-los-angeles-car-free-zones-remote-work-being-explored-ways-address-traffic/15186778/"
 				>will not be able to drive to the 2028 Olympics</a
 			> seems out of touch with the everyday experience of Angelenos.
-			I collected travel time data to each of the Olympic venues to understand what a car-free Olympics would look like today. 
+			I collected travel time data for each of the Olympic venues to understand what a car-free Olympics would look like today. 
 			How much of Los Angeles can reach the venues by transit? 
 			Using the <a
 				href="https://docs.traveltime.com/api/overview/introduction">TravelTime API</a
@@ -89,20 +89,20 @@
 		<IsochroneMap {venues} {isochronesRewind} colours={colourPalette} />
 
 		<p>
-			While the downtown venues are somewhat accessible, nearly half the venues can't be reached within 2 hours by transit.
+			While the downtown venues are most accessible, nearly half the venues cannot be reached within 2 hours by transit.
 		</p>
 
 		<TravelTimeBar data={isochronesRewind.features} colours={colourPalette} />
 
 		<p>
 			Of course, this analysis is based on our current transit system (data is from late 2025).
-			The good news is that there are a number of transit projects that are underway which are aiming to open before 2028.
+			There are a number of transit projects that are underway which are aiming to open before 2028.
 			However, two key questions remain: will the projects actually get done on time? 
 			And will they improve the convenience, accessibility, and safety of transit enough to make a meaningful difference for Angelenos trying to get to the venues?
 		</p>
 
 		<p>
-			The gulfs between Olympic ambitions and transit reality raises questions about how LA will
+			The gulf between Olympic ambitions and transit reality raises questions about how LA will
 			transform its transportation system, and whether changes made for the Games will leave a
 			lasting impact on the city's mobility. Indeed, one of the four objectives of the LA 2028
 			Transport Strategy is to change residents' transit behaviors and encourage broader use of LA's
@@ -118,7 +118,7 @@
 		</p>
 
 		<p>
-			It is also concerning how priorities have shifted since the original Olympics bid back in
+			Priorities have shifted since the original Olympics bid back in
 			2014. Of the eight transportation projects originally listed in the bid that were expected to
 			be completed by 2024, only one has been completed. Since 2018, Metro has substituted 11 of the
 			original 28 infrastructure projects with ones deemed more achievable by 2028. In fact, three
